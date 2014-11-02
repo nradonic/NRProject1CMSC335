@@ -58,7 +58,7 @@ public class DataTreeTest {
             fr.close();
         }
         catch (IOException ex)
-        {System.out.println("File opening error "+chooser.getSelectedFile().getName()+" "+ex.toString()); };
+        {System.out.println("File opening error "+chooser.getSelectedFile().getName()+" "+ex.toString()); }
         System.out.println("Data file dump:");
 
         for (String ss: gameData){

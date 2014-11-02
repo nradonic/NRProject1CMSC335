@@ -7,28 +7,29 @@
 package DataTree;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Party {
     private static int partiesCreated = 0;
+    int ID = 0;
     String name;
-    final int partyID;
     ArrayList<Creature> creatures = new ArrayList<Creature>();
 
     public Party(String name){
         partiesCreated++;
-        partyID = partiesCreated;
+        this.ID = partiesCreated;
         for (Creature  c: creatures){
-            c.setPartyID(partyID);
+            c.setPartyID(ID);
         }
         this.name = name;
     }
 
-    public int getPartyID(){
-        return partyID;
+    public int getID(){
+        return ID;
     }
 
     public Party(int ID, String name){
-        this.partyID = ID;
+        this.ID = ID;
         this.name = name;
         partiesCreated++;
     }
@@ -38,7 +39,7 @@ public class Party {
     }
 
     public String toString(){
-        String partyOutput = "p : "+partyID+" : "+name+"\n";
+        String partyOutput = "p : "+ ID +" : "+name+"\n";
         if (creatures.size()>0) {
             partyOutput += "  // Contains: " + creatures.size() + "  creatures\n";
         }
@@ -49,11 +50,17 @@ public class Party {
     }
 
     public String partyOnlyToString(){
-        return "p : "+partyID+" : "+name+"\n";
+        return "p : "+ ID +" : "+name+"\n";
     }
 
     public void addCreature(Creature creature){
-        creature.setPartyID(partyID);
-        creatures.add(creature);
+        creature.setPartyID(ID);
+        Optional<Creature> cExisting = creatures.stream().filter(p->p.ID == creature.ID).findFirst();
+        if(cExisting.isPresent()){
+            Creature tempC = cExisting.get();
+            tempC = creature;
+        } else {
+            creatures.add(creature);
+        }
     }
 }

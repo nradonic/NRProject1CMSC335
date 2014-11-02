@@ -7,12 +7,11 @@ package DataTree;
 
 public class Treasure {
     private static int treasuresCreated = 0;
-     final int ID;
-
-     int creatureID;
-     double weight;
-     double value;
-     String treasureType;
+    int ID = 0;
+    int creatureID;
+    double weight;
+    double value;
+    String treasureType;
 
     public Treasure(String treasureType, double weight, double value){
         treasuresCreated++;

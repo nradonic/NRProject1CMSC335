@@ -6,20 +6,20 @@
 package DataTree;
 
 public class Artifact {
-        private static int artifactsCreated = 0;
-        final int ID;
-        String name;
-        int creatureID;
-        String artifactType;
+    private static int artifactsCreated = 0;
+    int ID = 0;
+    String name;
+    int creatureID;
+    String artifactType;
 
-        public Artifact(String name, String artifactType){
-            artifactsCreated++;
-            ID = artifactsCreated;
-            this.name = name;
-            this.artifactType = artifactType;
-        }
+    public Artifact(String name, String artifactType){
+        artifactsCreated++;
+        this.ID = artifactsCreated;
+        this.name = name;
+        this.artifactType = artifactType;
+    }
 
-        public Artifact(int ID, String artifactType, int creatureID, String name){
+    public Artifact(int ID, String artifactType, int creatureID, String name){
         this.ID = ID;
         this.name = name;
         this.artifactType = artifactType;
