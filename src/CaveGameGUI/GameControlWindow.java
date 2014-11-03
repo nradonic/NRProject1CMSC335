@@ -31,7 +31,7 @@ public class GameControlWindow extends JFrame{
         System.out.println ("In constructor");
         setTitle ("Sorcerer's Cave");
         setSize (500, 900);
-        setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation (WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible (true);
 
@@ -96,7 +96,7 @@ public class GameControlWindow extends JFrame{
         ); // the anonymous inner class
     }
 
-    private void loadFileData(Cave cave){
+    private void loadFileData(Cave gameCave){
         LoadGameData.LoadData(gameCave);
 
         //System.out.println(gameCave.toString());

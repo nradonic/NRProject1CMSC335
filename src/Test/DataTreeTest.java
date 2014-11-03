@@ -65,7 +65,6 @@ public class DataTreeTest {
             String s = ss.trim();
             String[] attributes = s.split(":");
             String temp = "";
-            int regex = attributes.length;
             for (String st : attributes){
                 temp = st;
                 int x = temp.length();

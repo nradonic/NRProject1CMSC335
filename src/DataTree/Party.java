@@ -6,9 +6,6 @@
  */
 package DataTree;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
 public class Party extends  GameElement{
     private static int partiesCreated = 0;
     String name;

@@ -13,9 +13,9 @@ import java.util.*;
 public class Cave extends GameElement{
     private String name;
 
-    private ArrayList<GameElement> unassignedCreatures = new ArrayList<GameElement>();
-    private ArrayList<GameElement> unassignedTreasures = new ArrayList<GameElement>();
-    private ArrayList<GameElement> unassignedArtifacts = new ArrayList<GameElement>();
+    private ArrayList<GameElement> unassignedCreatures = new ArrayList<>();
+    private ArrayList<GameElement> unassignedTreasures = new ArrayList<>();
+    private ArrayList<GameElement> unassignedArtifacts = new ArrayList<>();
 
     public Cave(String name){
         super(GameLayer.CAVE, 1);
@@ -103,17 +103,12 @@ public class Cave extends GameElement{
         return caveOutput;
     }
 
-    private void addCreatureToUnassignedList(Creature creature) {
-        creature.setPartyID(0);
-        unassignedCreatures.add(creature);
-    }
-
     public String sortTree(){
         String treeString = toString();
         String outputString = "// Data file for CMSC 335, Fall 2014\n// Nick Radonic\n";
 
         LocalDateTime timePoint = LocalDateTime.now();
-        outputString += "// "+ timePoint.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)).toString();
+        outputString += "// "+ timePoint.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
 
         outputString += getPartyDescriptions(treeString);
         outputString += getCreatureDescriptions(treeString);

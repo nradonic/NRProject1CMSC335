@@ -1,10 +1,7 @@
 package GameControl;
 
 import CaveGameGUI.GameControlWindow;
-import DataFileInput.LoadGameData;
 import DataTree.Cave;
-
-import javax.swing.*;
 
 /**
  * CaveGame.java
