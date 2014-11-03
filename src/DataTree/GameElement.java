@@ -1,5 +1,10 @@
 package DataTree;
-
+/**
+ * GameElement.java
+ * Oct. 30, 2014
+ * Nick Radonic
+ * Base game element, used for game element inheritance in Project 1, Cave Game
+ */
 import java.util.ArrayList;
 import java.util.Optional;
 

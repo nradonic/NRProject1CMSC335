@@ -1,7 +1,8 @@
 /**
  * Treasure.java
- * Created by Nick Radonic on 10/30/14.
- * Treasure class
+ * 10/30/14
+ * Author Nick Radonic
+ * Treasure class game element for Cave Game
  */
 package DataTree;
 

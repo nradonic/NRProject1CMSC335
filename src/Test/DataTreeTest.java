@@ -2,7 +2,7 @@
  * DataTreeTest.java
  * Oct. 30, 2014
  * Nick Radonic
- * Cave game data structure creation test in Project 1 game
+ * Cave game data structure mechanical creation test in Project 1, Cave Game
  */
 
 package Test;

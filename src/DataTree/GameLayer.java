@@ -1,7 +1,10 @@
 package DataTree;
 
 /**
- * Created by NickRadonic on 11/2/14.
+ * GameLayer.java
+ * 11/2/14
+ * Created by Nick Radonic
+ * ENUM definitions for the game components, inherited from the base GameElement
  */
 
 

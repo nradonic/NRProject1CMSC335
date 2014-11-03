@@ -1,7 +1,8 @@
 /**
  * Artifact.java
- * Created by Nick Radonic on 10/30/14.
- * Artifact class
+ * 10/30/14
+ * Author Nick Radonic
+ * Artifact class game element in CAve Game
  */
 package DataTree;
 

@@ -1,7 +1,9 @@
 package DataFileInput;
 /**
  *  LoadGameData.java
- * Created by Nick Radonic on 10/31/14.
+ *  10/31/14
+ * Created by Nick Radonic
+ * File chooser popup, data import filtering
  */
 
 import DataTree.*;
@@ -26,6 +28,7 @@ public class LoadGameData {
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Cave Game Data Files", "txt");
         chooser.setFileFilter(filter);
+        chooser.setCurrentDirectory(new File("."));
         int returnVal = chooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());

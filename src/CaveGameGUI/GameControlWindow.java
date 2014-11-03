@@ -1,5 +1,10 @@
 package CaveGameGUI;
-
+/**
+ * CaveGameGUI.java
+ * Oct. 30, 2014
+ * Nick Radonic
+ * GUI design file for Cave Gave, main window and search popup
+ */
 import DataFileInput.LoadGameData;
 import DataTree.Cave;
 
@@ -113,7 +118,7 @@ public class GameControlWindow extends JFrame{
         JCheckBox jcbTreasure = new JCheckBox("Treasure");
         jcbTreasure.setSelected(lastJCBT);
 
-        JCheckBox jcbArticle = new JCheckBox("Article");
+        JCheckBox jcbArticle = new JCheckBox("Artifact");
         jcbArticle.setSelected(lastJCBA);
 
         JCheckBox[] jcbSearch = {jcbParty, jcbCreature, jcbTreasure, jcbArticle};
