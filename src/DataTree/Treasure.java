@@ -5,9 +5,8 @@
  */
 package DataTree;
 
-public class Treasure {
+public class Treasure extends GameElement{
     private static int treasuresCreated = 0;
-    int ID = 0;
     int creatureID;
     double weight;
     double value;
@@ -20,6 +19,7 @@ public class Treasure {
         this.weight = weight;
         this.value = value;
         this.treasureType = treasureType;
+        gameLayer = GameLayer.TREASURE;
     }
 
     public Treasure(int ID, String treasureType, int creatureID, double weight, double value){
@@ -29,6 +29,7 @@ public class Treasure {
         this.weight = weight;
         this.value = value;
         this.treasureType = treasureType;
+        gameLayer = GameLayer.TREASURE;
     }
 
     public String toString(){

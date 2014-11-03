@@ -74,7 +74,7 @@ public class DataTreeTest {
                 try {
                     int ID = Integer.parseInt(attributes[1].trim());
                     Party party = new Party( ID, attributes[2]);
-                    dataTree.addParty(party);
+                    dataTree.addGameElement(party);
                 } catch (Exception ex) {System.out.println("Party failed to parse data: "+s);}
             }
 
@@ -86,7 +86,7 @@ public class DataTreeTest {
                     double fear = Double.parseDouble(attributes[6].trim());
                     double carryingCapacity = Double.parseDouble(attributes[7].trim());
                     Creature creature = new Creature(ID, attributes[2], attributes[3], PID, empathy, fear, carryingCapacity);
-                    dataTree.addCreature(creature);
+                    dataTree.addGameElement(creature);
                 } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
             }
 
@@ -97,7 +97,7 @@ public class DataTreeTest {
                     double weight = Double.parseDouble(attributes[4].trim());
                     double value = Double.parseDouble(attributes[5].trim());
                     Treasure treasure = new Treasure(ID, attributes[2], creatureID, weight, value);
-                    dataTree.addTreasure(treasure);
+                    dataTree.addGameElement(treasure);
                 } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
             }
 
@@ -107,7 +107,7 @@ public class DataTreeTest {
                     int creatureID = Integer.parseInt(attributes[3].trim());
                     String name = (attributes.length <5) ? "" : attributes[4];
                     Artifact artifact = new Artifact(ID, attributes[2], creatureID, name);
-                    dataTree.addArtifact(artifact);
+                    dataTree.addGameElement(artifact);
                 } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
             }
         }
@@ -132,9 +132,9 @@ public class DataTreeTest {
                     creature.addTreasure(tr);
                     creature.addArtifact(art);
                 }
-                party.addCreature(creature);
+                party.addGameElementTree(creature);
             }
-            dataTree.addParty(party);
+            dataTree.addGameElement(party);
         }
 
 

@@ -30,7 +30,7 @@ public class GameControlWindow extends JFrame{
 
         System.out.println ("In constructor");
         setTitle ("Sorcerer's Cave");
-        setSize (500, 500);
+        setSize (500, 900);
         setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible (true);

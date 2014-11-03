@@ -10,31 +10,42 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.*;
 
-public class Cave {
-    private ArrayList<Party> parties = new ArrayList<Party>();
+public class Cave extends GameElement{
     private String name;
-    private ArrayList<Creature> unassignedCreatures = new ArrayList<Creature>();
-    private ArrayList<Treasure> unassignedTreasures = new ArrayList<Treasure>();
-    private ArrayList<Artifact> unassignedArtifacts = new ArrayList<Artifact>();
+
+    private ArrayList<GameElement> unassignedCreatures = new ArrayList<GameElement>();
+    private ArrayList<GameElement> unassignedTreasures = new ArrayList<GameElement>();
+    private ArrayList<GameElement> unassignedArtifacts = new ArrayList<GameElement>();
 
     public Cave(String name){
+        super(GameLayer.CAVE, 1);
         this.name = name;
     }
 
-    public String addParty(Party party){
-        Optional<Party> pExisting = parties.stream().filter(p->p.ID == party.ID).findFirst();
-        if(pExisting.isPresent()){
-            Party tempP = pExisting.get();
-            tempP = party;
-        } else {
-            parties.add(party);
+    public void addGameElement(GameElement gameElement){
+        boolean result = addGameElementTree(gameElement);
+        if (!result){
+            switch (gameElement.getGameLayer()){
+                case CREATURE:{
+                    addUnassigned(unassignedCreatures, gameElement);
+                }
+                break;
+                case TREASURE:{
+                    addUnassigned(unassignedTreasures, gameElement);
+                }
+                break;
+                case ARTIFACT:{
+                    addUnassigned(unassignedArtifacts, gameElement);
+                }
+                break;
+                default:break;
+            }
         }
-        return party.getName() + " " + party.getID();
     }
 
-    public Party getParty(int partyID){
+ /*   public Party getParty(int partyID){
         Party returnParty = null;
-        for (Party p : parties){
+        for (GameElement p : gameElementArrayList){
             if (partyID == p.getID())
             {
                 returnParty = p;
@@ -54,17 +65,17 @@ public class Cave {
             }
         }
         return returnParty;
-    }
+    }*/
 
     public String getName(){
         return name;
     }
 
     public String toString(){
-        String caveOutput = "// Cave: "+name+"\n";
-        caveOutput += "// Contains: "+parties.size()+" parties\n";
+        String caveOutput = "// Cave: "+name+"\n\n";
+        caveOutput += "// Contains: "+gameElementArrayList.size()+" part"+(gameElementArrayList.size()>1?"ies":"y")+"\n";
 
-        for (Party p : parties){
+        for (GameElement p : gameElementArrayList){
             caveOutput += "\n";
             caveOutput += p.toString();
         }
@@ -72,118 +83,29 @@ public class Cave {
             caveOutput += "\n\n// Unassigned Creatures\n";
             caveOutput += "   // Contains: "+unassignedCreatures.size()+" unassigned creature"+(unassignedCreatures.size()>1?"s":"")+"\n";
         }
-        for (Creature c : unassignedCreatures){
+        for (GameElement c : unassignedCreatures){
             caveOutput += c.toString()+"\n";
         }
         caveOutput += "\n\n  // Unassigned Treasure and Artifacts\n";
         if (unassignedTreasures.size()>0) {
             caveOutput += "        // Contains: " + unassignedTreasures.size() + " unassigned treasure"+(unassignedTreasures.size()>1?"s":"")+"\n";
         }
-        for (Treasure t : unassignedTreasures){
+        for (GameElement t : unassignedTreasures){
             caveOutput += t.toString();
         }
         if (unassignedArtifacts.size()>0) {
             caveOutput += "        // Contains: " + unassignedArtifacts.size() + " unassigned artifact"+(unassignedArtifacts.size()>1?"s":"")+"\n";
         }
-        for (Artifact art : unassignedArtifacts){
+        for (GameElement art : unassignedArtifacts){
             caveOutput += art.toString();
         }
 
         return caveOutput;
     }
 
-    public void addCreature (Creature creature){
-        Optional<Party> party;
-        if (creature.getPartyID() != 0) {
-            party = parties.stream().filter(s -> s.getID() == creature.getPartyID()).findAny();
-            if (!party.isPresent()) { addCreatureToUnassignedList(creature);}
-            else { party.get().addCreature(creature);}
-        }
-        else
-        {
-            creature.setPartyID(0);
-            Optional<Creature> aExisting = unassignedCreatures.stream().filter(p->p.ID == creature.ID).findFirst();
-            if(aExisting.isPresent()){
-                Creature tempA = aExisting.get();
-                tempA = creature;
-            } else {
-                unassignedCreatures.add(creature);
-            }
-        }
-    }
-
     private void addCreatureToUnassignedList(Creature creature) {
         creature.setPartyID(0);
         unassignedCreatures.add(creature);
-    }
-
-    public void addTreasure(Treasure treasure){
-        Creature tempCreature = null;
-        for (Party party : parties){
-            for (Creature creature: party.creatures){
-                if (treasure.creatureID == creature.ID){
-                    tempCreature = creature;
-                    break;
-                }
-            }
-        }
-        if (tempCreature == null){
-            for (Creature creature: unassignedCreatures){
-                if (treasure.creatureID == creature.ID){
-                    tempCreature = creature;
-                    break;
-                }
-            }
-        }
-        
-        if (tempCreature != null) {
-            tempCreature.addTreasure(treasure);
-        }
-        else {
-            treasure.setCreatureID(0);
-            Optional<Treasure> aExisting = unassignedTreasures.stream().filter(p->p.ID == treasure.ID).findFirst();
-            if(aExisting.isPresent()){
-                Treasure tempA = aExisting.get();
-                tempA = treasure;
-            } else {
-                unassignedTreasures.add(treasure);
-            }
-        }
-    }
-
-    public void addArtifact(Artifact artifact){
-        Creature tempCreature = null;
-        for (Party party : parties){
-            for (Creature creature: party.creatures){
-                if (artifact.creatureID == creature.ID){
-                    tempCreature = creature;
-                    break;
-                }
-            }
-        }
-
-        if (tempCreature == null){
-            for (Creature creature: unassignedCreatures){
-                if (artifact.creatureID == creature.ID){
-                    tempCreature = creature;
-                    break;
-                }
-            }
-        }
-
-        if (tempCreature != null) {
-            tempCreature.addArtifact(artifact);
-        }
-        else {
-            artifact.setCreatureID(0);
-            Optional<Artifact> aExisting = unassignedArtifacts.stream().filter(p->p.ID == artifact.ID).findFirst();
-            if(aExisting.isPresent()){
-                Artifact tempA = aExisting.get();
-                tempA = artifact;
-            } else {
-                unassignedArtifacts.add(artifact);
-            }
-        }
     }
 
     public String sortTree(){
@@ -250,5 +172,15 @@ public class Cave {
             }
         }
         return outputString;
+    }
+
+    private void addUnassigned(ArrayList<GameElement> age, GameElement gameElement){
+        Optional<GameElement> oge = age.stream().filter(p->p.ID == gameElement.ID).findFirst();
+        if(oge.isPresent()){
+            GameElement tempGE = oge.get();
+            tempGE = gameElement;
+        } else {
+            age.add(gameElement);
+        }
     }
 }

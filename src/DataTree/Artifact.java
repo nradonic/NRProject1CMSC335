@@ -5,9 +5,8 @@
  */
 package DataTree;
 
-public class Artifact {
+public class Artifact extends GameElement{
     private static int artifactsCreated = 0;
-    int ID = 0;
     String name;
     int creatureID;
     String artifactType;
@@ -17,6 +16,7 @@ public class Artifact {
         this.ID = artifactsCreated;
         this.name = name;
         this.artifactType = artifactType;
+        gameLayer = GameLayer.ARTIFACT;
     }
 
     public Artifact(int ID, String artifactType, int creatureID, String name){
@@ -24,6 +24,7 @@ public class Artifact {
         this.name = name;
         this.artifactType = artifactType;
         this.creatureID = creatureID;
+        gameLayer = GameLayer.ARTIFACT;
     }
 
     public String toString(){
