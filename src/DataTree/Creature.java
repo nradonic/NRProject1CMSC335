@@ -91,9 +91,9 @@ public class Creature extends GameElement{
             }
         }
         creatureOutput += (treasureCount>0) ? "        // "+name+" has " + treasureCount + " treasure"+(treasureCount>1?"s":"")+"\n" : "";
-        creatureOutput += treasureOutput;
+        //creatureOutput += treasureOutput;
         creatureOutput += (artifactCount>0) ? "        // "+name+" has " + artifactCount + " artifact"+(artifactCount>1?"s":"")+"\n" : "";
-        creatureOutput += artifactOutput;
+        //creatureOutput += artifactOutput;
 
         return creatureOutput;
     }

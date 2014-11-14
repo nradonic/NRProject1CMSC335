@@ -21,7 +21,8 @@ import java.awt.event.ActionListener;
 public class GameControlWindow extends JFrame{
     static final long serialVersionUID = 123L;
     JTextArea jta = new JTextArea ();
-    Cave gameCave;
+    Cave cave;
+    JTree tree;
 
     // store previous search terms
     boolean lastJCBP = true;
@@ -31,24 +32,31 @@ public class GameControlWindow extends JFrame{
     String lastStr = "text to search for...";
 
     public GameControlWindow (Cave cave) {
-        gameCave = cave;
+        this.cave = cave;
+        this.tree = new JTree(cave);
 
         System.out.println ("In constructor");
         setTitle ("Sorcerer's Cave");
-        setSize (500, 900);
+        setSize (900, 900);
         setDefaultCloseOperation (WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible (true);
 
         JScrollPane jsp = new JScrollPane (jta);
-        jta.setText("Empty Game:   "+cave.getName()+"\nUse READ button to get game file");
-        add(jsp, BorderLayout.CENTER);
+        jta.setText(cave.getName()+"\nUse READ button to get game file");
+
+        add(tree, BorderLayout.CENTER);
+        //add(cave.unassignedCreatures, BorderLayout.CENTER);
+        //add(cave.unassignedTreasures, BorderLayout.CENTER);
+        //add(cave.unassignedArtifacts, BorderLayout.CENTER);
+
+        add(jsp, BorderLayout.PAGE_END);
 
         setupButtons();
 
     } // end no-parameter constructor
 
-    private void setupButtons() {
+    public void setupButtons() {
         JButton jbr = new JButton ("Read");
         JButton jbs = new JButton ("Search");
         JButton jba = new JButton ("Redraw");
@@ -64,17 +72,20 @@ public class GameControlWindow extends JFrame{
 
         jbr.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                loadFileData(gameCave);
-                String treeStr = gameCave.toString();
-                jta.setText(treeStr);
-                jta.setCaretPosition(0);
+                loadFileData();
+//                String treeStr = cave.toString();
+//                jta.setText(treeStr);
+//                jta.setCaretPosition(0);
+                tree.treeDidChange();
+                tree.updateUI();
+
             } // end required method
         } // end local definition of inner class
         ); // the anonymous inner class
 
         jbs.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                String searchGameResults = searchGame (gameCave);
+                String searchGameResults = searchGame (cave);
                 String treeStr = searchGameResults;
                 jta.setText(treeStr);
                 jta.setCaretPosition(0);
@@ -84,7 +95,7 @@ public class GameControlWindow extends JFrame{
 
         jba.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                String treeStr = gameCave.toString();
+                String treeStr = cave.toString();
                 jta.setText(treeStr);
                 jta.setCaretPosition(0);
             } // end required method
@@ -93,7 +104,7 @@ public class GameControlWindow extends JFrame{
 
         jbm.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                String treeStr = gameCave.toString();
+                String treeStr = cave.toString();
                 jta.setText(treeStr);
                 jta.setCaretPosition(0);
             } // end required method
@@ -101,8 +112,9 @@ public class GameControlWindow extends JFrame{
         ); // the anonymous inner class
     }
 
-    private void loadFileData(Cave gameCave){
-        LoadGameData.LoadData(gameCave);
+    private void loadFileData(){
+        LoadGameData.LoadData(cave);
+        //tree = new JTree(cave);
 
         //System.out.println(gameCave.toString());
         //System.out.println(gameCave.sortTree());
@@ -147,4 +159,3 @@ public class GameControlWindow extends JFrame{
     }
 
 }
-

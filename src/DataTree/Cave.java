@@ -1,10 +1,12 @@
-// Cave.java
-// Oct. 30, 2014
-// Nick Radonic
-// top level cave structure in Project 1 game
+/** Cave.java
+* Oct. 30, 2014
+* Nick Radonic
+* top level cave structure in Project 1 game
+*/
 
 package DataTree;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -13,9 +15,18 @@ import java.util.*;
 public class Cave extends GameElement{
     private String name;
 
-    private ArrayList<GameElement> unassignedCreatures = new ArrayList<>();
-    private ArrayList<GameElement> unassignedTreasures = new ArrayList<>();
-    private ArrayList<GameElement> unassignedArtifacts = new ArrayList<>();
+//    private ArrayList<GameElement> unassignedCreatures = new ArrayList<>();
+//    private ArrayList<GameElement> unassignedTreasures = new ArrayList<>();
+//    private ArrayList<GameElement> unassignedArtifacts = new ArrayList<>();
+
+    Creature unassignedCaveCreatures;
+    public JTree unassignedCreatures = new JTree(unassignedCaveCreatures);
+
+    Treasure unassignedCaveTreasures;
+    public JTree unassignedTreasures = new JTree(unassignedCaveTreasures);
+
+    Artifact unassignedCaveArtifacts;
+    public JTree unassignedArtifacts = new JTree(unassignedCaveArtifacts);
 
     public Cave(String name){
         super(GameLayer.CAVE, 1);
@@ -27,15 +38,21 @@ public class Cave extends GameElement{
         if (!result){
             switch (gameElement.getGameLayer()){
                 case CREATURE:{
-                    addUnassigned(unassignedCreatures, gameElement);
+                    unassignedCaveCreatures.add(gameElement);
+                    unassignedCreatures.treeDidChange();
+                    unassignedCreatures.updateUI();
                 }
                 break;
                 case TREASURE:{
-                    addUnassigned(unassignedTreasures, gameElement);
+                    unassignedCaveTreasures.add(gameElement);
+                    unassignedTreasures.treeDidChange();
+                    unassignedTreasures.updateUI();
                 }
                 break;
                 case ARTIFACT:{
-                    addUnassigned(unassignedArtifacts, gameElement);
+                    unassignedCaveArtifacts.add(gameElement);
+                    unassignedArtifacts.treeDidChange();
+                    unassignedArtifacts.updateUI();
                 }
                 break;
                 default:break;
@@ -73,32 +90,36 @@ public class Cave extends GameElement{
 
     public String toString(){
         String caveOutput = "// Cave: "+name+"\n\n";
-        caveOutput += "// Contains: "+gameElementArrayList.size()+" part"+(gameElementArrayList.size()>1?"ies":"y")+"\n";
-
+        caveOutput += "// Contains: "+this.getChildCount()+" part"+(this.getChildCount()>1?"ies":"y")+"\n";
+/*
         for (GameElement p : gameElementArrayList){
             caveOutput += "\n";
             caveOutput += p.toString();
-        }
-        if (unassignedCreatures.size()>0){
-            caveOutput += "\n\n// Unassigned Creatures\n";
-            caveOutput += "   // Contains: "+unassignedCreatures.size()+" unassigned creature"+(unassignedCreatures.size()>1?"s":"")+"\n";
-        }
-        for (GameElement c : unassignedCreatures){
-            caveOutput += c.toString()+"\n";
-        }
-        caveOutput += "\n\n  // Unassigned Treasure and Artifacts\n";
-        if (unassignedTreasures.size()>0) {
-            caveOutput += "        // Contains: " + unassignedTreasures.size() + " unassigned treasure"+(unassignedTreasures.size()>1?"s":"")+"\n";
-        }
-        for (GameElement t : unassignedTreasures){
-            caveOutput += t.toString();
-        }
-        if (unassignedArtifacts.size()>0) {
-            caveOutput += "        // Contains: " + unassignedArtifacts.size() + " unassigned artifact"+(unassignedArtifacts.size()>1?"s":"")+"\n";
-        }
-        for (GameElement art : unassignedArtifacts){
-            caveOutput += art.toString();
-        }
+        }*/
+//         caveOutput += "// Contains: "+this.getChildCount()+" part"+(this.getChildCount() > 1?"ies":"y")+"\n";
+//
+//
+//        if (unassignedCaveCreatures.getChildCount()>0){
+//            caveOutput += "\n\n// Unassigned Creatures\n";
+//            caveOutput += "   // Contains: "+unassignedCaveCreatures.getChildCount()+" unassigned creature"+
+//                    (unassignedCaveCreatures.getChildCount()>1?"s":"")+"\n";
+//        }
+//        for (GameElement c : unassignedCreatures){
+//            caveOutput += c.toString()+"\n";
+//        }
+//        caveOutput += "\n\n  // Unassigned Treasure and Artifacts\n";
+//        if (unassignedTreasures.size()>0) {
+//            caveOutput += "        // Contains: " + unassignedTreasures.size() + " unassigned treasure"+(unassignedTreasures.size()>1?"s":"")+"\n";
+//        }
+//        for (GameElement t : unassignedTreasures){
+//            caveOutput += t.toString();
+//        }
+//        if (unassignedArtifacts.size()>0) {
+//            caveOutput += "        // Contains: " + unassignedArtifacts.size() + " unassigned artifact"+(unassignedArtifacts.size()>1?"s":"")+"\n";
+//        }
+//        for (GameElement art : unassignedArtifacts){
+//            caveOutput += art.toString();
+//        }
 
         return caveOutput;
     }

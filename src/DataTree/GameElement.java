@@ -5,8 +5,10 @@ package DataTree;
  * Nick Radonic
  * Base game element, used for game element inheritance in Project 1, Cave Game
  */
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Vector;
 
 /**
  * GameElement.java
@@ -14,7 +16,7 @@ import java.util.Optional;
  * Created by NickRadonic on 11/2/14.
  */
 
-public class GameElement {
+public class GameElement extends DefaultMutableTreeNode {
     GameLayer gameLayer = GameLayer.NONE;
     int ID = 0;
     ArrayList<GameElement> gameElementArrayList = new ArrayList<GameElement>();
@@ -42,7 +44,8 @@ public class GameElement {
                 if (gameElement.gameLayer == GameLayer.PARTY) {
                     result = insertIfDuplicateGameElement(gameElement);
                     if (!result) {
-                        gameElementArrayList.add(gameElement);
+                        //gameElementArrayList.add(gameElement);
+                        this.add(gameElement);
                     }
                     result = true;
                 }
@@ -57,7 +60,8 @@ public class GameElement {
                     if (ID == ((Creature)gameElement).partyID) {
                         result = insertIfDuplicateGameElement(gameElement);
                         if (!result) {
-                            gameElementArrayList.add(gameElement);
+                            //gameElementArrayList.add(gameElement);
+                            this.add(gameElement);
                             result = true;
                         }
                     }
@@ -73,7 +77,8 @@ public class GameElement {
                     if (ID == ((Treasure)gameElement).creatureID) {
                         result = insertIfDuplicateGameElement(gameElement);
                         if (!result) {
-                            gameElementArrayList.add(gameElement);
+                            //gameElementArrayList.add(gameElement);
+                            this.add(gameElement);
                             result = true;
                         }
                     }
@@ -82,7 +87,8 @@ public class GameElement {
                     if (ID == ((Artifact)gameElement).creatureID) {
                         result = insertIfDuplicateGameElement(gameElement);
                         if (!result) {
-                            gameElementArrayList.add(gameElement);
+                            //gameElementArrayList.add(gameElement);
+                            this.add(gameElement);
                             result = true;
                         }
                     }
@@ -97,20 +103,25 @@ public class GameElement {
 
     private boolean insertIfDuplicateGameElement(GameElement gameElement) {
         boolean result = false;
-        Optional<GameElement> geExisting = gameElementArrayList.stream().filter(
-                p -> p.ID == gameElement.ID &&
-                        p.gameLayer == gameElement.gameLayer).findFirst();
-        if (geExisting.isPresent()) {
-            GameElement tempGE = geExisting.get();
-            tempGE = gameElement;
-            result = true;
+        Vector<GameElement> ge = this.children;
+        if(ge != null) {
+            Optional<GameElement> geExisting = ge.stream().filter(
+                    p -> p.ID == gameElement.ID &&
+                            p.gameLayer == gameElement.gameLayer).findFirst();
+            if (geExisting.isPresent()) {
+                GameElement tempGE = geExisting.get();
+                this.remove(tempGE);
+                this.add(gameElement);
+                //tempGE = gameElement;
+                result = true;
+            }
         }
         return result;
     }
 
     private boolean recursiveInsertion(GameElement gameElement) {
         boolean result = false;
-        for (GameElement g : gameElementArrayList) {
+        for (GameElement g : (Vector<GameElement>)this.children) {
             result = g.addGameElementTree(gameElement);
             if (result) {
                 break;
@@ -122,9 +133,10 @@ public class GameElement {
     @Override
     public String toString() {
         String output = "";
-        for (GameElement gameElement : gameElementArrayList) {
+        for (GameElement gameElement : (Vector<GameElement>)this.children) {
             output += gameElement.toString();
         }
-        return output;
+        //return output;
+        return "";
     }
 }

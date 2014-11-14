@@ -33,12 +33,14 @@ public class Party extends  GameElement{
         return name;
     }
 
+    @Override
     public String toString(){
         String partyOutput = "p : "+ ID +" : "+name+"\n";
         if (gameElementArrayList.size()>0) {
-            partyOutput += "  // Contains: " + gameElementArrayList.size() + "  creature"+(gameElementArrayList.size()>1 ? "s" : "")+"\n";
+            //partyOutput += "  // Contains: " + gameElementArrayList.size() + "  creature"+(gameElementArrayList.size()>1 ? "s" : "")+"\n";
+            partyOutput += "  // Contains: " + this.getChildCount() + "  creature"+(this.getChildCount()>1 ? "s" : "")+"\n";
         }
-        partyOutput += super.toString();
+        //partyOutput += super.toString();
         return partyOutput;
     }
 

@@ -8,6 +8,8 @@ package GameControl;
 import CaveGameGUI.GameControlWindow;
 import DataTree.Cave;
 
+import javax.swing.*;
+
 /**
  * CaveGame.java
  * 11/1/14
