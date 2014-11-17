@@ -35,7 +35,6 @@ public class Creature extends GameElement{
 
     public Creature(int ID, String creatureType, String  name, int partyID, double empathy, double fear, double carryingCapacity, int age, double height, double weight){
         creaturesCreated++;
-        this.ID = ID;
         this.name = name;
         this.creatureType = creatureType;
         this.empathy = empathy;
