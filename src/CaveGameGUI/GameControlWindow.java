@@ -38,30 +38,36 @@ public class GameControlWindow extends JFrame{
 
         System.out.println("In constructor");
         setTitle("Sorcerer's Cave");
-        setSize(900, 900);
+        setSize(900, 1000);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel jp0 = new JPanel();
-        jp0.setLayout(new BoxLayout(jp0, BoxLayout.Y_AXIS));
+        JPanel framePanel = new JPanel();
+        framePanel.setLayout(new BoxLayout(framePanel, BoxLayout.Y_AXIS));
 
 
-        JPanel jp1 = new JPanel ();
-        jp1.add(setupButtons());
-        jp0.add(jp1);
+        JPanel buttonsScrollPanel = new JPanel ();
+        buttonsScrollPanel.add(setupButtons());
+        framePanel.add(buttonsScrollPanel);
 
-        JScrollPane jsp2 = new JScrollPane (tree);
-        jp0.add(jsp2);
+        JScrollPane treeScrollPane = new JScrollPane (tree);
+        framePanel.add(treeScrollPane);
 
         jta.setText(cave.getName()+"\nUse READ button to get game file");
-        JScrollPane jsp3 = new JScrollPane (jta);
+        jta.setRows(10);
+        JScrollPane messagesScrollPane = new JScrollPane (jta);
 
-        jp0.add(jsp3);
+        framePanel.add(messagesScrollPane);
 
-        //add(cave.unassignedCreatures, BorderLayout.CENTER);
-        //add(cave.unassignedTreasures, BorderLayout.CENTER);
-        //add(cave.unassignedArtifacts, BorderLayout.CENTER);
-        getContentPane().add(jp0);
+        JScrollPane unassignedCreaturesPane = new JScrollPane(new JTree(cave.unassignedCaveCreatures));
+        JScrollPane unassignedTreasuresPane = new JScrollPane(new JTree(cave.unassignedCaveTreasures));
+        JScrollPane unassignedArtifactsPane = new JScrollPane(new JTree(cave.unassignedCaveArtifacts));
+
+        framePanel.add(unassignedCreaturesPane);
+        framePanel.add(unassignedTreasuresPane);
+        framePanel.add(unassignedArtifactsPane);
+
+        getContentPane().add(framePanel);
         setVisible (true);
 
 

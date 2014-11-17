@@ -15,17 +15,20 @@ import java.util.*;
 public class Cave extends GameElement{
     private String name;
 
-    Creature unassignedCaveCreatures;
-    public JTree unassignedCreatures = new JTree(unassignedCaveCreatures);
-
-    Treasure unassignedCaveTreasures;
-    public JTree unassignedTreasures = new JTree(unassignedCaveTreasures);
-
-    Artifact unassignedCaveArtifacts;
-    public JTree unassignedArtifacts = new JTree(unassignedCaveArtifacts);
+    public Cave unassignedCaveCreatures;
+    public Cave unassignedCaveTreasures;
+    public Cave unassignedCaveArtifacts;
 
     public Cave(String name){
         super(GameLayer.CAVE, 1);
+        this.name = name;
+
+        unassignedCaveCreatures = new Cave("Unassigned Cave Creatures", 0);
+        unassignedCaveTreasures = new Cave("Unassigned Cave Treasures", 0);
+        unassignedCaveArtifacts = new Cave("Unassigned Cave Artifacts", 0);
+    }
+
+    private Cave(String name, int dummy){
         this.name = name;
     }
 
@@ -35,20 +38,20 @@ public class Cave extends GameElement{
             switch (gameElement.getGameLayer()){
                 case CREATURE:{
                     unassignedCaveCreatures.add(gameElement);
-                    unassignedCreatures.treeDidChange();
-                    unassignedCreatures.updateUI();
+//                    unassignedCreaturesTree.treeDidChange();
+//                    unassignedCreaturesTree.updateUI();
                 }
                 break;
                 case TREASURE:{
                     unassignedCaveTreasures.add(gameElement);
-                    unassignedTreasures.treeDidChange();
-                    unassignedTreasures.updateUI();
+//                    unassignedTreasuresTree.treeDidChange();
+//                    unassignedArtifactsTree.updateUI();
                 }
                 break;
                 case ARTIFACT:{
                     unassignedCaveArtifacts.add(gameElement);
-                    unassignedArtifacts.treeDidChange();
-                    unassignedArtifacts.updateUI();
+//                    unassignedArtifactsTree.treeDidChange();
+//                    unassignedArtifactsTree.updateUI();
                 }
                 break;
                 default:break;
