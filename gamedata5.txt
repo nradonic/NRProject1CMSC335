@@ -1,0 +1,212 @@
+// sample data file for CMSC 335, Spring 2012
+// Nicholas Duchon
+// Jan 23, 2012
+// Parties format:
+//    p:<index>:<name>
+p : 10001 : Unity
+p : 10002 : Assemblage
+p : 10003 : Conglomeration
+
+// Creatures format:
+//    c:<index>:<type>:<name>:<party>:<empathy>:<fear>:<carrying capacity>
+c : 20001 : Woman   : Lucy   :10001 : 17 : 22 : 20
+c : 20002 : Woman   : Jane   :10001 : 22 : 15 : 25
+c : 20003 : Woman   : Nancy  :10003 : 80 : 44 : 20
+c : 20004 : Man     : James  :10002 : 35 : 13 : 50
+c : 20005 : Troll   : Fred   :10002 : 03 : 05 : 150
+c : 20006 : Warlock : Harry  :10003 : 05 : 06 : 0
+c : 20007 : Witch   : Morgana:10001 : 10 : 15 : 0
+
+// Treasures format:
+//    t:<index>:<type>:<creature>:<weight>:<value>
+// creature = 0 means noone is carrying that treasure at the moment
+t : 30001 : Gold : 20004 : 50 : 2000
+t : 30002 : Gold :     0 : 75 : 5000
+t : 30003 : Gems : 20002 : 10 : 10000
+t : 30004 : Silver : 20005 : 120 : 1000
+
+// Artifacts format:
+//    a:<index>:<type>:<creature>[:<name>]
+a : 40001 : Wand : 20007 : ElderWand
+a : 40002 : Wand : 20006
+a : 40003 : Potion : 20007
+
+/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/bin/java "-javaagent:/Users/NickRadonic/Library/Application Support/IntelliJIdea13/chronon/lib/recorder/recorder-3.20.1.187.jar=/Users/NickRadonic/Library/Caches/IntelliJIdea13/chronon-recordings/2014_10_31_DataTreeTest22/config.txt" "-agentpath:/Users/NickRadonic/Library/Application Support/IntelliJIdea13/chronon/lib/recorder/native/librecorderagent-3.0.7.jnilib" -noverify -Didea.launcher.port=7532 "-Didea.launcher.bin.path=/Applications/IntelliJ IDEA 13.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath "/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/lib/ant-javafx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/lib/dt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/lib/javafx-mx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/lib/jconsole.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/lib/sa-jdi.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/lib/tools.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/jfxswt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/management-agent.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/plugin.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/ext/cldrdata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/ext/dnsns.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/ext/jfxrt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/ext/localedata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/ext/nashorn.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/ext/sunec.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/ext/zipfs.jar:/Users/NickRadonic/IdeaProjects/NRProject1CMSC335/out/production/NRProject1CMSC335:/Applications/IntelliJ IDEA 13.app/Contents/lib/idea_rt.jar" com.intellij.rt.execution.application.AppMain Test.DataTreeTest
+objc[11607]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/bin/java and /Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/jre/lib/libinstrument.dylib. One of the two will be used. Which one is undefined.
+Chronon: Skipping recording of DataTree.Cave.addCreature (LDataTree/Creature;)V due to AnalyzerException: Error at instruction 11: INVOKEDYNAMIC instruction is not supported
+// Cave: GameZone
+// Contains: 2 parties
+p : 1 : Red Hot Raiders 1
+// Contains: 3  creatures
+    c : 1 : 32 : Freed1 : 1 : 15.5 : 22.9 : 44.0
+// Contains 5 treasures
+        t : 1 : 1 : 1 : 10.1 : 3141.59
+        t : 2 : 1 : 1 : 10.1 : 3141.59
+        t : 3 : 1 : 1 : 10.1 : 3141.59
+        t : 4 : 1 : 1 : 10.1 : 3141.59
+        t : 5 : 1 : 1 : 10.1 : 3141.59
+// Contains 5 artifacts
+        a : 1 : 2 : 1
+        a : 2 : 2 : 1
+        a : 3 : 2 : 1
+        a : 4 : 2 : 1
+        a : 5 : 2 : 1
+    c : 2 : 32 : Freed2 : 1 : 15.5 : 22.9 : 44.0
+// Contains 5 treasures
+        t : 6 : 1 : 2 : 10.1 : 3141.59
+        t : 7 : 1 : 2 : 10.1 : 3141.59
+        t : 8 : 1 : 2 : 10.1 : 3141.59
+        t : 9 : 1 : 2 : 10.1 : 3141.59
+        t : 10 : 1 : 2 : 10.1 : 3141.59
+// Contains 5 artifacts
+        a : 6 : 2 : 2
+        a : 7 : 2 : 2
+        a : 8 : 2 : 2
+        a : 9 : 2 : 2
+        a : 10 : 2 : 2
+    c : 3 : 32 : Freed3 : 1 : 15.5 : 22.9 : 44.0
+// Contains 5 treasures
+        t : 11 : 1 : 3 : 10.1 : 3141.59
+        t : 12 : 1 : 3 : 10.1 : 3141.59
+        t : 13 : 1 : 3 : 10.1 : 3141.59
+        t : 14 : 1 : 3 : 10.1 : 3141.59
+        t : 15 : 1 : 3 : 10.1 : 3141.59
+// Contains 5 artifacts
+        a : 11 : 2 : 3
+        a : 12 : 2 : 3
+        a : 13 : 2 : 3
+        a : 14 : 2 : 3
+        a : 15 : 2 : 3
+p : 2 : Red Hot Raiders 2
+// Contains: 3  creatures
+    c : 4 : 32 : Freed1 : 2 : 15.5 : 22.9 : 44.0
+// Contains 5 treasures
+        t : 16 : 1 : 4 : 10.1 : 3141.59
+        t : 17 : 1 : 4 : 10.1 : 3141.59
+        t : 18 : 1 : 4 : 10.1 : 3141.59
+        t : 19 : 1 : 4 : 10.1 : 3141.59
+        t : 20 : 1 : 4 : 10.1 : 3141.59
+// Contains 5 artifacts
+        a : 16 : 2 : 4
+        a : 17 : 2 : 4
+        a : 18 : 2 : 4
+        a : 19 : 2 : 4
+        a : 20 : 2 : 4
+    c : 5 : 32 : Freed2 : 2 : 15.5 : 22.9 : 44.0
+// Contains 5 treasures
+        t : 21 : 1 : 5 : 10.1 : 3141.59
+        t : 22 : 1 : 5 : 10.1 : 3141.59
+        t : 23 : 1 : 5 : 10.1 : 3141.59
+        t : 24 : 1 : 5 : 10.1 : 3141.59
+        t : 25 : 1 : 5 : 10.1 : 3141.59
+// Contains 5 artifacts
+        a : 21 : 2 : 5
+        a : 22 : 2 : 5
+        a : 23 : 2 : 5
+        a : 24 : 2 : 5
+        a : 25 : 2 : 5
+    c : 6 : 32 : Freed3 : 2 : 15.5 : 22.9 : 44.0
+// Contains 5 treasures
+        t : 26 : 1 : 6 : 10.1 : 3141.59
+        t : 27 : 1 : 6 : 10.1 : 3141.59
+        t : 28 : 1 : 6 : 10.1 : 3141.59
+        t : 29 : 1 : 6 : 10.1 : 3141.59
+        t : 30 : 1 : 6 : 10.1 : 3141.59
+// Contains 5 artifacts
+        a : 26 : 2 : 6
+        a : 27 : 2 : 6
+        a : 28 : 2 : 6
+        a : 29 : 2 : 6
+        a : 30 : 2 : 6
+// Contains: 0 unassigned creatures
+// Contains: 0 unassigned treasures
+// Contains: 0 unassigned artifacts
+
+// Data file for CMSC 335, Fall 2014
+// Nick Radonic
+// Oct 31, 2014// Parties format :
+//  p:<index>:<name>
+p : 1 : Red Hot Raiders 1
+p : 2 : Red Hot Raiders 2
+// Creatures format :
+//    c:<index>:<type>:<name>:<party>:<empathy>:<fear>:<carrying capacity>
+c : 1 : 32 : Freed1 : 1 : 15.5 : 22.9 : 44.0
+c : 2 : 32 : Freed2 : 1 : 15.5 : 22.9 : 44.0
+c : 3 : 32 : Freed3 : 1 : 15.5 : 22.9 : 44.0
+c : 4 : 32 : Freed1 : 2 : 15.5 : 22.9 : 44.0
+c : 5 : 32 : Freed2 : 2 : 15.5 : 22.9 : 44.0
+c : 6 : 32 : Freed3 : 2 : 15.5 : 22.9 : 44.0
+// Treasure format :
+//    t:<index>:<type>:<creature>:<weight>:<value>
+t : 1 : 1 : 1 : 10.1 : 3141.59
+t : 2 : 1 : 1 : 10.1 : 3141.59
+t : 3 : 1 : 1 : 10.1 : 3141.59
+t : 4 : 1 : 1 : 10.1 : 3141.59
+t : 5 : 1 : 1 : 10.1 : 3141.59
+t : 6 : 1 : 2 : 10.1 : 3141.59
+t : 7 : 1 : 2 : 10.1 : 3141.59
+t : 8 : 1 : 2 : 10.1 : 3141.59
+t : 9 : 1 : 2 : 10.1 : 3141.59
+t : 10 : 1 : 2 : 10.1 : 3141.59
+t : 11 : 1 : 3 : 10.1 : 3141.59
+t : 12 : 1 : 3 : 10.1 : 3141.59
+t : 13 : 1 : 3 : 10.1 : 3141.59
+t : 14 : 1 : 3 : 10.1 : 3141.59
+t : 15 : 1 : 3 : 10.1 : 3141.59
+t : 16 : 1 : 4 : 10.1 : 3141.59
+t : 17 : 1 : 4 : 10.1 : 3141.59
+t : 18 : 1 : 4 : 10.1 : 3141.59
+t : 19 : 1 : 4 : 10.1 : 3141.59
+t : 20 : 1 : 4 : 10.1 : 3141.59
+t : 21 : 1 : 5 : 10.1 : 3141.59
+t : 22 : 1 : 5 : 10.1 : 3141.59
+t : 23 : 1 : 5 : 10.1 : 3141.59
+t : 24 : 1 : 5 : 10.1 : 3141.59
+t : 25 : 1 : 5 : 10.1 : 3141.59
+t : 26 : 1 : 6 : 10.1 : 3141.59
+t : 27 : 1 : 6 : 10.1 : 3141.59
+t : 28 : 1 : 6 : 10.1 : 3141.59
+t : 29 : 1 : 6 : 10.1 : 3141.59
+t : 30 : 1 : 6 : 10.1 : 3141.59
+// Artifact format :
+//    a:<index>:<type>:<creature>[:<name>]
+a : 1 : 2 : 1
+a : 2 : 2 : 1
+a : 3 : 2 : 1
+a : 4 : 2 : 1
+a : 5 : 2 : 1
+a : 6 : 2 : 2
+a : 7 : 2 : 2
+a : 8 : 2 : 2
+a : 9 : 2 : 2
+a : 10 : 2 : 2
+a : 11 : 2 : 3
+a : 12 : 2 : 3
+a : 13 : 2 : 3
+a : 14 : 2 : 3
+a : 15 : 2 : 3
+a : 16 : 2 : 4
+a : 17 : 2 : 4
+a : 18 : 2 : 4
+a : 19 : 2 : 4
+a : 20 : 2 : 4
+a : 21 : 2 : 5
+a : 22 : 2 : 5
+a : 23 : 2 : 5
+a : 24 : 2 : 5
+a : 25 : 2 : 5
+a : 26 : 2 : 6
+a : 27 : 2 : 6
+a : 28 : 2 : 6
+a : 29 : 2 : 6
+a : 30 : 2 : 6
+c : 33 : 333 : Freed23 : 9 : 15.5 : 22.9 : 44.0
+t : 301 : Gold : 20009 : 50 : 2000
+
+Chronon: Shutting down...
+Chronon: Please wait while runtime data is processed...
+Chronon: Compressing Data ...
+Chronon: Saving to disk ...
+Chronon: Done
+
+Process finished with exit code 0

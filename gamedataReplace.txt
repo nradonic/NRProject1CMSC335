@@ -1,0 +1,4 @@
+p : 1 : Red Hot Raiders 1
+    c : 1 : 32 : Freed1 : 1 : 15.5 : 22.9 : 44.0
+p : 1 : Red Hot Raiders 1
+    c : 2 : 33 : Freed2 : 1 : 15.5 : 22.9 : 44.0
