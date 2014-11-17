@@ -84,7 +84,12 @@ public class DataTreeTest {
                     double empathy = Double.parseDouble(attributes[5].trim());
                     double fear = Double.parseDouble(attributes[6].trim());
                     double carryingCapacity = Double.parseDouble(attributes[7].trim());
-                    Creature creature = new Creature(ID, attributes[2], attributes[3], PID, empathy, fear, carryingCapacity);
+
+                    int age = attributes.length>8 ? Integer.parseInt(attributes[8]) : 0;
+                    double height = attributes.length>9 ? Integer.parseInt(attributes[9]) : 0;
+                    double weight = attributes.length>10 ? Double.parseDouble(attributes[10]) : 0;
+
+                    Creature creature = new Creature(ID, attributes[2], attributes[3], PID, empathy, fear, carryingCapacity, age, height, weight);
                     dataTree.addGameElement(creature);
                 } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
             }
@@ -111,36 +116,36 @@ public class DataTreeTest {
             }
         }
         System.out.println(dataTree.toString());
-        System.out.println(dataTree.sortTree());
+        //System.out.println(dataTree.sortTree());
 
     }
 
-    private static void Test1AddComponents() {
-        Cave dataTree = new Cave("Game Zone");
-
-        for(int parties=1; parties<3; parties++){
-                Party party = new Party("Red Hot Raiders "+parties);
-            for(int cre=1; cre < 4; cre++) {
-                Creature creature = new Creature("Freed"+cre, "Frank N. Stein", 15.5, 22.9, 44);
-
-                for (int stuff = 1; stuff <= 5; stuff++) {
-
-                    Treasure tr = new Treasure( "Gold "+stuff, 10.1, 3141.59);
-                    Artifact art = new Artifact( "Picasso "+stuff, "very artsy");
-
-                    creature.addTreasure(tr);
-                    creature.addArtifact(art);
-                }
-                party.addGameElementTree(creature);
-            }
-            dataTree.addGameElement(party);
-        }
-
-
-        String output = dataTree.toString();
-        System.out.println(output);
-
-        output = dataTree.sortTree();
-        System.out.println(output);
-    }
+//    private static void Test1AddComponents() {
+//        Cave dataTree = new Cave("Game Zone");
+//
+//        for(int parties=1; parties<3; parties++){
+//                Party party = new Party("Red Hot Raiders "+parties);
+//            for(int cre=1; cre < 4; cre++) {
+//                Creature creature = new Creature("Freed"+cre, "Frank N. Stein", 15.5, 22.9, 44);
+//
+//                for (int stuff = 1; stuff <= 5; stuff++) {
+//
+//                    Treasure tr = new Treasure( "Gold "+stuff, 10.1, 3141.59);
+//                    Artifact art = new Artifact( "Picasso "+stuff, "very artsy");
+//
+//                    creature.addTreasure(tr);
+//                    creature.addArtifact(art);
+//                }
+//                party.addGameElementTree(creature);
+//            }
+//            dataTree.addGameElement(party);
+//        }
+//
+//
+//        String output = dataTree.toString();
+//        System.out.println(output);
+//
+//        output = dataTree.sortTree();
+//        System.out.println(output);
+//    }
 }

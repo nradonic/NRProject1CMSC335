@@ -19,7 +19,7 @@ import java.util.Vector;
 public class GameElement extends DefaultMutableTreeNode {
     GameLayer gameLayer = GameLayer.NONE;
     int ID = 0;
-    ArrayList<GameElement> gameElementArrayList = new ArrayList<GameElement>();
+    //ArrayList<GameElement> gameElementArrayList = new ArrayList<GameElement>();
 
     public GameElement() {
     }

@@ -76,7 +76,12 @@ public class LoadGameData {
                     double empathy = Double.parseDouble(attributes[5].trim());
                     double fear = Double.parseDouble(attributes[6].trim());
                     double carryingCapacity = Double.parseDouble(attributes[7].trim());
-                    Creature creature = new Creature(ID, attributes[2], attributes[3], PID, empathy, fear, carryingCapacity);
+
+                    int age = attributes.length>8 ? Integer.parseInt(attributes[8]) : 0;
+                    double height = attributes.length>9 ? Integer.parseInt(attributes[9]) : 0;
+                    double weight = attributes.length>10 ? Double.parseDouble(attributes[10]) : 0;
+
+                    Creature creature = new Creature(ID, attributes[2], attributes[3], PID, empathy, fear, carryingCapacity, age, height, weight);
                     cave.addGameElement(creature);
                 } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
             }

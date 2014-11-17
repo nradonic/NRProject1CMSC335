@@ -7,6 +7,7 @@ package CaveGameGUI;
  */
 import DataFileInput.LoadGameData;
 import DataTree.Cave;
+import javafx.geometry.VerticalDirection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,40 +36,51 @@ public class GameControlWindow extends JFrame{
         this.cave = cave;
         this.tree = new JTree(cave);
 
-        System.out.println ("In constructor");
-        setTitle ("Sorcerer's Cave");
-        setSize (900, 900);
-        setDefaultCloseOperation (WindowConstants.EXIT_ON_CLOSE);
+        System.out.println("In constructor");
+        setTitle("Sorcerer's Cave");
+        setSize(900, 900);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setVisible (true);
 
-        JScrollPane jsp = new JScrollPane (jta);
+        JPanel jp0 = new JPanel();
+        jp0.setLayout(new BoxLayout(jp0, BoxLayout.Y_AXIS));
+
+
+        JPanel jp1 = new JPanel ();
+        jp1.add(setupButtons());
+        jp0.add(jp1);
+
+        JScrollPane jsp2 = new JScrollPane (tree);
+        jp0.add(jsp2);
+
         jta.setText(cave.getName()+"\nUse READ button to get game file");
+        JScrollPane jsp3 = new JScrollPane (jta);
 
-        add(tree, BorderLayout.CENTER);
+        jp0.add(jsp3);
+
         //add(cave.unassignedCreatures, BorderLayout.CENTER);
         //add(cave.unassignedTreasures, BorderLayout.CENTER);
         //add(cave.unassignedArtifacts, BorderLayout.CENTER);
+        getContentPane().add(jp0);
+        setVisible (true);
 
-        add(jsp, BorderLayout.PAGE_END);
 
-        setupButtons();
 
     } // end no-parameter constructor
 
-    public void setupButtons() {
+    public JPanel setupButtons() {
         JButton jbr = new JButton ("Read");
         JButton jbs = new JButton ("Search");
         JButton jba = new JButton ("Redraw");
         JButton jbm = new JButton("Move");
 
         JPanel jp = new JPanel ();
+        jp.setLayout(new FlowLayout());
+
         jp.add (jbr);
         jp.add (jbs);
         jp.add (jba);
         jp.add (jbm);
-        add(jp, BorderLayout.PAGE_START);
-        validate ();
 
         jbr.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
@@ -110,6 +122,7 @@ public class GameControlWindow extends JFrame{
             } // end required method
         } // end local definition of inner class
         ); // the anonymous inner class
+        return jp;
     }
 
     private void loadFileData(){
