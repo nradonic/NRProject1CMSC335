@@ -20,7 +20,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     Integer ID = 0;
     private FilterField filterField = FilterField.NONE;
     private GameLayer filterDomain = GameLayer.NONE;
-
+    private FilterField currentFilterField = FilterField.NONE;
     //ArrayList<GameElement> gameElementArrayList = new ArrayList<GameElement>();
 
 //    class TreeMapMine extends TreeMap implements Comparable<TreeMapMine>{
@@ -182,6 +182,9 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
 
         switch (gameLayer) {
             case CAVE: { // Party fields
+                if(filterDomain == GameLayer.PARTY){
+                    currentFilterField = filterField;
+                }
                 tmName = new TreeMap<>();
                 gameElementEnumeration = this.children();
                 while (gameElementEnumeration.hasMoreElements()) {
@@ -191,6 +194,9 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 break;
             }
             case PARTY: { // Creature fields
+                if(filterDomain == GameLayer.CREATURE){
+                    currentFilterField = filterField;
+                }
                 tmName = new TreeMap<>();
                 tmType = new TreeMap<>();
                 tmPartyID = new TreeMap<>();
@@ -218,6 +224,9 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 break;
             }
             case CREATURE: { // Treasure fields
+                if(filterDomain == GameLayer.TREASURE || filterDomain == GameLayer.ARTIFACT){
+                    currentFilterField = filterField;
+                }
                 tmName = new TreeMap<>();
                 tmType = new TreeMap<>();
                 tmPartyID = new TreeMap<>();
