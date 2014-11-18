@@ -7,6 +7,8 @@ package CaveGameGUI;
  */
 import DataFileInput.LoadGameData;
 import DataTree.Cave;
+import DataTree.GameLayer;
+import DataTree.Treasure;
 import javafx.geometry.VerticalDirection;
 
 import javax.swing.*;
@@ -24,12 +26,15 @@ public class GameControlWindow extends JFrame{
     JTextArea jta = new JTextArea ();
     Cave cave;
     JTree tree;
-
+    JPanel sortPanel = new JPanel();
     // store previous search terms
     boolean lastJCBP = true;
     boolean lastJCBC = true;
     boolean lastJCBT = true;
     boolean lastJCBA = true;
+    GameLayer layerOfInterest = GameLayer.NONE;
+    GameLayer filterDomain = GameLayer.NONE;
+
     String lastStr = "text to search for...";
 
     public GameControlWindow (Cave cave) {
@@ -66,6 +71,7 @@ public class GameControlWindow extends JFrame{
         framePanel.add(unassignedCreaturesPane);
         framePanel.add(unassignedTreasuresPane);
         framePanel.add(unassignedArtifactsPane);
+        framePanel.add(sortGame());
 
         getContentPane().add(framePanel);
         setVisible (true);
@@ -77,7 +83,7 @@ public class GameControlWindow extends JFrame{
     public JPanel setupButtons() {
         JButton jbr = new JButton ("Read");
         JButton jbs = new JButton ("Search");
-        JButton jba = new JButton ("Redraw");
+        JButton jba = new JButton ("Sort");
         JButton jbm = new JButton("Move");
 
         JPanel jp = new JPanel ();
@@ -113,9 +119,9 @@ public class GameControlWindow extends JFrame{
 
         jba.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                String treeStr = cave.toString();
-                jta.setText(treeStr);
-                jta.setCaretPosition(0);
+                //JPanel jp = sortGame(cave);
+
+
             } // end required method
         } // end local definition of inner class
         ); // the anonymous inner class
@@ -168,13 +174,87 @@ public class GameControlWindow extends JFrame{
         for (String s: gameLines){
             if (s.toLowerCase().contains(searchStr) &&
                     ( (jcbArticle.isSelected() && s.trim().startsWith("a")) ||
-                    (jcbParty.isSelected() && s.trim().startsWith("p")) ||
-                    (jcbTreasure.isSelected() && s.trim().startsWith("t")) ||
-                    (jcbCreature.isSelected() && s.trim().startsWith("c")) ) ) {
+                            (jcbParty.isSelected() && s.trim().startsWith("p")) ||
+                            (jcbTreasure.isSelected() && s.trim().startsWith("t")) ||
+                            (jcbCreature.isSelected() && s.trim().startsWith("c")) ) ) {
                 outputLines += s+"\n";
             }
         }
         return outputLines;
     }
 
+    JPanel sortGame(){
+        ButtonGroup bg = new ButtonGroup();
+
+        JRadioButton jcbParty = new JRadioButton("Party");
+        bg.add(jcbParty);
+
+        JRadioButton jcbCreature = new JRadioButton("Creature");
+        bg.add(jcbCreature);
+
+        JRadioButton jcbTreasure = new JRadioButton("Treasure");
+        bg.add(jcbTreasure);
+
+        JRadioButton jcbArticle = new JRadioButton("Artifact");
+        bg.add(jcbArticle);
+
+        JRadioButton jcbNone = new JRadioButton("None");
+        jcbNone.setSelected(true);
+        bg.add(jcbNone);
+
+        JPanel jcbFilter = new JPanel();
+        jcbFilter.add(new JLabel("Search domain:    "));
+        jcbFilter.add(jcbParty);
+        jcbFilter.add(jcbCreature);
+        jcbFilter.add(jcbTreasure);
+        jcbFilter.add(jcbArticle);
+        jcbFilter.add(jcbNone);
+
+
+        jcbParty.addActionListener ( new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                filterDomain = GameLayer.PARTY;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+
+        jcbCreature.addActionListener ( new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                filterDomain = GameLayer.CREATURE;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+        jcbTreasure.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                filterDomain = GameLayer.TREASURE;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+        jcbArticle.addActionListener ( new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                filterDomain = GameLayer.ARTIFACT;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+        jcbNone.addActionListener ( new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                filterDomain = GameLayer.NONE;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+
+
+        return jcbFilter;
+    }
+
+
+    void updateFiltering(){
+        cave.createMaps(filterDomain);
+
+    }
 }

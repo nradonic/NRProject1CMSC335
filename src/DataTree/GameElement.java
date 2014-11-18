@@ -20,7 +20,31 @@ public class GameElement extends DefaultMutableTreeNode {
     Integer ID = 0;
     //ArrayList<GameElement> gameElementArrayList = new ArrayList<GameElement>();
 
-    Map<Map,String> fieldMap = new TreeMap<>();
+//    class TreeMapMine extends TreeMap implements Comparable<TreeMapMine>{
+//        int compareTo(Object t){
+//            return 1;
+//        }
+//    }
+//
+//    Map<TreeMap,String> fieldMap = new TreeMap<>();
+
+    TreeMap<GameElement, Integer> tmID = new TreeMap<>();
+    TreeMap<GameElement, String> tmName = new TreeMap<>();
+
+    TreeMap<GameElement, String> tmType = new TreeMap<>();
+    TreeMap<GameElement, Integer> tmPartyID = new TreeMap<>();
+    TreeMap<GameElement, Integer> tmCreatureID = new TreeMap<>();
+
+    TreeMap<GameElement, Double> tmValue = new TreeMap<>();
+    TreeMap<GameElement, Double> tmWeight = new TreeMap<>();
+    TreeMap<GameElement, Double> tmHeight = new TreeMap<>();
+    TreeMap<GameElement, Integer> tmAge = new TreeMap<>();
+
+    TreeMap<GameElement, Double> tmEmpathy = new TreeMap<>();
+    TreeMap<GameElement, Double> tmFear = new TreeMap<>();
+    TreeMap<GameElement, Double> tmCapacity = new TreeMap<>();
+
+
 
     public GameElement() {
     }
@@ -28,7 +52,7 @@ public class GameElement extends DefaultMutableTreeNode {
     public GameElement(GameLayer layer, int ID) {
         gameLayer = layer;
         this.ID = ID;
-        createMaps();
+        //createMaps();
     }
 
     public GameLayer getGameLayer() {
@@ -142,168 +166,82 @@ public class GameElement extends DefaultMutableTreeNode {
         return "";
     }
 
-    private void createMaps(){
-        fieldMap.put(new TreeMap<GameElement, Integer>(new Comparator<GameElement>()
-        {
-            public int compare(GameElement o1, GameElement o2)
-            {
-                //comparison logic goes here
-                return o1.ID - o2.ID;
-            }
-        }), "ID");
+    public void createMaps(GameLayer gameLayerOfInterest){
+        tmID = new TreeMap<>();
+        Enumeration<GameElement> gameElementEnumeration = this.breadthFirstEnumeration();
+        while (gameElementEnumeration.hasMoreElements()){
+            GameElement ge = gameElementEnumeration.nextElement();
+            tmID.put(ge, ge.ID);
+        }
 
         switch (gameLayer) {
             case CAVE: { // Party fields
-                fieldMap.put(new TreeMap<GameElement, String>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        return ((Party)o1).name.compareTo(((Party)o2).name);
-                    }
-                }), "Name");
+                tmName = new TreeMap<>();
+                gameElementEnumeration = this.breadthFirstEnumeration();
+                while (gameElementEnumeration.hasMoreElements()){
+                    GameElement ge = gameElementEnumeration.nextElement();
+                    tmName.put(ge, ((Cave)ge).getName());
+                }
                 break;
             }
-            case PARTY:  { // Creature fields
-                fieldMap.put(new TreeMap<GameElement, String>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        return ((Creature)o1).name.compareTo(((Creature)o2).name);
-                    }
-                }), "Name");
-                fieldMap.put(new TreeMap<GameElement, String>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        return ((Creature)o1).creatureType.compareTo(((Creature)o2).creatureType);
-                    }
-                }), "Type");
-                fieldMap.put(new TreeMap<GameElement, Integer>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        return ((Creature)o1).partyID - ((Creature)o2).partyID;
-                    }
-                }), "Party ID");
-                fieldMap.put(new TreeMap<GameElement, Integer>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        return ((Creature)o1).age - ((Creature)o2).age;
-                    }
-                }), "Age");
-                fieldMap.put(new TreeMap<GameElement, Double>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        double k = ((Creature)o1).empathy - ((Creature)o2).empathy;
-                        return k > 0 ? 1 : (k<0 ? -1 : 0);
-                    }
-                }), "Empathy");
-                fieldMap.put(new TreeMap<GameElement, Double>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        double k = ((Creature)o1).fear - ((Creature)o2).fear;
-                        return k > 0 ? 1 : (k<0 ? -1 : 0);
-                    }
-                }), "Fear");
-                fieldMap.put(new TreeMap<GameElement, Double>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        double k = ((Creature)o1).carryingCapacity - ((Creature)o2).carryingCapacity;
-                        return k > 0 ? 1 : (k<0 ? -1 : 0);
-                    }
-                }), "Capacity");
-                fieldMap.put(new TreeMap<GameElement, Double>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        double k = ((Creature)o1).height - ((Creature)o2).height;
-                        return k > 0 ? 1 : (k<0 ? -1 : 0);
-                    }
-                }), "Height");
-                fieldMap.put(new TreeMap<GameElement, Double>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        double k = ((Creature)o1).weight - ((Creature)o2).weight;
-                        return k > 0 ? 1 : (k<0 ? -1 : 0);
-                    }
-                }), "Weight");
+            case PARTY: { // Creature fields
+                tmName = new TreeMap<>();
+                tmType = new TreeMap<>();
+                tmPartyID = new TreeMap<>();
+                tmAge = new TreeMap<>();
+                tmEmpathy = new TreeMap<>();
+                tmFear = new TreeMap<>();
+                tmCapacity = new TreeMap<>();
+                tmHeight = new TreeMap<>();
+                tmWeight = new TreeMap<>();
+
+                gameElementEnumeration = this.breadthFirstEnumeration();
+                while (gameElementEnumeration.hasMoreElements()) {
+                    GameElement ge = gameElementEnumeration.nextElement();
+                    tmName.put(ge, ((Creature) ge).name);
+                    tmType.put(ge, ((Creature) ge).creatureType);
+                    tmPartyID.put(ge, ((Creature) ge).partyID);
+                    tmAge.put(ge, ((Creature) ge).age);
+                    tmEmpathy.put(ge, ((Creature) ge).empathy);
+                    tmFear.put(ge, ((Creature) ge).fear);
+                    tmCapacity.put(ge, ((Creature) ge).carryingCapacity);
+                    tmHeight.put(ge, ((Creature) ge).height);
+                    tmWeight.put(ge, ((Creature) ge).weight);
+
+                }
                 break;
             }
             case CREATURE:{ // Treasure fields
-                fieldMap.put(new TreeMap<GameElement, Integer>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        if (o1.gameLayer == GameLayer.TREASURE){
-                            return ((Treasure)o1).creatureID - ((Treasure)o2).creatureID;
-                        } else {return ((Artifact)o1).creatureID - ((Artifact)o2).creatureID;}
-                    }
-                }), "ID");
-                fieldMap.put(new TreeMap<GameElement, String>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        if (o1.gameLayer == GameLayer.TREASURE){
-                            return ((Treasure)o1).treasureType.compareTo(((Treasure)o2).treasureType);
-                        } else {return ((Artifact)o1).artifactType.compareTo(((Artifact)o2).artifactType);}
-                    }
-                }), "Type");
-                fieldMap.put(new TreeMap<GameElement, Integer>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        return ((Creature)o1).partyID - ((Creature)o2).partyID;
-                    }
-                }), "Creature ID");
-                fieldMap.put(new TreeMap<GameElement, Double>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        double k = ((Treasure)o1).value - ((Treasure)o2).value;
-                        return k > 0 ? 1 : (k<0 ? -1 : 0);
-                    }
-                }), "Value");
-                fieldMap.put(new TreeMap<GameElement, Double>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        double k = ((Treasure)o1).weight - ((Treasure)o2).weight;
-                        return k > 0 ? 1 : (k<0 ? -1 : 0);
-                    }
-                }), "Weight");
+                tmName = new TreeMap<>();
+                tmType = new TreeMap<>();
+                tmPartyID = new TreeMap<>();
+                tmWeight = new TreeMap<>();
+                tmCreatureID = new TreeMap<>();
+                tmID = new TreeMap<>();
 
-                // Artifact fields not in Treasure
-                fieldMap.put(new TreeMap<GameElement, String>(new Comparator<GameElement>()
-                {
-                    public int compare(GameElement o1, GameElement o2)
-                    {
-                        //comparison logic goes here
-                        return ((Artifact)o1).name.compareTo(((Artifact)o2).name);
+                gameElementEnumeration = this.breadthFirstEnumeration();
+                while (gameElementEnumeration.hasMoreElements()){
+                    GameElement ge = gameElementEnumeration.nextElement();
+                    switch (ge.gameLayer) {
+                        case TREASURE:{
+                            tmType.put(ge, ((Treasure)ge).treasureType);
+                            tmPartyID.put(ge, ((Treasure)ge).creatureID);
+                            tmID.put(ge, ((Treasure)ge).ID);
+                            tmValue.put(ge, ((Treasure)ge).value);
+                            tmWeight.put(ge, ((Treasure)ge).weight);
+                        }
+                        case ARTIFACT:{
+                            tmName.put(ge, ((Artifact)ge).name);
+                            tmType.put(ge, ((Artifact)ge).artifactType);
+                            tmCreatureID.put(ge, ((Artifact)ge).creatureID);
+                            tmID.put(ge, ((Artifact)ge).ID);
+                        }
                     }
-                }), "Name");
-                break;
-            }
+
+                } break;}
             default: {break;}
         }
+
+
     }
 }

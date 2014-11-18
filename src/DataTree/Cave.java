@@ -65,7 +65,10 @@ public class Cave extends GameElement{
 
     public String toString(){
         String caveOutput = "// Cave: "+name+"\n\n";
-        caveOutput += "// Contains: "+this.getChildCount()+" part"+(this.getChildCount()>1?"ies":"y")+"\n";
+        String items = " Item" +((this.getChildCount()>1 || this.getChildCount()==0) ? "s" : "");
+        String party = (" part"+(this.getChildCount()>1?"ies":"y"));
+        String item_message = name.startsWith("Unassigned Cave") ? items :  party;
+        caveOutput += "// Contains: "+this.getChildCount()+item_message+"\n";
         return caveOutput;
     }
 

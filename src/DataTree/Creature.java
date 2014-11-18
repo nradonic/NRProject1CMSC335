@@ -44,7 +44,7 @@ public class Creature extends GameElement{
         this.age = age;
         this.height = height;
         this.weight = weight;
-
+        this.ID = ID;
         gameLayer = GameLayer.CREATURE;
     }
 
