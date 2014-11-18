@@ -15,6 +15,7 @@ import java.util.*;
 public class Cave extends GameElement{
     private String name;
 
+    public Cave displayCave;
     public Cave unassignedCaveCreatures;
     public Cave unassignedCaveTreasures;
     public Cave unassignedCaveArtifacts;
@@ -26,6 +27,7 @@ public class Cave extends GameElement{
         unassignedCaveCreatures = new Cave("Unassigned Cave Creatures", 0);
         unassignedCaveTreasures = new Cave("Unassigned Cave Treasures", 0);
         unassignedCaveArtifacts = new Cave("Unassigned Cave Artifacts", 0);
+        displayCave = new Cave(name,0);
     }
 
     private Cave(String name, int dummy){

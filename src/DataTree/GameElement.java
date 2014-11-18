@@ -15,9 +15,12 @@ import java.util.*;
  * @since 11/2/14.
  */
 
-public class GameElement extends DefaultMutableTreeNode {
+public class GameElement extends DefaultMutableTreeNode implements Comparable<GameElement> {
     GameLayer gameLayer = GameLayer.NONE;
     Integer ID = 0;
+    private FilterField filterField = FilterField.NONE;
+    private GameLayer filterDomain = GameLayer.NONE;
+
     //ArrayList<GameElement> gameElementArrayList = new ArrayList<GameElement>();
 
 //    class TreeMapMine extends TreeMap implements Comparable<TreeMapMine>{
@@ -45,14 +48,13 @@ public class GameElement extends DefaultMutableTreeNode {
     TreeMap<GameElement, Double> tmCapacity = new TreeMap<>();
 
 
-
     public GameElement() {
     }
 
     public GameElement(GameLayer layer, int ID) {
         gameLayer = layer;
         this.ID = ID;
-        //createMaps();
+        //createOrUpdateMaps();
     }
 
     public GameLayer getGameLayer() {
@@ -83,7 +85,7 @@ public class GameElement extends DefaultMutableTreeNode {
             break;
             case PARTY: {
                 if (gameElement.gameLayer == GameLayer.CREATURE) {
-                    if (ID == ((Creature)gameElement).partyID) {
+                    if (ID == ((Creature) gameElement).partyID) {
                         result = insertIfDuplicateGameElement(gameElement);
                         if (!result) {
                             //gameElementArrayList.add(gameElement);
@@ -100,7 +102,7 @@ public class GameElement extends DefaultMutableTreeNode {
             break;
             case CREATURE: {
                 if (gameElement.gameLayer == GameLayer.TREASURE) {
-                    if (ID == ((Treasure)gameElement).creatureID) {
+                    if (ID == ((Treasure) gameElement).creatureID) {
                         result = insertIfDuplicateGameElement(gameElement);
                         if (!result) {
                             //gameElementArrayList.add(gameElement);
@@ -110,7 +112,7 @@ public class GameElement extends DefaultMutableTreeNode {
                     }
                 }
                 if (gameElement.gameLayer == GameLayer.ARTIFACT) {
-                    if (ID == ((Artifact)gameElement).creatureID) {
+                    if (ID == ((Artifact) gameElement).creatureID) {
                         result = insertIfDuplicateGameElement(gameElement);
                         if (!result) {
                             //gameElementArrayList.add(gameElement);
@@ -130,7 +132,7 @@ public class GameElement extends DefaultMutableTreeNode {
     private boolean insertIfDuplicateGameElement(GameElement gameElement) {
         boolean result = false;
         Vector<GameElement> ge = this.children;
-        if(ge != null) {
+        if (ge != null) {
             Optional<GameElement> geExisting = ge.stream().filter(
                     p -> p.ID == gameElement.ID &&
                             p.gameLayer == gameElement.gameLayer).findFirst();
@@ -147,7 +149,7 @@ public class GameElement extends DefaultMutableTreeNode {
 
     private boolean recursiveInsertion(GameElement gameElement) {
         boolean result = false;
-        for (GameElement g : (Vector<GameElement>)this.children) {
+        for (GameElement g : (Vector<GameElement>) this.children) {
             result = g.addGameElementTree(gameElement);
             if (result) {
                 break;
@@ -159,17 +161,21 @@ public class GameElement extends DefaultMutableTreeNode {
     @Override
     public String toString() {
         String output = "";
-        for (GameElement gameElement : (Vector<GameElement>)this.children) {
+        for (GameElement gameElement : (Vector<GameElement>) this.children) {
             output += gameElement.toString();
         }
         //return output;
         return "";
     }
 
-    public void createMaps(GameLayer gameLayerOfInterest){
+    public void createOrUpdateMaps(GameLayer filterDomain, FilterField filterField) {
+        this.filterDomain = filterDomain;
+        this.filterField = filterField;
+
         tmID = new TreeMap<>();
-        Enumeration<GameElement> gameElementEnumeration = this.breadthFirstEnumeration();
-        while (gameElementEnumeration.hasMoreElements()){
+
+        Enumeration<GameElement> gameElementEnumeration = this.children();
+        while (gameElementEnumeration.hasMoreElements()) {
             GameElement ge = gameElementEnumeration.nextElement();
             tmID.put(ge, ge.ID);
         }
@@ -177,10 +183,10 @@ public class GameElement extends DefaultMutableTreeNode {
         switch (gameLayer) {
             case CAVE: { // Party fields
                 tmName = new TreeMap<>();
-                gameElementEnumeration = this.breadthFirstEnumeration();
-                while (gameElementEnumeration.hasMoreElements()){
+                gameElementEnumeration = this.children();
+                while (gameElementEnumeration.hasMoreElements()) {
                     GameElement ge = gameElementEnumeration.nextElement();
-                    tmName.put(ge, ((Cave)ge).getName());
+                    tmName.put(ge, ((Party) ge).getName());
                 }
                 break;
             }
@@ -195,7 +201,7 @@ public class GameElement extends DefaultMutableTreeNode {
                 tmHeight = new TreeMap<>();
                 tmWeight = new TreeMap<>();
 
-                gameElementEnumeration = this.breadthFirstEnumeration();
+                gameElementEnumeration = this.children();
                 while (gameElementEnumeration.hasMoreElements()) {
                     GameElement ge = gameElementEnumeration.nextElement();
                     tmName.put(ge, ((Creature) ge).name);
@@ -211,7 +217,7 @@ public class GameElement extends DefaultMutableTreeNode {
                 }
                 break;
             }
-            case CREATURE:{ // Treasure fields
+            case CREATURE: { // Treasure fields
                 tmName = new TreeMap<>();
                 tmType = new TreeMap<>();
                 tmPartyID = new TreeMap<>();
@@ -219,29 +225,59 @@ public class GameElement extends DefaultMutableTreeNode {
                 tmCreatureID = new TreeMap<>();
                 tmID = new TreeMap<>();
 
-                gameElementEnumeration = this.breadthFirstEnumeration();
-                while (gameElementEnumeration.hasMoreElements()){
+                gameElementEnumeration = this.children();
+                while (gameElementEnumeration.hasMoreElements()) {
                     GameElement ge = gameElementEnumeration.nextElement();
                     switch (ge.gameLayer) {
-                        case TREASURE:{
-                            tmType.put(ge, ((Treasure)ge).treasureType);
-                            tmPartyID.put(ge, ((Treasure)ge).creatureID);
-                            tmID.put(ge, ((Treasure)ge).ID);
-                            tmValue.put(ge, ((Treasure)ge).value);
-                            tmWeight.put(ge, ((Treasure)ge).weight);
+                        case TREASURE: {
+                            tmType.put(ge, ((Treasure) ge).treasureType);
+                            tmPartyID.put(ge, ((Treasure) ge).creatureID);
+                            tmID.put(ge, ((Treasure) ge).ID);
+                            tmValue.put(ge, ((Treasure) ge).value);
+                            tmWeight.put(ge, ((Treasure) ge).weight);
+                            break;
                         }
-                        case ARTIFACT:{
-                            tmName.put(ge, ((Artifact)ge).name);
-                            tmType.put(ge, ((Artifact)ge).artifactType);
-                            tmCreatureID.put(ge, ((Artifact)ge).creatureID);
-                            tmID.put(ge, ((Artifact)ge).ID);
+                        case ARTIFACT: {
+                            tmName.put(ge, ((Artifact) ge).name);
+                            tmType.put(ge, ((Artifact) ge).artifactType);
+                            tmCreatureID.put(ge, ((Artifact) ge).creatureID);
+                            tmID.put(ge, ((Artifact) ge).ID);
+                            break;
                         }
                     }
 
-                } break;}
-            default: {break;}
+                }
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+
+        gameElementEnumeration = this.children();
+        while (gameElementEnumeration.hasMoreElements()) {
+            GameElement ge = gameElementEnumeration.nextElement();
+            ge.createOrUpdateMaps(filterDomain, filterField);
         }
 
 
+    }
+
+    public int compareTo(GameElement ge) {
+        if (filterDomain == gameLayer) {
+            if(gameLayer == GameLayer.PARTY) {
+                switch (filterField) {
+                    case ID: {
+                        return this.ID - ((Party) ge).ID;
+                    }
+                    case NAME: {
+                        return ((Party) this).name.compareTo(((Party) ge).name);
+                    }
+                    default:
+                        return 0;
+                }
+            }
+        }
+        return 0;
     }
 }

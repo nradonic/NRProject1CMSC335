@@ -7,9 +7,8 @@ package CaveGameGUI;
  */
 import DataFileInput.LoadGameData;
 import DataTree.Cave;
+import DataTree.FilterField;
 import DataTree.GameLayer;
-import DataTree.Treasure;
-import javafx.geometry.VerticalDirection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +22,9 @@ import java.awt.event.ActionListener;
  */
 public class GameControlWindow extends JFrame{
     static final long serialVersionUID = 123L;
+
+    FilterField filterField = FilterField.NONE;
+
     JTextArea jta = new JTextArea ();
     Cave cave;
     JTree tree;
@@ -32,7 +34,6 @@ public class GameControlWindow extends JFrame{
     boolean lastJCBC = true;
     boolean lastJCBT = true;
     boolean lastJCBA = true;
-    GameLayer layerOfInterest = GameLayer.NONE;
     GameLayer filterDomain = GameLayer.NONE;
 
     String lastStr = "text to search for...";
@@ -71,7 +72,8 @@ public class GameControlWindow extends JFrame{
         framePanel.add(unassignedCreaturesPane);
         framePanel.add(unassignedTreasuresPane);
         framePanel.add(unassignedArtifactsPane);
-        framePanel.add(sortGame());
+        framePanel.add(sortGameLayerButtons());
+        framePanel.add(sortFieldLayerButtons());
 
         getContentPane().add(framePanel);
         setVisible (true);
@@ -109,7 +111,7 @@ public class GameControlWindow extends JFrame{
 
         jbs.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                String searchGameResults = searchGame (cave);
+                String searchGameResults = searchGame(cave);
                 String treeStr = searchGameResults;
                 jta.setText(treeStr);
                 jta.setCaretPosition(0);
@@ -119,7 +121,7 @@ public class GameControlWindow extends JFrame{
 
         jba.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                //JPanel jp = sortGame(cave);
+                //JPanel jp = sortGameLayerButtons(cave);
 
 
             } // end required method
@@ -183,7 +185,7 @@ public class GameControlWindow extends JFrame{
         return outputLines;
     }
 
-    JPanel sortGame(){
+    JPanel sortGameLayerButtons(){
         ButtonGroup bg = new ButtonGroup();
 
         JRadioButton jcbParty = new JRadioButton("Party");
@@ -253,8 +255,78 @@ public class GameControlWindow extends JFrame{
     }
 
 
+    JPanel sortFieldLayerButtons(){
+        ButtonGroup bg = new ButtonGroup();
+
+        JRadioButton jcbName = new JRadioButton("Name");
+        bg.add(jcbName);
+
+        JRadioButton jcbType = new JRadioButton("Creature Type");
+        bg.add(jcbType);
+
+        JRadioButton jcbTreasure = new JRadioButton("Treasure");
+        bg.add(jcbTreasure);
+
+        JRadioButton jcbArticle = new JRadioButton("Artifact");
+        bg.add(jcbArticle);
+
+        JRadioButton jcbNone = new JRadioButton("None");
+        jcbNone.setSelected(true);
+        bg.add(jcbNone);
+
+        JPanel jcbFilter = new JPanel();
+        jcbFilter.add(new JLabel("Search fields:    "));
+        jcbFilter.add(jcbName);
+        jcbFilter.add(jcbType);
+        jcbFilter.add(jcbTreasure);
+        jcbFilter.add(jcbArticle);
+        jcbFilter.add(jcbNone);
+
+
+        jcbName.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                filterField = FilterField.NAME;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+
+        jcbType.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                filterField = FilterField.CREATURETYPE;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+        jcbTreasure.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                filterField = FilterField.CREATURETYPE;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+        jcbArticle.addActionListener ( new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                filterField = FilterField.CREATURETYPE;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+        jcbNone.addActionListener ( new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                filterField = FilterField.CREATURETYPE;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
+
+
+        return jcbFilter;
+    }
+
+
     void updateFiltering(){
-        cave.createMaps(filterDomain);
+        cave.createOrUpdateMaps(filterDomain, filterField);
 
     }
 }
