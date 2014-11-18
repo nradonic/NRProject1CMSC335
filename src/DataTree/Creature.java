@@ -23,18 +23,20 @@ public class Creature extends GameElement{
     double weight;
 
     public Creature(String name, String creatureType, double empathy, double fear, double carryingCapacity){
-        this.ID = creaturesCreated;
+        super(GameLayer.CREATURE, creaturesCreated+1);
+        creaturesCreated++;
+
         this.name = name;
         this.creatureType = creatureType;
         this.empathy = empathy;
         this.fear = fear;
         this.carryingCapacity = carryingCapacity;
-
-        gameLayer = GameLayer.CREATURE;
     }
 
     public Creature(int ID, String creatureType, String  name, int partyID, double empathy, double fear, double carryingCapacity, int age, double height, double weight){
+        super(GameLayer.CREATURE, ID);
         creaturesCreated++;
+
         this.name = name;
         this.creatureType = creatureType;
         this.empathy = empathy;
@@ -44,31 +46,8 @@ public class Creature extends GameElement{
         this.age = age;
         this.height = height;
         this.weight = weight;
-        this.ID = ID;
-        gameLayer = GameLayer.CREATURE;
     }
 
-//    public void addTreasure(Treasure treasure){
-//            treasure.setCreatureID(ID);
-//        Optional<GameElement> tExisting = gameElementArrayList.stream().filter(p->p.ID == treasure.ID).findFirst();
-//        if(tExisting.isPresent()){
-//            GameElement tempT = tExisting.get();
-//            tempT = treasure;
-//        } else {
-//            gameElementArrayList.add(treasure);
-//        }
-//    }
-//
-//    public void addArtifact(Artifact artifact){
-//        artifact.setCreatureID(ID);
-//        Optional<GameElement> aExisting = gameElementArrayList.stream().filter(p->p.ID == artifact.ID).findFirst();
-//        if(aExisting.isPresent()){
-//            GameElement tempA = aExisting.get();
-//            tempA = artifact;
-//            } else {
-//            gameElementArrayList.add(artifact);
-//        }
-//    }
 
     public void setPartyID(int partyID){
         this.partyID = partyID;

@@ -14,23 +14,20 @@ public class Treasure extends GameElement{
     String treasureType;
 
     public Treasure(String treasureType, double weight, double value){
+        super(GameLayer.TREASURE, treasuresCreated+1);
         treasuresCreated++;
-        this.ID = treasuresCreated;
-
         this.weight = weight;
         this.value = value;
         this.treasureType = treasureType;
-        gameLayer = GameLayer.TREASURE;
     }
 
     public Treasure(int ID, String treasureType, int creatureID, double weight, double value){
+        super(GameLayer.TREASURE, ID);
         treasuresCreated++;
-        this.ID = ID;
         this.creatureID = creatureID;
         this.weight = weight;
         this.value = value;
         this.treasureType = treasureType;
-        gameLayer = GameLayer.TREASURE;
     }
 
     public String toString(){

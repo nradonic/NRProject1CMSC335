@@ -11,11 +11,10 @@ public class Party extends  GameElement{
     String name;
 
     public Party(String name){
+        super(GameLayer.PARTY, partiesCreated+1);
         partiesCreated++;
-        this.ID = partiesCreated;
 
         this.name = name;
-        gameLayer = GameLayer.PARTY;
     }
 
     public int getID(){
@@ -23,10 +22,11 @@ public class Party extends  GameElement{
     }
 
     public Party(int ID, String name){
+        super(GameLayer.PARTY, ID);
         this.ID = ID;
         this.name = name;
-        gameLayer = GameLayer.PARTY;
         partiesCreated++;
+
     }
 
     public String getName(){

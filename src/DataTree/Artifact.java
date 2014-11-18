@@ -13,7 +13,9 @@ public class Artifact extends GameElement{
     String artifactType;
 
     public Artifact(String name, String artifactType){
+        super(GameLayer.ARTIFACT, artifactsCreated+1);
         artifactsCreated++;
+
         this.ID = artifactsCreated;
         this.name = name;
         this.artifactType = artifactType;
@@ -21,11 +23,10 @@ public class Artifact extends GameElement{
     }
 
     public Artifact(int ID, String artifactType, int creatureID, String name){
-        this.ID = ID;
+        super(GameLayer.ARTIFACT, ID);
         this.name = name;
         this.artifactType = artifactType;
         this.creatureID = creatureID;
-        gameLayer = GameLayer.ARTIFACT;
     }
 
     public String toString(){

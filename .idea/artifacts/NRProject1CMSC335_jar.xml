@@ -1,14 +1,13 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="NRProject1CMSC335:jar">
+  <artifact type="jar" build-on-make="true" name="NRProject1CMSC335:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/NRProject1CMSC335_jar</output-path>
     <root id="archive" name="NRProject1CMSC335.jar">
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
+      <element id="file-copy" path="$PROJECT_DIR$/a_dataB.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/gamedata1.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/gamedata5.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/gamedataReplace.txt" />
       <element id="module-output" name="NRProject1CMSC335" />
-      <element id="archive" name="archive.jar">
-        <element id="directory" name="META-INF">
-          <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
-        </element>
-        <element id="dir-copy" path="$PROJECT_DIR$" />
-      </element>
     </root>
   </artifact>
 </component>

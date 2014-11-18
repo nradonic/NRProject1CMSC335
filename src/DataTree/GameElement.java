@@ -21,25 +21,13 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     private FilterField filterField = FilterField.NONE;
     private GameLayer filterDomain = GameLayer.NONE;
     private FilterField currentFilterField = FilterField.NONE;
-    //ArrayList<GameElement> gameElementArrayList = new ArrayList<GameElement>();
-
-//    class TreeMapMine extends TreeMap implements Comparable<TreeMapMine>{
-//        int compareTo(Object t){
-//            return 1;
-//        }
-//    }
-//
-//    Map<TreeMap,String> fieldMap = new TreeMap<>();
 
     TreeMap<GameElement, Integer> tmID = new TreeMap<>();
     TreeMap<GameElement, String> tmName = new TreeMap<>();
 
     TreeMap<GameElement, String> tmType = new TreeMap<>();
     TreeMap<GameElement, Integer> tmPartyID = new TreeMap<>();
-    TreeMap<GameElement, Integer> tmCreatureID = new TreeMap<>();
 
-    TreeMap<GameElement, Double> tmValue = new TreeMap<>();
-    TreeMap<GameElement, Double> tmWeight = new TreeMap<>();
     TreeMap<GameElement, Double> tmHeight = new TreeMap<>();
     TreeMap<GameElement, Integer> tmAge = new TreeMap<>();
 
@@ -47,14 +35,47 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     TreeMap<GameElement, Double> tmFear = new TreeMap<>();
     TreeMap<GameElement, Double> tmCapacity = new TreeMap<>();
 
+    TreeMap<GameElement, Integer> tmCreatureID = new TreeMap<>();
+    TreeMap<GameElement, Double> tmValue = new TreeMap<>();
+    TreeMap<GameElement, Double> tmWeight = new TreeMap<>();
+
+    ArrayList<TreeMap> caveTMList = new ArrayList<>();
+    ArrayList<TreeMap> partyTMList = new ArrayList<>();
+    ArrayList<TreeMap> creatureTMList = new ArrayList<>();
 
     public GameElement() {
+        populateListOfTreeMaps();
     }
 
     public GameElement(GameLayer layer, int ID) {
         gameLayer = layer;
         this.ID = ID;
+
+        populateListOfTreeMaps();
         //createOrUpdateMaps();
+    }
+
+    private void populateListOfTreeMaps() {
+        caveTMList.add(tmID);
+        caveTMList.add(tmName);
+
+        partyTMList.add(tmID);
+        partyTMList.add(tmName);
+        partyTMList.add(tmType);
+        partyTMList.add(tmPartyID);
+        partyTMList.add(tmAge);
+        partyTMList.add(tmEmpathy);
+        partyTMList.add(tmFear);
+        partyTMList.add(tmCapacity);
+        partyTMList.add(tmHeight);
+        partyTMList.add(tmWeight);
+
+        creatureTMList.add(tmID);
+        creatureTMList.add(tmName);
+        creatureTMList.add(tmType);
+        creatureTMList.add(tmCreatureID);
+        creatureTMList.add(tmWeight);
+        creatureTMList.add(tmValue);
     }
 
     public GameLayer getGameLayer() {
@@ -197,6 +218,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 if(filterDomain == GameLayer.CREATURE){
                     currentFilterField = filterField;
                 }
+                tmID = new TreeMap<>();
                 tmName = new TreeMap<>();
                 tmType = new TreeMap<>();
                 tmPartyID = new TreeMap<>();
@@ -210,6 +232,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 gameElementEnumeration = this.children();
                 while (gameElementEnumeration.hasMoreElements()) {
                     GameElement ge = gameElementEnumeration.nextElement();
+                    tmID.put(ge, ((Creature) ge).ID);
                     tmName.put(ge, ((Creature) ge).name);
                     tmType.put(ge, ((Creature) ge).creatureType);
                     tmPartyID.put(ge, ((Creature) ge).partyID);
