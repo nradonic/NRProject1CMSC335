@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 public class GameControlWindow extends JFrame{
     static final long serialVersionUID = 123L;
 
-    FilterField filterField = FilterField.NONE;
+    FilterField filterField = FilterField.ID;
 
     JTextArea jta = new JTextArea ();
     Cave cave;
@@ -34,7 +34,7 @@ public class GameControlWindow extends JFrame{
     boolean lastJCBC = true;
     boolean lastJCBT = true;
     boolean lastJCBA = true;
-    GameLayer filterDomain = GameLayer.NONE;
+    GameLayer filterDomain = GameLayer.PARTY;
 
     String lastStr = "text to search for...";
 
@@ -200,17 +200,12 @@ public class GameControlWindow extends JFrame{
         JRadioButton jcbArticle = new JRadioButton("Artifact");
         bg.add(jcbArticle);
 
-        JRadioButton jcbNone = new JRadioButton("None");
-        jcbNone.setSelected(true);
-        bg.add(jcbNone);
-
         JPanel jcbFilter = new JPanel();
         jcbFilter.add(new JLabel("Search domain:    "));
         jcbFilter.add(jcbParty);
         jcbFilter.add(jcbCreature);
         jcbFilter.add(jcbTreasure);
         jcbFilter.add(jcbArticle);
-        jcbFilter.add(jcbNone);
 
 
         jcbParty.addActionListener ( new ActionListener() {
@@ -242,14 +237,6 @@ public class GameControlWindow extends JFrame{
             } // end required method
         } // end local definition of inner class
         ); //
-        jcbNone.addActionListener ( new ActionListener() {
-            public void actionPerformed (ActionEvent e) {
-                filterDomain = GameLayer.NONE;
-                updateFiltering();
-            } // end required method
-        } // end local definition of inner class
-        ); //
-
 
         return jcbFilter;
     }
@@ -257,6 +244,9 @@ public class GameControlWindow extends JFrame{
 
     JPanel sortFieldLayerButtons(){
         ButtonGroup bg = new ButtonGroup();
+
+        JRadioButton jcbID = new JRadioButton("ID");
+        bg.add(jcbID);
 
         JRadioButton jcbName = new JRadioButton("Name");
         bg.add(jcbName);
@@ -270,18 +260,21 @@ public class GameControlWindow extends JFrame{
         JRadioButton jcbArticle = new JRadioButton("Artifact");
         bg.add(jcbArticle);
 
-        JRadioButton jcbNone = new JRadioButton("None");
-        jcbNone.setSelected(true);
-        bg.add(jcbNone);
-
         JPanel jcbFilter = new JPanel();
         jcbFilter.add(new JLabel("Search fields:    "));
+        jcbFilter.add(jcbID);
         jcbFilter.add(jcbName);
         jcbFilter.add(jcbType);
         jcbFilter.add(jcbTreasure);
         jcbFilter.add(jcbArticle);
-        jcbFilter.add(jcbNone);
 
+        jcbID.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                filterField = FilterField.ID;
+                updateFiltering();
+            } // end required method
+        } // end local definition of inner class
+        ); //
 
         jcbName.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -312,21 +305,12 @@ public class GameControlWindow extends JFrame{
             } // end required method
         } // end local definition of inner class
         ); //
-        jcbNone.addActionListener ( new ActionListener() {
-            public void actionPerformed (ActionEvent e) {
-                filterField = FilterField.CREATURETYPE;
-                updateFiltering();
-            } // end required method
-        } // end local definition of inner class
-        ); //
-
-
         return jcbFilter;
     }
 
 
     void updateFiltering(){
-        cave.createOrUpdateMaps(filterDomain, filterField);
-
+        cave.modifyDisplayJTree(filterDomain, filterField);
+        tree.updateUI();
     }
 }

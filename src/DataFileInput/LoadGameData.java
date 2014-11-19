@@ -107,5 +107,6 @@ public class LoadGameData {
                 } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
             }
         }
+        cave.updateMaps();
      }
 }

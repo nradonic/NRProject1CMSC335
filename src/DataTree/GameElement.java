@@ -16,11 +16,13 @@ import java.util.*;
  */
 
 public class GameElement extends DefaultMutableTreeNode implements Comparable<GameElement> {
-    GameLayer gameLayer = GameLayer.NONE;
-    Integer ID = 0;
-    private FilterField filterField = FilterField.NONE;
-    private GameLayer filterDomain = GameLayer.NONE;
-    private FilterField currentFilterField = FilterField.NONE;
+    public static FilterField treeMapFF = FilterField.ID;
+    protected GameLayer gameLayer = GameLayer.NONE;
+    protected Integer ID = 0;
+
+    private FilterField filterField = FilterField.ID;
+    private GameLayer filterDomain = GameLayer.PARTY;
+    private FilterField currentFilterField = FilterField.ID;
 
     TreeMap<GameElement, Integer> tmID = new TreeMap<>();
     TreeMap<GameElement, String> tmName = new TreeMap<>();
@@ -39,43 +41,13 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     TreeMap<GameElement, Double> tmValue = new TreeMap<>();
     TreeMap<GameElement, Double> tmWeight = new TreeMap<>();
 
-    ArrayList<TreeMap> caveTMList = new ArrayList<>();
-    ArrayList<TreeMap> partyTMList = new ArrayList<>();
-    ArrayList<TreeMap> creatureTMList = new ArrayList<>();
-
     public GameElement() {
-        populateListOfTreeMaps();
     }
 
     public GameElement(GameLayer layer, int ID) {
         gameLayer = layer;
         this.ID = ID;
 
-        populateListOfTreeMaps();
-        //createOrUpdateMaps();
-    }
-
-    private void populateListOfTreeMaps() {
-        caveTMList.add(tmID);
-        caveTMList.add(tmName);
-
-        partyTMList.add(tmID);
-        partyTMList.add(tmName);
-        partyTMList.add(tmType);
-        partyTMList.add(tmPartyID);
-        partyTMList.add(tmAge);
-        partyTMList.add(tmEmpathy);
-        partyTMList.add(tmFear);
-        partyTMList.add(tmCapacity);
-        partyTMList.add(tmHeight);
-        partyTMList.add(tmWeight);
-
-        creatureTMList.add(tmID);
-        creatureTMList.add(tmName);
-        creatureTMList.add(tmType);
-        creatureTMList.add(tmCreatureID);
-        creatureTMList.add(tmWeight);
-        creatureTMList.add(tmValue);
     }
 
     public GameLayer getGameLayer() {
@@ -154,15 +126,17 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         boolean result = false;
         Vector<GameElement> ge = this.children;
         if (ge != null) {
-            Optional<GameElement> geExisting = ge.stream().filter(
-                    p -> p.ID == gameElement.ID &&
-                            p.gameLayer == gameElement.gameLayer).findFirst();
-            if (geExisting.isPresent()) {
-                GameElement tempGE = geExisting.get();
-                this.remove(tempGE);
-                this.add(gameElement);
-                //tempGE = gameElement;
-                result = true;
+            for (GameElement g : ge) {
+                if (g.getID() == gameElement.getID()) {
+                    if (g.gameLayer.ordinal() == gameElement.gameLayer.ordinal()) {
+                        int e = g.ID;
+                        this.remove(g);
+                        this.add(gameElement);
+                        //tempGE = gameElement;
+                        result = true;
+                        break;
+                    }
+                }
             }
         }
         return result;
@@ -189,125 +163,302 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         return "";
     }
 
-    public void createOrUpdateMaps(GameLayer filterDomain, FilterField filterField) {
+    public void modifyDisplayJTree(GameLayer filterDomain, FilterField filterField) {
         this.filterDomain = filterDomain;
         this.filterField = filterField;
 
-        tmID = new TreeMap<>();
+        if(gameLayer==GameLayer.CAVE && filterDomain == GameLayer.PARTY ||
+                gameLayer==GameLayer.PARTY && filterDomain == GameLayer.CREATURE ||
+                gameLayer==GameLayer.CREATURE && filterDomain == GameLayer.TREASURE ||
+                gameLayer==GameLayer.CREATURE && filterDomain == GameLayer.ARTIFACT
+                ) {
+            currentFilterField = filterField;
+            NavigableSet<GameElement> geSet = tmID.navigableKeySet();
 
-        Enumeration<GameElement> gameElementEnumeration = this.children();
-        while (gameElementEnumeration.hasMoreElements()) {
-            GameElement ge = gameElementEnumeration.nextElement();
-            tmID.put(ge, ge.ID);
+            if (gameLayer == GameLayer.CAVE) {
+                geSet = getGameElementsSetForCave();
+            } else if (gameLayer == GameLayer.PARTY) {
+                geSet = getGameElementsSetForParty(geSet);
+            } else if (gameLayer == GameLayer.CREATURE) {
+                geSet = getGameElementsSetForCreature(geSet);
+            }
+
+            Iterator<GameElement> ge = geSet.iterator();
+            while (ge.hasNext()) {
+                GameElement geItem = ge.next();
+                remove(geItem);
+                add(geItem);
+            }
+
+            recursivelyUpdateDisplayJTree();
         }
-
-        switch (gameLayer) {
-            case CAVE: { // Party fields
-                if(filterDomain == GameLayer.PARTY){
-                    currentFilterField = filterField;
-                }
-                tmName = new TreeMap<>();
-                gameElementEnumeration = this.children();
-                while (gameElementEnumeration.hasMoreElements()) {
-                    GameElement ge = gameElementEnumeration.nextElement();
-                    tmName.put(ge, ((Party) ge).getName());
-                }
-                break;
-            }
-            case PARTY: { // Creature fields
-                if(filterDomain == GameLayer.CREATURE){
-                    currentFilterField = filterField;
-                }
-                tmID = new TreeMap<>();
-                tmName = new TreeMap<>();
-                tmType = new TreeMap<>();
-                tmPartyID = new TreeMap<>();
-                tmAge = new TreeMap<>();
-                tmEmpathy = new TreeMap<>();
-                tmFear = new TreeMap<>();
-                tmCapacity = new TreeMap<>();
-                tmHeight = new TreeMap<>();
-                tmWeight = new TreeMap<>();
-
-                gameElementEnumeration = this.children();
-                while (gameElementEnumeration.hasMoreElements()) {
-                    GameElement ge = gameElementEnumeration.nextElement();
-                    tmID.put(ge, ((Creature) ge).ID);
-                    tmName.put(ge, ((Creature) ge).name);
-                    tmType.put(ge, ((Creature) ge).creatureType);
-                    tmPartyID.put(ge, ((Creature) ge).partyID);
-                    tmAge.put(ge, ((Creature) ge).age);
-                    tmEmpathy.put(ge, ((Creature) ge).empathy);
-                    tmFear.put(ge, ((Creature) ge).fear);
-                    tmCapacity.put(ge, ((Creature) ge).carryingCapacity);
-                    tmHeight.put(ge, ((Creature) ge).height);
-                    tmWeight.put(ge, ((Creature) ge).weight);
-
-                }
-                break;
-            }
-            case CREATURE: { // Treasure fields
-                if(filterDomain == GameLayer.TREASURE || filterDomain == GameLayer.ARTIFACT){
-                    currentFilterField = filterField;
-                }
-                tmName = new TreeMap<>();
-                tmType = new TreeMap<>();
-                tmPartyID = new TreeMap<>();
-                tmWeight = new TreeMap<>();
-                tmCreatureID = new TreeMap<>();
-                tmID = new TreeMap<>();
-
-                gameElementEnumeration = this.children();
-                while (gameElementEnumeration.hasMoreElements()) {
-                    GameElement ge = gameElementEnumeration.nextElement();
-                    switch (ge.gameLayer) {
-                        case TREASURE: {
-                            tmType.put(ge, ((Treasure) ge).treasureType);
-                            tmPartyID.put(ge, ((Treasure) ge).creatureID);
-                            tmID.put(ge, ((Treasure) ge).ID);
-                            tmValue.put(ge, ((Treasure) ge).value);
-                            tmWeight.put(ge, ((Treasure) ge).weight);
-                            break;
-                        }
-                        case ARTIFACT: {
-                            tmName.put(ge, ((Artifact) ge).name);
-                            tmType.put(ge, ((Artifact) ge).artifactType);
-                            tmCreatureID.put(ge, ((Artifact) ge).creatureID);
-                            tmID.put(ge, ((Artifact) ge).ID);
-                            break;
-                        }
-                    }
-
-                }
-                break;
-            }
-            default: {
-                break;
-            }
-        }
-
-        gameElementEnumeration = this.children();
-        while (gameElementEnumeration.hasMoreElements()) {
-            GameElement ge = gameElementEnumeration.nextElement();
-            ge.createOrUpdateMaps(filterDomain, filterField);
-        }
-
 
     }
 
-    public int compareTo(GameElement ge) {
-        if (filterDomain == gameLayer) {
-            if(gameLayer == GameLayer.PARTY) {
-                switch (filterField) {
-                    case ID: {
-                        return this.ID - ((Party) ge).ID;
+    private void recursivelyUpdateDisplayJTree() {
+        Enumeration<GameElement> gameElementEnumeration = this.children();
+        while (gameElementEnumeration.hasMoreElements()) {
+            GameElement geDisplay = gameElementEnumeration.nextElement();
+            geDisplay.modifyDisplayJTree(filterDomain, filterField);
+        }
+    }
+
+    private NavigableSet<GameElement> getGameElementsSetForCave() {
+        NavigableSet<GameElement> geSet;
+        if (currentFilterField == FilterField.ID) {
+            treeMapFF = FilterField.ID;
+            geSet = tmID.navigableKeySet();
+        } else {
+            treeMapFF = FilterField.NAME;
+            geSet = tmName.navigableKeySet();
+        }
+        return geSet;
+    }
+
+    private NavigableSet<GameElement> getGameElementsSetForCreature(NavigableSet<GameElement> geSet) {
+        switch (currentFilterField) {
+            case ID: {
+                treeMapFF = FilterField.ID;
+                geSet = tmID.navigableKeySet();
+                break;
+            }
+            case NAME: {
+                treeMapFF = FilterField.NAME;
+                geSet = tmName.navigableKeySet();
+                break;
+            }
+            case TREASURETYPE: {
+                treeMapFF = FilterField.TREASURETYPE;
+                geSet = tmType.navigableKeySet();
+                break;
+            }
+            case ARTIFACTTYPE: {
+                treeMapFF = FilterField.ARTIFACTTYPE;
+                geSet = tmType.navigableKeySet();
+                break;
+            }
+            case CREATUREID: {
+                treeMapFF = FilterField.CREATUREID;
+                geSet = tmCreatureID.navigableKeySet();
+                break;
+            }
+            case WEIGHT: {
+                treeMapFF = FilterField.WEIGHT;
+                geSet = tmWeight.navigableKeySet();
+                break;
+            }
+            case VALUE: {
+                treeMapFF = FilterField.VALUE;
+                geSet = tmValue.navigableKeySet();
+                break;
+            }
+        }
+        return geSet;
+    }
+
+    private NavigableSet<GameElement> getGameElementsSetForParty(NavigableSet<GameElement> geSet) {
+        switch (currentFilterField) {
+            case ID: {
+                treeMapFF = FilterField.ID;
+                geSet = tmID.navigableKeySet();
+                break;
+            }
+            case NAME: {
+                treeMapFF = FilterField.NAME;
+                geSet = tmName.navigableKeySet();
+                break;
+            }
+            case CREATURETYPE: {
+                treeMapFF = FilterField.CREATURETYPE;
+                geSet = tmType.navigableKeySet();
+                break;
+            }
+            case PARTYID: {
+                treeMapFF = FilterField.PARTYID;
+                geSet = tmPartyID.navigableKeySet();
+                break;
+            }
+            case AGE: {
+                treeMapFF = FilterField.AGE;
+                geSet = tmAge.navigableKeySet();
+                break;
+            }
+            case EMPATHY: {
+                treeMapFF = FilterField.EMPATHY;
+                geSet = tmEmpathy.navigableKeySet();
+                break;
+            }
+            case FEAR: {
+                treeMapFF = FilterField.FEAR;
+                geSet = tmFear.navigableKeySet();
+                break;
+            }
+            case CAPACITY: {
+                treeMapFF = FilterField.CAPACITY;
+                geSet = tmCapacity.navigableKeySet();
+                break;
+            }
+            case HEIGHT: {
+                treeMapFF = FilterField.HEIGHT;
+                geSet = tmHeight.navigableKeySet();
+                break;
+            }
+            case WEIGHT: {
+                treeMapFF = FilterField.WEIGHT;
+                geSet = tmWeight.navigableKeySet();
+                break;
+            }
+        }
+        return geSet;
+    }
+
+    public void updateMaps() {
+        Enumeration<GameElement> gameElementEnumeration;
+
+        if(gameLayer==GameLayer.CAVE && filterDomain == GameLayer.PARTY ||
+                gameLayer==GameLayer.PARTY && filterDomain == GameLayer.CREATURE ||
+                gameLayer==GameLayer.CREATURE && filterDomain == GameLayer.TREASURE ||
+                gameLayer==GameLayer.CREATURE && filterDomain == GameLayer.ARTIFACT
+                ) {
+            tmID = new TreeMap<>();
+            treeMapFF = FilterField.ID;
+            gameElementEnumeration = this.children();
+            while (gameElementEnumeration.hasMoreElements()) {
+                GameElement ge = gameElementEnumeration.nextElement();
+                tmID.put((Party)ge, ((Party)ge).getID());
+            }
+
+            switch (gameLayer) {
+                case CAVE: { // Party fields
+                    tmName = new TreeMap<>();
+                    treeMapFF = FilterField.NAME;
+                    gameElementEnumeration = this.children();
+                    while (gameElementEnumeration.hasMoreElements()) {
+                        GameElement ge = gameElementEnumeration.nextElement();
+                        tmName.put((Party)ge, ((Party) ge).getName());
                     }
-                    case NAME: {
-                        return ((Party) this).name.compareTo(((Party) ge).name);
-                    }
-                    default:
-                        return 0;
+                    break;
                 }
+                case PARTY: { // Creature fields
+                    tmID = new TreeMap<>();
+                    tmName = new TreeMap<>();
+                    tmType = new TreeMap<>();
+                    tmPartyID = new TreeMap<>();
+                    tmAge = new TreeMap<>();
+                    tmEmpathy = new TreeMap<>();
+                    tmFear = new TreeMap<>();
+                    tmCapacity = new TreeMap<>();
+                    tmHeight = new TreeMap<>();
+                    tmWeight = new TreeMap<>();
+
+                    gameElementEnumeration = this.children();
+                    while (gameElementEnumeration.hasMoreElements()) {
+                        GameElement ge = gameElementEnumeration.nextElement();
+                        treeMapFF = FilterField.ID;
+                        tmID.put((Creature)ge, ((Creature) ge).getID());
+
+                        treeMapFF = FilterField.NAME;
+                        tmName.put((Creature)ge, ((Creature) ge).name);
+
+                        treeMapFF = FilterField.CREATURETYPE;
+                        tmType.put((Creature)ge, ((Creature) ge).creatureType);
+
+                        treeMapFF = FilterField.PARTYID;
+                        tmPartyID.put((Creature)ge, ((Creature) ge).partyID);
+
+                        treeMapFF = FilterField.AGE;
+                        tmAge.put((Creature)ge, ((Creature) ge).age);
+
+                        treeMapFF = FilterField.EMPATHY;
+                        tmEmpathy.put((Creature)ge, ((Creature) ge).empathy);
+
+                        treeMapFF = FilterField.FEAR;
+                        tmFear.put((Creature)ge, ((Creature) ge).fear);
+
+                        treeMapFF = FilterField.CAPACITY;
+                        tmCapacity.put((Creature)ge, ((Creature) ge).carryingCapacity);
+
+                        treeMapFF = FilterField.HEIGHT;
+                        tmHeight.put((Creature)ge, ((Creature) ge).height);
+
+                        treeMapFF = FilterField.WEIGHT;
+                        tmWeight.put((Creature)ge, ((Creature) ge).weight);
+
+                    }
+                    break;
+                }
+                case CREATURE: { // Treasure fields
+                    tmName = new TreeMap<>();
+                    tmType = new TreeMap<>();
+                    tmPartyID = new TreeMap<>();
+                    tmWeight = new TreeMap<>();
+                    tmCreatureID = new TreeMap<>();
+                    tmID = new TreeMap<>();
+
+                    gameElementEnumeration = this.children();
+                    while (gameElementEnumeration.hasMoreElements()) {
+                        GameElement ge = gameElementEnumeration.nextElement();
+                        switch (ge.gameLayer) {
+                            case TREASURE: {
+                                treeMapFF = FilterField.TREASURETYPE;
+                                tmType.put((Treasure)ge, ((Treasure) ge).treasureType);
+
+                                treeMapFF = FilterField.CREATUREID;
+                                tmPartyID.put((Treasure)ge, ((Treasure) ge).creatureID);
+
+                                treeMapFF = FilterField.ID;
+                                tmID.put((Treasure)ge, ((Treasure) ge).getID());
+
+                                treeMapFF = FilterField.VALUE;
+                                tmValue.put((Treasure)ge, ((Treasure) ge).value);
+
+                                treeMapFF = FilterField.WEIGHT;
+                                tmWeight.put((Treasure)ge, ((Treasure) ge).weight);
+                                break;
+                            }
+                            case ARTIFACT: {
+                                treeMapFF = FilterField.NAME;
+                                tmName.put((Artifact) ge, ((Artifact) ge).name);
+
+                                treeMapFF = FilterField.ARTIFACTTYPE;
+                                tmType.put((Artifact) ge, ((Artifact) ge).artifactType);
+
+                                treeMapFF = FilterField.CREATUREID;
+                                tmCreatureID.put((Artifact) ge, ((Artifact) ge).creatureID);
+
+                                treeMapFF = FilterField.ID;
+                                tmID.put((Artifact) ge, ((Artifact) ge).getID());
+                                break;
+                            }
+                        }
+
+                    }
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+        }
+        gameElementEnumeration = this.children();
+        while (gameElementEnumeration.hasMoreElements()) {
+            GameElement ge = gameElementEnumeration.nextElement();
+            ge.updateMaps();
+        }
+    }
+
+    @Override
+    public int compareTo(GameElement ge) {
+        if (filterDomain == GameLayer.PARTY) {
+            switch (treeMapFF) {
+                case ID: {
+                    return ((Party)this).getID() - ((Party) ge).getID();
+                }
+                case NAME: {
+                    return ((Party) this).name.compareTo(((Party) ge).name);
+                }
+                default:
+                    return 0;
             }
         }
         return 0;

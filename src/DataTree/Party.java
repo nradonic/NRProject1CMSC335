@@ -17,13 +17,8 @@ public class Party extends  GameElement{
         this.name = name;
     }
 
-    public int getID(){
-        return ID;
-    }
-
     public Party(int ID, String name){
         super(GameLayer.PARTY, ID);
-        this.ID = ID;
         this.name = name;
         partiesCreated++;
 
@@ -35,7 +30,7 @@ public class Party extends  GameElement{
 
     @Override
     public String toString(){
-        String partyOutput = "p : "+ ID +" : "+name+"\n";
+        String partyOutput = "p : "+ ID +" : "+name;
 //        if (gameElementArrayList.size()>0) {
 //            //partyOutput += "  // Contains: " + gameElementArrayList.size() + "  creature"+(gameElementArrayList.size()>1 ? "s" : "")+"\n";
 //            partyOutput += "  // Contains: " + this.getChildCount() + "  creature"+(this.getChildCount()>1 ? "s" : "")+"\n";
