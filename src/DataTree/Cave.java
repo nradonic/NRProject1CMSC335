@@ -1,8 +1,8 @@
 /** Cave.java
-* Oct. 30, 2014
-* Nick Radonic
-* top level cave structure in Project 1 game
-*/
+ * Oct. 30, 2014
+ * Nick Radonic
+ * top level cave structure in Project 1 game
+ */
 
 package DataTree;
 
@@ -38,27 +38,34 @@ public class Cave extends GameElement{
         boolean result = addGameElementTree(gameElement);
         if (!result){
             switch (gameElement.getGameLayer()){
-                case CREATURE:{
-                    unassignedCaveCreatures.add(gameElement);
-//                    unassignedCreaturesTree.treeDidChange();
-//                    unassignedCreaturesTree.updateUI();
+                case CREATURE: {
+                    addToUnassignedElements(gameElement, unassignedCaveCreatures);
+                    break;
                 }
-                break;
                 case TREASURE:{
-                    unassignedCaveTreasures.add(gameElement);
-//                    unassignedTreasuresTree.treeDidChange();
-//                    unassignedArtifactsTree.updateUI();
+                    addToUnassignedElements(gameElement, unassignedCaveTreasures);
+                    break;
                 }
-                break;
                 case ARTIFACT:{
-                    unassignedCaveArtifacts.add(gameElement);
-//                    unassignedArtifactsTree.treeDidChange();
-//                    unassignedArtifactsTree.updateUI();
+                    addToUnassignedElements(gameElement, unassignedCaveArtifacts);
+                    break;
                 }
-                break;
                 default:break;
             }
         }
+    }
+
+    private void addToUnassignedElements(GameElement gameElement, Cave unassignedCave){
+        Enumeration<GameElement> gameElementEnumeration = unassignedCave.children();
+
+        while (gameElementEnumeration.hasMoreElements()) {
+            GameElement ge = gameElementEnumeration.nextElement();
+            if(ge.getID() == gameElement.getID()) {
+                unassignedCave.remove(ge);
+                break;
+            }
+        }
+        unassignedCave.add(gameElement);
     }
 
     public String getName(){

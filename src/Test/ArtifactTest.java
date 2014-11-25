@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class GameElementTest {
+public class ArtifactTest {
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -17,7 +17,12 @@ public class GameElementTest {
     }
 
     @Test
-    public void testGetGameLayer() throws Exception {
+    public void testToString() throws Exception {
+
+    }
+
+    @Test
+    public void testArtifactOnlyToString() throws Exception {
 
     }
 
@@ -27,22 +32,22 @@ public class GameElementTest {
     }
 
     @Test
-    public void testAddGameElementTree() throws Exception {
+    public void testGetName() throws Exception {
 
     }
 
     @Test
-    public void testToString() throws Exception {
+    public void testGetCreatureID() throws Exception {
 
     }
 
     @Test
-    public void testModifyDisplayJTree() throws Exception {
+    public void testSetCreatureID() throws Exception {
 
     }
 
     @Test
-    public void testCompareTo() throws Exception {
+    public void testGetTreasureType() throws Exception {
 
     }
 }

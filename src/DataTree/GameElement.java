@@ -132,12 +132,25 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
 
     private boolean recursiveInsertion(GameElement gameElement) {
         boolean result = false;
-        for (GameElement g : (Vector<GameElement>) this.children) {
-            result = g.addGameElementTree(gameElement);
-            if (result) {
-                break;
+//        for (GameElement g : (Vector<GameElement>) this.children) {
+//            result = g.addGameElementTree(gameElement);
+//            if (result) {
+//                break;
+//            }
+//        }
+
+        Vector<GameElement> ge = this.children;
+        if (ge != null) {
+            for (GameElement g : ge) {
+                result = g.addGameElementTree(gameElement);
+                if (result) {
+                    break;
+                }
             }
         }
+
+
+
         return result;
     }
 
@@ -276,6 +289,11 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 geSet = tmValue.navigableKeySet();
                 break;
             }
+            case ARTIFACTTYPE: {
+                treeMapFF = FilterField.ARTIFACTTYPE;
+                geSet = tmType.navigableKeySet();
+                break;
+            }
             default:break;
         }
         return geSet;
@@ -410,11 +428,14 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
             return compareAtPartyLevel((Party) ge);
         } else if (gameLayer == GameLayer.CREATURE){
             return compareAtCreatureLevel((Creature) ge);
-        }else if (gameLayer == GameLayer.TREASURE){
+        }else if (gameLayer == GameLayer.TREASURE && ge.gameLayer == GameLayer.TREASURE){
             return compareAtTreasureLevel((Treasure) ge);
-        }else if (gameLayer == GameLayer.ARTIFACT){
+        }else if (gameLayer == GameLayer.ARTIFACT && ge.gameLayer == GameLayer.ARTIFACT){
             return compareAtArtifactLevel((Artifact) ge);
-        }
+        } else if (gameLayer == GameLayer.ARTIFACT && ge.gameLayer == GameLayer.TREASURE){
+            return -1;
+        } else if (gameLayer == GameLayer.TREASURE && ge.gameLayer == GameLayer.ARTIFACT){
+            return 1;}
         return 0;
     }
 
@@ -424,10 +445,10 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 return ((Artifact)this).getID() - ((Artifact) ge).getID();
             }
             case NAME: {
-                return ((Artifact) this).name.compareTo(((Artifact) ge).name);
+                return ((Artifact) this).name.compareToIgnoreCase(((Artifact) ge).name);
             }
             case ARTIFACTTYPE: {
-                return ((Artifact) this).artifactType.compareTo(((Artifact) ge).artifactType);
+                return ((Artifact) this).artifactType.compareToIgnoreCase(((Artifact) ge).artifactType);
             }
             default:
                 return 0;
@@ -456,10 +477,10 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 return ((Creature)this).getID() - ((Creature) ge).getID();
             }
             case NAME: {
-                return ((Creature) this).name.compareTo(((Creature) ge).name);
+                return ((Creature) this).name.compareToIgnoreCase(((Creature) ge).name);
             }
             case CREATURETYPE: {
-                return ((Creature) this).creatureType.compareTo(((Creature) ge).creatureType);
+                return ((Creature) this).creatureType.compareToIgnoreCase(((Creature) ge).creatureType);
             }
             case EMPATHY: {
                 return (int)(((Creature) this).empathy - ((Creature) ge).empathy);
@@ -477,7 +498,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 return (int)(((Creature) this).weight - ((Creature) ge).weight);
             }
             case HEIGHT: {
-                return ((Creature) this).name.compareTo(((Creature) ge).name);
+                return ((Creature) this).name.compareToIgnoreCase(((Creature) ge).name);
             }
 
             default:
@@ -491,7 +512,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 return ((Party)this).getID() - ((Party) ge).getID();
             }
             case NAME: {
-                return ((Party) this).name.compareTo(((Party) ge).name);
+                return ((Party) this).name.compareToIgnoreCase(((Party) ge).name);
             }
             default:
                 return 0;

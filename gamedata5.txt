@@ -8,14 +8,14 @@ p : 10002 : Assemblage
 p : 10003 : Conglomeration
 
 // Creatures format:
-//    c:<index>:<type>:<name>:<party>:<empathy>:<fear>:<carrying capacity>
-c : 20001 : Woman   : Lucy   :10001 : 17 : 22 : 20
-c : 20002 : Woman   : Jane   :10001 : 22 : 15 : 25
-c : 20003 : Woman   : Nancy  :10003 : 80 : 44 : 20
-c : 20004 : Man     : James  :10002 : 35 : 13 : 50
-c : 20005 : Troll   : Fred   :10002 : 03 : 05 : 150
-c : 20006 : Warlock : Harry  :10003 : 05 : 06 : 0
-c : 20007 : Witch   : Morgana:10001 : 10 : 15 : 0
+//    c:<index>:<type>:<name>:<party>:<empathy>:<fear>:<carrying capacity>:<age>:<Height>:<weight>
+c : 20001 : Woman   : Lucy   :10001 : 17 : 22 : 20 : 15 : 1.5 : 70
+c : 20002 : Woman   : Jane   :10001 : 22 : 15 : 25 : 18 : 1.8 : 80
+c : 20003 : Woman   : Nancy  :10003 : 80 : 44 : 20 : 21 : 1.7 : 45
+c : 20004 : Man     : James  :10002 : 35 : 13 : 50 : 16 : 1.9 : 87
+c : 20005 : Troll   : Fred   :10002 : 03 : 05 : 150 : 456 : 2.2 : 105
+c : 20006 : Warlock : Harry  :10003 : 05 : 06 : 0 : 150 : 0.5 : 23
+c : 20007 : Witch   : Morgana:10001 : 10 : 15 : 0 : 65 : 1.3 : 56
 
 // Treasures format:
 //    t:<index>:<type>:<creature>:<weight>:<value>
@@ -38,86 +38,86 @@ Chronon: Skipping recording of DataTree.Cave.addCreature (LDataTree/Creature;)V 
 // Contains: 2 parties
 p : 1 : Red Hot Raiders 1
 // Contains: 3  creatures
-    c : 1 : 32 : Freed1 : 1 : 15.5 : 22.9 : 44.0
+    c : 1 : 32 : Freed1 : 1 : 15.5 : 22.9 : 44.0 : 22 : 1.9 : 82
 // Contains 5 treasures
-        t : 1 : 1 : 1 : 10.1 : 3141.59
-        t : 2 : 1 : 1 : 10.1 : 3141.59
-        t : 3 : 1 : 1 : 10.1 : 3141.59
-        t : 4 : 1 : 1 : 10.1 : 3141.59
-        t : 5 : 1 : 1 : 10.1 : 3141.59
+        t : 1 : gold : 1 : 10.1 : 31
+        t : 2 : silver : 1 : 10.2 : 41.59
+        t : 3 : jewels : 1 : 10.0 : 11.59
+        t : 4 : incense: 1 : 5 : 1.59
+        t : 5 : platinum : 1 : 19.1 : 3141.59
 // Contains 5 artifacts
-        a : 1 : 2 : 1
-        a : 2 : 2 : 1
-        a : 3 : 2 : 1
-        a : 4 : 2 : 1
-        a : 5 : 2 : 1
-    c : 2 : 32 : Freed2 : 1 : 15.5 : 22.9 : 44.0
+        a : 1 : scroll : 1 : Smith food
+        a : 2 : wand : 1 : Smith food
+        a : 3 : stool: 1 : Troll food
+        a : 4 : spy glass : 1 : left over troll food
+        a : 5 : compass : 1 : if only a troll would eat this food
+    c : 2 : 32 : Freed2 : 1 : 15.5 : 22.9 : 44.0 : 99 : 2.2 : 122
 // Contains 5 treasures
-        t : 6 : 1 : 2 : 10.1 : 3141.59
-        t : 7 : 1 : 2 : 10.1 : 3141.59
-        t : 8 : 1 : 2 : 10.1 : 3141.59
-        t : 9 : 1 : 2 : 10.1 : 3141.59
-        t : 10 : 1 : 2 : 10.1 : 3141.59
+        t : 6 : gold : 2 : 10.1 : 299.59
+        t : 7 : silver : 2 : 10.1 : 22.59
+        t : 8 : iron : 2 : 10.1 : 9.59
+        t : 9 : diamond : 2 : 10.1 : 6.59
+        t : 10 : platinum : 2 : 10.1 : 944.59
 // Contains 5 artifacts
-        a : 6 : 2 : 2
-        a : 7 : 2 : 2
-        a : 8 : 2 : 2
-        a : 9 : 2 : 2
-        a : 10 : 2 : 2
-    c : 3 : 32 : Freed3 : 1 : 15.5 : 22.9 : 44.0
+        a : 6 : doll : 2 : rabbit skin
+        a : 7 : stool : 2 : a bigger rabbit skin
+        a : 8 : charm : 2 : a smaller rabbit skin
+        a : 9 : charm: 2 : rabbit foot
+        a : 10 : charm : 2 : another rabbit foot
+    c : 3 : 32 : Freed3 : 1 : 15.5 : 22.9 : 44.0 : 82 : 1.39 : 59
 // Contains 5 treasures
-        t : 11 : 1 : 3 : 10.1 : 3141.59
-        t : 12 : 1 : 3 : 10.1 : 3141.59
-        t : 13 : 1 : 3 : 10.1 : 3141.59
-        t : 14 : 1 : 3 : 10.1 : 3141.59
-        t : 15 : 1 : 3 : 10.1 : 3141.59
+        t : 11 : gold : 3 : 10.1 : 43.59
+        t : 12 : silver : 3 : 10.1 : 30.59
+        t : 13 : platinum: 3 : 10.1 : 119.59
+        t : 14 : iron: 3 : 10.1 : 6.59
+        t : 15 : diamond : 3 : 10.1 : 33.59
 // Contains 5 artifacts
-        a : 11 : 2 : 3
-        a : 12 : 2 : 3
-        a : 13 : 2 : 3
-        a : 14 : 2 : 3
-        a : 15 : 2 : 3
+        a : 11 : drawing: 3 : ducky
+        a : 12 : chart : 3 : ducky two
+        a : 13 : scroll : 3 : super ducky
+        a : 14 : compass : 3 : abcdefghi
+        a : 15 : map : 3 : jklmnopqr
 p : 2 : Red Hot Raiders 2
 // Contains: 3  creatures
-    c : 4 : 32 : Freed1 : 2 : 15.5 : 22.9 : 44.0
+    c : 4 : 32 : Freed1 : 2 : 15.5 : 22.9 : 44.0  : 22 : 1.9 : 82
 // Contains 5 treasures
-        t : 16 : 1 : 4 : 10.1 : 3141.59
-        t : 17 : 1 : 4 : 10.1 : 3141.59
-        t : 18 : 1 : 4 : 10.1 : 3141.59
-        t : 19 : 1 : 4 : 10.1 : 3141.59
-        t : 20 : 1 : 4 : 10.1 : 3141.59
+        t : 16 : gold : 4 : 10.1 : 3041.59
+        t : 17 : silver : 4 : 10.1 : 3401.59
+        t : 18 : diamond : 4 : 10.1 : 30014.59
+        t : 19 : platinum : 4 : 10.1 : 1410.59
+        t : 20 : iron : 4 : 10.1 : 34.59
 // Contains 5 artifacts
-        a : 16 : 2 : 4
-        a : 17 : 2 : 4
-        a : 18 : 2 : 4
-        a : 19 : 2 : 4
-        a : 20 : 2 : 4
-    c : 5 : 32 : Freed2 : 2 : 15.5 : 22.9 : 44.0
+        a : 16 : scroll : 4 : name 1
+        a : 17 : scroll : 4 : another name
+        a : 18 : flute : 4 : name 3
+        a : 19 : skull : 4 : artifact arty
+        a : 20 : map : 4 : wanda
+    c : 5 : 32 : Freed2 : 2 : 15.5 : 22.9 : 44.0: 23 : 1.9 : 81
 // Contains 5 treasures
-        t : 21 : 1 : 5 : 10.1 : 3141.59
-        t : 22 : 1 : 5 : 10.1 : 3141.59
-        t : 23 : 1 : 5 : 10.1 : 3141.59
-        t : 24 : 1 : 5 : 10.1 : 3141.59
-        t : 25 : 1 : 5 : 10.1 : 3141.59
+        t : 21 : gold: 5 : 10.1 : 41.59
+        t : 22 : silver : 5 : 10.1 : 311.59
+        t : 23 : diamond : 5 : 10.1 : 3.59
+        t : 24 : iron : 5 : 10.1 : 4.59
+        t : 25 : platinum : 5 : 10.1 : 3.59
 // Contains 5 artifacts
-        a : 21 : 2 : 5
-        a : 22 : 2 : 5
-        a : 23 : 2 : 5
-        a : 24 : 2 : 5
-        a : 25 : 2 : 5
-    c : 6 : 32 : Freed3 : 2 : 15.5 : 22.9 : 44.0
+        a : 21 : scroll : 5 : hoops
+        a : 22 : map : 5 : hops
+        a : 23 : whistle : 5 : hoss
+        a : 24 : compass : 5 : rooftime
+        a : 25 : stamp : 5 : scroll
+    c : 6 : 32 : Freed3 : 2 : 15.5 : 22.9 : 44.0 : 22 : 1.9 : 82
 // Contains 5 treasures
-        t : 26 : 1 : 6 : 10.1 : 3141.59
-        t : 27 : 1 : 6 : 10.1 : 3141.59
-        t : 28 : 1 : 6 : 10.1 : 3141.59
-        t : 29 : 1 : 6 : 10.1 : 3141.59
-        t : 30 : 1 : 6 : 10.1 : 3141.59
+        t : 26 : gold : 6 : 10.1 : 1.59
+        t : 27 : diamonds : 6 : 10.1 : 41.59
+        t : 28 : silver : 6 : 10.1 : 141.59
+        t : 29 : platinum : 6 : 10.1 : 341.59
+        t : 30 : uranium : 6 : 10.1 : 31.59
 // Contains 5 artifacts
-        a : 26 : 2 : 6
-        a : 27 : 2 : 6
-        a : 28 : 2 : 6
-        a : 29 : 2 : 6
-        a : 30 : 2 : 6
+        a : 26 :scroll : 6 : tt
+        a : 27 : map : 6 : yy
+        a : 28 : book : 6 : zz
+        a : 29 : doll : 6 : aa
+        a : 30 : crystal : 6 : bb
 // Contains: 0 unassigned creatures
 // Contains: 0 unassigned treasures
 // Contains: 0 unassigned artifacts
@@ -130,63 +130,63 @@ p : 1 : Red Hot Raiders 1
 p : 2 : Red Hot Raiders 2
 // Creatures format :
 //    c:<index>:<type>:<name>:<party>:<empathy>:<fear>:<carrying capacity>
-c : 1 : 32 : Freed1 : 1 : 15.5 : 22.9 : 44.0
-c : 2 : 32 : Freed2 : 1 : 15.5 : 22.9 : 44.0
-c : 3 : 32 : Freed3 : 1 : 15.5 : 22.9 : 44.0
-c : 4 : 32 : Freed1 : 2 : 15.5 : 22.9 : 44.0
-c : 5 : 32 : Freed2 : 2 : 15.5 : 22.9 : 44.0
-c : 6 : 32 : Freed3 : 2 : 15.5 : 22.9 : 44.0
+c : 1 : ghoul: Freed1 : 1 : 15.5 : 22.9 : 44.0: 22 : 1.9 : 82
+c : 2 : goblin : Freed2 : 1 : 15.5 : 22.9 : 44.0: 22 : 1.9 : 82
+c : 3 : artist : Freed3 : 1 : 15.5 : 22.9 : 44.0: 22 : 1.9 : 82
+c : 4 : man : Freed1 : 2 : 15.5 : 22.9 : 44.0: 22 : 1.9 : 82
+c : 5 : servant : Freed2 : 2 : 15.5 : 22.9 : 44.0: 22 : 1.9 : 82
+c : 6 : jailer : Freed3 : 2 : 15.5 : 22.9 : 44.0: 22 : 1.9 : 82
 // Treasure format :
 //    t:<index>:<type>:<creature>:<weight>:<value>
-t : 1 : 1 : 1 : 10.1 : 3141.59
-t : 2 : 1 : 1 : 10.1 : 3141.59
-t : 3 : 1 : 1 : 10.1 : 3141.59
-t : 4 : 1 : 1 : 10.1 : 3141.59
-t : 5 : 1 : 1 : 10.1 : 3141.59
-t : 6 : 1 : 2 : 10.1 : 3141.59
-t : 7 : 1 : 2 : 10.1 : 3141.59
-t : 8 : 1 : 2 : 10.1 : 3141.59
-t : 9 : 1 : 2 : 10.1 : 3141.59
-t : 10 : 1 : 2 : 10.1 : 3141.59
-t : 11 : 1 : 3 : 10.1 : 3141.59
-t : 12 : 1 : 3 : 10.1 : 3141.59
-t : 13 : 1 : 3 : 10.1 : 3141.59
-t : 14 : 1 : 3 : 10.1 : 3141.59
-t : 15 : 1 : 3 : 10.1 : 3141.59
-t : 16 : 1 : 4 : 10.1 : 3141.59
-t : 17 : 1 : 4 : 10.1 : 3141.59
-t : 18 : 1 : 4 : 10.1 : 3141.59
-t : 19 : 1 : 4 : 10.1 : 3141.59
-t : 20 : 1 : 4 : 10.1 : 3141.59
-t : 21 : 1 : 5 : 10.1 : 3141.59
-t : 22 : 1 : 5 : 10.1 : 3141.59
-t : 23 : 1 : 5 : 10.1 : 3141.59
-t : 24 : 1 : 5 : 10.1 : 3141.59
-t : 25 : 1 : 5 : 10.1 : 3141.59
-t : 26 : 1 : 6 : 10.1 : 3141.59
-t : 27 : 1 : 6 : 10.1 : 3141.59
-t : 28 : 1 : 6 : 10.1 : 3141.59
-t : 29 : 1 : 6 : 10.1 : 3141.59
-t : 30 : 1 : 6 : 10.1 : 3141.59
+t : 1 : a : 1 : 10.1 : 1.59
+t : 2 : b : 1 : 10.1 : 41.59
+t : 3 : c : 1 : 10.1 : 141.59
+t : 4 : d : 1 : 10.1 : 3141.59
+t : 5 : e: 1 : 10.1 : 3.59
+t : 6 : f : 2 : 10.1 : 31.59
+t : 7 : g : 2 : 10.1 : 341.59
+t : 8 : h : 2 : 10.1 : 311.59
+t : 9 : i : 2 : 10.1 : 31.59
+t : 10 : j : 2 : 10.1 : 319
+t : 11 : k : 3 : 10.1 : 31
+t : 12 : l : 3 : 10.1 : 314.59
+t : 13 : m : 3 : 10.1 : 314
+t : 14 : n : 3 : 10.1 : 3141.9
+t : 15 : o : 3 : 10.1 : 31.9
+t : 16 : p : 4 : 10.1 : 23.59
+t : 17 : q : 4 : 10.1 : 316.59
+t : 18 : r : 4 : 10.1 : 81.59
+t : 19 : s : 4 : 10.1 : 7.59
+t : 20 : t : 4 : 10.1 : 951.59
+t : 21 : u : 5 : 10.1 : 31.59
+t : 22 : v : 5 : 10.1 : 39
+t : 23 : w : 5 : 10.1 : 55.59
+t : 24 : x : 5 : 10.1 : 4.459
+t : 25 : y : 5 : 10.1 : 7.59
+t : 26 : z : 6 : 10.1 : 9.59
+t : 27 : A : 6 : 10.1 : 34.59
+t : 28 : B : 6 : 10.1 : 93.59
+t : 29 : C : 6 : 10.1 : 4.59
+t : 30 : D : 6 : 10.1 : 0.59
 // Artifact format :
 //    a:<index>:<type>:<creature>[:<name>]
-a : 1 : 2 : 1
-a : 2 : 2 : 1
-a : 3 : 2 : 1
-a : 4 : 2 : 1
-a : 5 : 2 : 1
-a : 6 : 2 : 2
-a : 7 : 2 : 2
-a : 8 : 2 : 2
-a : 9 : 2 : 2
-a : 10 : 2 : 2
-a : 11 : 2 : 3
-a : 12 : 2 : 3
-a : 13 : 2 : 3
-a : 14 : 2 : 3
-a : 15 : 2 : 3
-a : 16 : 2 : 4
-a : 17 : 2 : 4
+a : 1 : scroll : 1
+a : 2 : map: 1
+a : 3 : pen : 1
+a : 4 : eraser : 1
+a : 5 : paint : 1
+a : 6 : solvent : 2
+a : 7 : water : 2
+a : 8 : charm : 2
+a : 9 : scroll : 2
+a : 10 : list : 2
+a : 11 : book : 3
+a : 12 : paint :3
+a : 13 : ink : 3
+a : 14 : money : 3
+a : 15 : diagram : 3
+a : 16 : compass : 4
+a : 17 : scroll : 4
 a : 18 : 2 : 4
 a : 19 : 2 : 4
 a : 20 : 2 : 4

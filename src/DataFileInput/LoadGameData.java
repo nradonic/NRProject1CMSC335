@@ -58,10 +58,11 @@ public class LoadGameData {
             String temp = "";
             int regex = attributes.length;
             for (String st : attributes){
+                int x = 0;
                 temp = st;
-                int x = temp.length();
+                x = st.length();
             }
-            if (s.startsWith("p")) {
+            if (s.trim().startsWith("p")) {
                 try {
                     int ID = Integer.parseInt(attributes[1].trim());
                     Party party = new Party( ID, attributes[2]);
@@ -69,7 +70,7 @@ public class LoadGameData {
                 } catch (Exception ex) {System.out.println("Party failed to parse data: "+s);}
             }
 
-            if (s.startsWith("c")) {
+            if (s.trim().startsWith("c")) {
                 try {
                     int ID = Integer.parseInt(attributes[1].trim());
                     int PID = Integer.parseInt(attributes[4].trim());
@@ -77,9 +78,9 @@ public class LoadGameData {
                     double fear = Double.parseDouble(attributes[6].trim());
                     double carryingCapacity = Double.parseDouble(attributes[7].trim());
 
-                    int age = attributes.length>8 ? Integer.parseInt(attributes[8]) : 0;
-                    double height = attributes.length>9 ? Integer.parseInt(attributes[9]) : 0;
-                    double weight = attributes.length>10 ? Double.parseDouble(attributes[10]) : 0;
+                    int age = attributes.length>8 ? Integer.parseInt(attributes[8].trim()) : 0;
+                    double height = attributes.length>9 ? Double.parseDouble(attributes[9].trim()) : 0;
+                    double weight = attributes.length>10 ? Double.parseDouble(attributes[10].trim()) : 0;
 
                     Creature creature = new Creature(ID, attributes[2], attributes[3], PID, empathy, fear, carryingCapacity, age, height, weight);
                     cave.addGameElement(creature);
@@ -89,10 +90,11 @@ public class LoadGameData {
             if (s.trim().startsWith("t")) {
                 try {
                     int ID = Integer.parseInt(attributes[1].trim());
+                    String treasureType = attributes[2].trim();
                     int creatureID = Integer.parseInt(attributes[3].trim());
                     double weight = Double.parseDouble(attributes[4].trim());
                     double value = Double.parseDouble(attributes[5].trim());
-                    Treasure treasure = new Treasure(ID, attributes[2], creatureID, weight, value);
+                    Treasure treasure = new Treasure(ID, treasureType, creatureID, weight, value);
                     cave.addGameElement(treasure);
                 } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
             }
@@ -100,9 +102,10 @@ public class LoadGameData {
             if (s.trim().startsWith("a")) {
                 try {
                     int ID = Integer.parseInt(attributes[1].trim());
+                    String artifactType = attributes[2].trim();
                     int creatureID = Integer.parseInt(attributes[3].trim());
                     String name = (attributes.length <5) ? " " : attributes[4]+" ";
-                    Artifact artifact = new Artifact(ID, attributes[2], creatureID, name);
+                    Artifact artifact = new Artifact(ID, artifactType, creatureID, name);
                     cave.addGameElement(artifact);
                 } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
             }
