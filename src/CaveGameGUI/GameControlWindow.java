@@ -95,15 +95,13 @@ public class GameControlWindow extends JFrame{
     public JPanel setupButtons() {
         JButton jbr = new JButton ("Read");
         JButton jbs = new JButton ("Search");
-        JButton jba = new JButton ("Sort");
-        JButton jbm = new JButton("Move");
+        JButton jbm = new JButton("Redraw");
 
         JPanel jp = new JPanel ();
         jp.setLayout(new FlowLayout());
 
         jp.add (jbr);
         jp.add (jbs);
-        jp.add (jba);
         jp.add (jbm);
 
         jbr.addActionListener ( new ActionListener() {
@@ -124,14 +122,7 @@ public class GameControlWindow extends JFrame{
         } // end local definition of inner class
         ); // the anonymous inner class
 
-        jba.addActionListener ( new ActionListener() {
-            public void actionPerformed (ActionEvent e) {
-                //JPanel jp = sortGameLayerButtons(cave);
-            } // end required method
-        } // end local definition of inner class
-        ); // the anonymous inner class
-
-        jbm.addActionListener ( new ActionListener() {
+       jbm.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
                 String treeStr = cave.toString();
                 jta.setText(treeStr);
@@ -149,25 +140,33 @@ public class GameControlWindow extends JFrame{
     private String searchGame(Cave cave){
         JPanel jp = new JPanel();
         jp.setBorder(BorderFactory.createTitledBorder("Search"));
+        jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
 
-        JCheckBox jcbParty = new JCheckBox("Party");
+        ButtonGroup bg = new ButtonGroup();
+
+        JRadioButton jcbParty = new JRadioButton("Party");
         jcbParty.setSelected(lastJCBP);
+        bg.add(jcbParty);
 
-        JCheckBox jcbCreature = new JCheckBox("Creature");
+        JRadioButton jcbCreature = new JRadioButton("Creature");
         jcbCreature.setSelected(lastJCBC);
+        bg.add(jcbCreature);
 
-        JCheckBox jcbTreasure = new JCheckBox("Treasure");
+        JRadioButton jcbTreasure = new JRadioButton("Treasure");
         jcbTreasure.setSelected(lastJCBT);
+        bg.add(jcbTreasure);
 
-        JCheckBox jcbArticle = new JCheckBox("Artifact");
+        JRadioButton jcbArticle = new JRadioButton("Artifact");
         jcbArticle.setSelected(lastJCBA);
+        bg.add(jcbArticle);
 
-        JCheckBox[] jcbSearch = {jcbParty, jcbCreature, jcbTreasure, jcbArticle};
+        JRadioButton[] jcbSearch = {jcbParty, jcbCreature, jcbTreasure, jcbArticle};
 
 
         String caveString = cave.toString();
         String[] gameLines = caveString.split("\n");
         String searchStr = JOptionPane.showInputDialog(jcbSearch, lastStr);
+
         lastStr = searchStr;
         lastJCBP = jcbParty.isSelected();
         lastJCBC = jcbCreature.isSelected();
@@ -276,7 +275,7 @@ public class GameControlWindow extends JFrame{
     JPanel loadSortFieldButtons(){
         ButtonGroup bg = new ButtonGroup();
         JPanel jp = new JPanel();
-        jp.add(new Label("Filters:  "));
+        jp.add(new Label("Sort Filters:  "));
 
         if(filterDomain == GameLayer.PARTY){
             generateRadioButtonFF(filterDomain, FilterField.ID, "ID", jp, bg);

@@ -119,7 +119,6 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
             for (GameElement g : ge) {
                 if (g.getID() == gameElement.getID()) {
                     if (g.gameLayer.ordinal() == gameElement.gameLayer.ordinal()) {
-                        int e = g.ID;
                         this.remove(g);
                         this.add(gameElement);
                         result = true;
