@@ -17,18 +17,17 @@ import java.util.*;
 
 public class GameElement extends DefaultMutableTreeNode implements Comparable<GameElement> {
     public static FilterField treeMapFF = FilterField.ID;
+    public static FilterField currentFilterField = FilterField.ID;
+
     protected GameLayer gameLayer = GameLayer.NONE;
     protected Integer ID = 0;
 
     private FilterField filterField = FilterField.ID;
-    private GameLayer filterDomain = GameLayer.PARTY;
-    private FilterField currentFilterField = FilterField.ID;
+    private GameLayer filterDomain = GameLayer.CAVE;
 
     TreeMap<GameElement, Integer> tmID = new TreeMap<>();
     TreeMap<GameElement, String> tmName = new TreeMap<>();
-
     TreeMap<GameElement, String> tmType = new TreeMap<>();
-    TreeMap<GameElement, Integer> tmPartyID = new TreeMap<>();
 
     TreeMap<GameElement, Double> tmHeight = new TreeMap<>();
     TreeMap<GameElement, Integer> tmAge = new TreeMap<>();
@@ -37,7 +36,6 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     TreeMap<GameElement, Double> tmFear = new TreeMap<>();
     TreeMap<GameElement, Double> tmCapacity = new TreeMap<>();
 
-    TreeMap<GameElement, Integer> tmCreatureID = new TreeMap<>();
     TreeMap<GameElement, Double> tmValue = new TreeMap<>();
     TreeMap<GameElement, Double> tmWeight = new TreeMap<>();
 
@@ -63,12 +61,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         switch (gameLayer) {
             case CAVE: {
                 if (gameElement.gameLayer == GameLayer.PARTY) {
-                    result = insertIfDuplicateGameElement(gameElement);
-                    if (!result) {
-                        //gameElementArrayList.add(gameElement);
-                        this.add(gameElement);
-                    }
-                    result = true;
+                    result = addGeUpdateMaps(gameElement);
                 }
                 if (gameElement.gameLayer == GameLayer.CREATURE || gameElement.gameLayer == GameLayer.TREASURE ||
                         gameElement.gameLayer == GameLayer.ARTIFACT) {
@@ -79,12 +72,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
             case PARTY: {
                 if (gameElement.gameLayer == GameLayer.CREATURE) {
                     if (ID == ((Creature) gameElement).partyID) {
-                        result = insertIfDuplicateGameElement(gameElement);
-                        if (!result) {
-                            //gameElementArrayList.add(gameElement);
-                            this.add(gameElement);
-                            result = true;
-                        }
+                        result = addGeUpdateMaps(gameElement);
                     }
                 } else {
                     if (gameElement.gameLayer == GameLayer.TREASURE || gameElement.gameLayer == GameLayer.ARTIFACT) {
@@ -96,22 +84,12 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
             case CREATURE: {
                 if (gameElement.gameLayer == GameLayer.TREASURE) {
                     if (ID == ((Treasure) gameElement).creatureID) {
-                        result = insertIfDuplicateGameElement(gameElement);
-                        if (!result) {
-                            //gameElementArrayList.add(gameElement);
-                            this.add(gameElement);
-                            result = true;
-                        }
+                        result = addGeUpdateMaps(gameElement);
                     }
                 }
                 if (gameElement.gameLayer == GameLayer.ARTIFACT) {
                     if (ID == ((Artifact) gameElement).creatureID) {
-                        result = insertIfDuplicateGameElement(gameElement);
-                        if (!result) {
-                            //gameElementArrayList.add(gameElement);
-                            this.add(gameElement);
-                            result = true;
-                        }
+                        result = addGeUpdateMaps(gameElement);
                     }
                 }
             }
@@ -119,6 +97,18 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
             case NONE:
                 break;
         }
+
+        return result;
+    }
+
+    private boolean addGeUpdateMaps(GameElement gameElement) {
+        boolean result;
+        result = insertIfDuplicateGameElement(gameElement);
+        if (!result) {
+            this.add(gameElement);
+        }
+        result = true;
+        updateMaps(gameElement.gameLayer);
         return result;
     }
 
@@ -132,7 +122,6 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                         int e = g.ID;
                         this.remove(g);
                         this.add(gameElement);
-                        //tempGE = gameElement;
                         result = true;
                         break;
                     }
@@ -159,13 +148,12 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         for (GameElement gameElement : (Vector<GameElement>) this.children) {
             output += gameElement.toString();
         }
-        //return output;
         return "";
     }
 
     public void modifyDisplayJTree(GameLayer filterDomain, FilterField filterField) {
-        this.filterDomain = filterDomain;
-        this.filterField = filterField;
+//        this.filterDomain = filterDomain;
+//        this.filterField = filterField;
 
         if(gameLayer==GameLayer.CAVE && filterDomain == GameLayer.PARTY ||
                 gameLayer==GameLayer.PARTY && filterDomain == GameLayer.CREATURE ||
@@ -178,9 +166,9 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
             if (gameLayer == GameLayer.CAVE) {
                 geSet = getGameElementsSetForCave();
             } else if (gameLayer == GameLayer.PARTY) {
-                geSet = getGameElementsSetForParty(geSet);
+                geSet = getGameElementsSetForParty();
             } else if (gameLayer == GameLayer.CREATURE) {
-                geSet = getGameElementsSetForCreature(geSet);
+                geSet = getGameElementsSetForCreature();
             }
 
             Iterator<GameElement> ge = geSet.iterator();
@@ -189,13 +177,12 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 remove(geItem);
                 add(geItem);
             }
-
-            recursivelyUpdateDisplayJTree();
+        } else {
+            recursivelyUpdateDisplayJTree(filterDomain, filterField);
         }
-
     }
 
-    private void recursivelyUpdateDisplayJTree() {
+    private void recursivelyUpdateDisplayJTree(GameLayer filterDomain, FilterField filterField) {
         Enumeration<GameElement> gameElementEnumeration = this.children();
         while (gameElementEnumeration.hasMoreElements()) {
             GameElement geDisplay = gameElementEnumeration.nextElement();
@@ -215,48 +202,8 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         return geSet;
     }
 
-    private NavigableSet<GameElement> getGameElementsSetForCreature(NavigableSet<GameElement> geSet) {
-        switch (currentFilterField) {
-            case ID: {
-                treeMapFF = FilterField.ID;
-                geSet = tmID.navigableKeySet();
-                break;
-            }
-            case NAME: {
-                treeMapFF = FilterField.NAME;
-                geSet = tmName.navigableKeySet();
-                break;
-            }
-            case TREASURETYPE: {
-                treeMapFF = FilterField.TREASURETYPE;
-                geSet = tmType.navigableKeySet();
-                break;
-            }
-            case ARTIFACTTYPE: {
-                treeMapFF = FilterField.ARTIFACTTYPE;
-                geSet = tmType.navigableKeySet();
-                break;
-            }
-            case CREATUREID: {
-                treeMapFF = FilterField.CREATUREID;
-                geSet = tmCreatureID.navigableKeySet();
-                break;
-            }
-            case WEIGHT: {
-                treeMapFF = FilterField.WEIGHT;
-                geSet = tmWeight.navigableKeySet();
-                break;
-            }
-            case VALUE: {
-                treeMapFF = FilterField.VALUE;
-                geSet = tmValue.navigableKeySet();
-                break;
-            }
-        }
-        return geSet;
-    }
-
-    private NavigableSet<GameElement> getGameElementsSetForParty(NavigableSet<GameElement> geSet) {
+    private NavigableSet<GameElement> getGameElementsSetForParty() {
+        NavigableSet<GameElement> geSet = tmID.navigableKeySet();
         switch (currentFilterField) {
             case ID: {
                 treeMapFF = FilterField.ID;
@@ -273,16 +220,6 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 geSet = tmType.navigableKeySet();
                 break;
             }
-            case PARTYID: {
-                treeMapFF = FilterField.PARTYID;
-                geSet = tmPartyID.navigableKeySet();
-                break;
-            }
-            case AGE: {
-                treeMapFF = FilterField.AGE;
-                geSet = tmAge.navigableKeySet();
-                break;
-            }
             case EMPATHY: {
                 treeMapFF = FilterField.EMPATHY;
                 geSet = tmEmpathy.navigableKeySet();
@@ -291,6 +228,11 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
             case FEAR: {
                 treeMapFF = FilterField.FEAR;
                 geSet = tmFear.navigableKeySet();
+                break;
+            }
+            case AGE: {
+                treeMapFF = FilterField.AGE;
+                geSet = tmAge.navigableKeySet();
                 break;
             }
             case CAPACITY: {
@@ -312,29 +254,57 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         return geSet;
     }
 
-    public void updateMaps() {
+    private NavigableSet<GameElement> getGameElementsSetForCreature() {
+        NavigableSet<GameElement> geSet = tmID.navigableKeySet();
+        switch (currentFilterField) {
+            case ID: {
+                treeMapFF = FilterField.ID;
+                geSet = tmID.navigableKeySet();
+                break;
+            }
+            case NAME: {
+                treeMapFF = FilterField.NAME;
+                geSet = tmName.navigableKeySet();
+                break;
+            }
+            case WEIGHT: {
+                treeMapFF = FilterField.WEIGHT;
+                geSet = tmWeight.navigableKeySet();
+                break;
+            }
+            case VALUE: {
+                treeMapFF = FilterField.VALUE;
+                geSet = tmValue.navigableKeySet();
+                break;
+            }
+            default:break;
+        }
+        return geSet;
+    }
+
+
+    private void updateMaps(GameLayer gameLayer1) {
         Enumeration<GameElement> gameElementEnumeration;
 
-        if(gameLayer==GameLayer.CAVE && filterDomain == GameLayer.PARTY ||
-                gameLayer==GameLayer.PARTY && filterDomain == GameLayer.CREATURE ||
-                gameLayer==GameLayer.CREATURE && filterDomain == GameLayer.TREASURE ||
-                gameLayer==GameLayer.CREATURE && filterDomain == GameLayer.ARTIFACT
+        if(gameLayer==GameLayer.CAVE && gameLayer1 == GameLayer.PARTY ||
+                gameLayer==GameLayer.PARTY && gameLayer1 == GameLayer.CREATURE ||
+                gameLayer==GameLayer.CREATURE && gameLayer1 == GameLayer.TREASURE ||
+                gameLayer==GameLayer.CREATURE && gameLayer1 == GameLayer.ARTIFACT
                 ) {
-            tmID = new TreeMap<>();
-            treeMapFF = FilterField.ID;
-            gameElementEnumeration = this.children();
-            while (gameElementEnumeration.hasMoreElements()) {
-                GameElement ge = gameElementEnumeration.nextElement();
-                tmID.put((Party)ge, ((Party)ge).getID());
-            }
 
             switch (gameLayer) {
                 case CAVE: { // Party fields
+                    tmID = new TreeMap<>();
                     tmName = new TreeMap<>();
-                    treeMapFF = FilterField.NAME;
+
                     gameElementEnumeration = this.children();
                     while (gameElementEnumeration.hasMoreElements()) {
+
                         GameElement ge = gameElementEnumeration.nextElement();
+                        currentFilterField = FilterField.ID;
+                        tmID.put((Party)ge, ((Party)ge).getID());
+
+                        currentFilterField = FilterField.NAME;
                         tmName.put((Party)ge, ((Party) ge).getName());
                     }
                     break;
@@ -343,7 +313,6 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                     tmID = new TreeMap<>();
                     tmName = new TreeMap<>();
                     tmType = new TreeMap<>();
-                    tmPartyID = new TreeMap<>();
                     tmAge = new TreeMap<>();
                     tmEmpathy = new TreeMap<>();
                     tmFear = new TreeMap<>();
@@ -354,34 +323,31 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                     gameElementEnumeration = this.children();
                     while (gameElementEnumeration.hasMoreElements()) {
                         GameElement ge = gameElementEnumeration.nextElement();
-                        treeMapFF = FilterField.ID;
+                        currentFilterField = FilterField.ID;
                         tmID.put((Creature)ge, ((Creature) ge).getID());
 
-                        treeMapFF = FilterField.NAME;
+                        currentFilterField = FilterField.NAME;
                         tmName.put((Creature)ge, ((Creature) ge).name);
 
-                        treeMapFF = FilterField.CREATURETYPE;
+                        currentFilterField = FilterField.CREATURETYPE;
                         tmType.put((Creature)ge, ((Creature) ge).creatureType);
 
-                        treeMapFF = FilterField.PARTYID;
-                        tmPartyID.put((Creature)ge, ((Creature) ge).partyID);
-
-                        treeMapFF = FilterField.AGE;
+                        currentFilterField = FilterField.AGE;
                         tmAge.put((Creature)ge, ((Creature) ge).age);
 
-                        treeMapFF = FilterField.EMPATHY;
+                        currentFilterField = FilterField.EMPATHY;
                         tmEmpathy.put((Creature)ge, ((Creature) ge).empathy);
 
-                        treeMapFF = FilterField.FEAR;
+                        currentFilterField = FilterField.FEAR;
                         tmFear.put((Creature)ge, ((Creature) ge).fear);
 
-                        treeMapFF = FilterField.CAPACITY;
+                        currentFilterField = FilterField.CAPACITY;
                         tmCapacity.put((Creature)ge, ((Creature) ge).carryingCapacity);
 
-                        treeMapFF = FilterField.HEIGHT;
+                        currentFilterField = FilterField.HEIGHT;
                         tmHeight.put((Creature)ge, ((Creature) ge).height);
 
-                        treeMapFF = FilterField.WEIGHT;
+                        currentFilterField = FilterField.WEIGHT;
                         tmWeight.put((Creature)ge, ((Creature) ge).weight);
 
                     }
@@ -390,9 +356,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 case CREATURE: { // Treasure fields
                     tmName = new TreeMap<>();
                     tmType = new TreeMap<>();
-                    tmPartyID = new TreeMap<>();
                     tmWeight = new TreeMap<>();
-                    tmCreatureID = new TreeMap<>();
                     tmID = new TreeMap<>();
 
                     gameElementEnumeration = this.children();
@@ -400,33 +364,27 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                         GameElement ge = gameElementEnumeration.nextElement();
                         switch (ge.gameLayer) {
                             case TREASURE: {
-                                treeMapFF = FilterField.TREASURETYPE;
+                                currentFilterField = FilterField.TREASURETYPE;
                                 tmType.put((Treasure)ge, ((Treasure) ge).treasureType);
 
-                                treeMapFF = FilterField.CREATUREID;
-                                tmPartyID.put((Treasure)ge, ((Treasure) ge).creatureID);
-
-                                treeMapFF = FilterField.ID;
+                                currentFilterField = FilterField.ID;
                                 tmID.put((Treasure)ge, ((Treasure) ge).getID());
 
-                                treeMapFF = FilterField.VALUE;
+                                currentFilterField = FilterField.VALUE;
                                 tmValue.put((Treasure)ge, ((Treasure) ge).value);
 
-                                treeMapFF = FilterField.WEIGHT;
+                                currentFilterField = FilterField.WEIGHT;
                                 tmWeight.put((Treasure)ge, ((Treasure) ge).weight);
                                 break;
                             }
                             case ARTIFACT: {
-                                treeMapFF = FilterField.NAME;
+                                currentFilterField = FilterField.NAME;
                                 tmName.put((Artifact) ge, ((Artifact) ge).name);
 
-                                treeMapFF = FilterField.ARTIFACTTYPE;
+                                currentFilterField = FilterField.ARTIFACTTYPE;
                                 tmType.put((Artifact) ge, ((Artifact) ge).artifactType);
 
-                                treeMapFF = FilterField.CREATUREID;
-                                tmCreatureID.put((Artifact) ge, ((Artifact) ge).creatureID);
-
-                                treeMapFF = FilterField.ID;
+                                currentFilterField = FilterField.ID;
                                 tmID.put((Artifact) ge, ((Artifact) ge).getID());
                                 break;
                             }
@@ -440,27 +398,104 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 }
             }
         }
-        gameElementEnumeration = this.children();
-        while (gameElementEnumeration.hasMoreElements()) {
-            GameElement ge = gameElementEnumeration.nextElement();
-            ge.updateMaps();
-        }
+//        gameElementEnumeration = this.children();
+//        while (gameElementEnumeration.hasMoreElements()) {
+//            GameElement ge = gameElementEnumeration.nextElement();
+//            ge.updateMaps(gameLayer1);
+//        }
     }
 
     @Override
     public int compareTo(GameElement ge) {
-        if (filterDomain == GameLayer.PARTY) {
-            switch (treeMapFF) {
-                case ID: {
-                    return ((Party)this).getID() - ((Party) ge).getID();
-                }
-                case NAME: {
-                    return ((Party) this).name.compareTo(((Party) ge).name);
-                }
-                default:
-                    return 0;
-            }
+        if (gameLayer == GameLayer.PARTY) {
+            return compareAtPartyLevel((Party) ge);
+        } else if (gameLayer == GameLayer.CREATURE){
+            return compareAtCreatureLevel((Creature) ge);
+        }else if (gameLayer == GameLayer.TREASURE){
+            return compareAtTreasureLevel((Treasure) ge);
+        }else if (gameLayer == GameLayer.ARTIFACT){
+            return compareAtArtifactLevel((Artifact) ge);
         }
         return 0;
+    }
+
+    private int compareAtArtifactLevel(Artifact ge) {
+        switch (currentFilterField) {
+            case ID: {
+                return ((Artifact)this).getID() - ((Artifact) ge).getID();
+            }
+            case NAME: {
+                return ((Artifact) this).name.compareTo(((Artifact) ge).name);
+            }
+            case ARTIFACTTYPE: {
+                return ((Artifact) this).artifactType.compareTo(((Artifact) ge).artifactType);
+            }
+            default:
+                return 0;
+        }
+    }
+
+    private int compareAtTreasureLevel(Treasure ge) {
+        switch (currentFilterField) {
+            case ID: {
+                return ((Treasure)this).getID() - ((Treasure) ge).getID();
+            }
+            case WEIGHT: {
+                return (int)(((Treasure) this).weight - ((Treasure) ge).weight);
+            }
+            case VALUE: {
+                return (int)(((Treasure) this).value - ((Treasure) ge).value);
+            }
+            default:
+                return 0;
+        }
+    }
+
+    private int compareAtCreatureLevel(Creature ge) {
+        switch (currentFilterField) {
+            case ID: {
+                return ((Creature)this).getID() - ((Creature) ge).getID();
+            }
+            case NAME: {
+                return ((Creature) this).name.compareTo(((Creature) ge).name);
+            }
+            case CREATURETYPE: {
+                return ((Creature) this).creatureType.compareTo(((Creature) ge).creatureType);
+            }
+            case EMPATHY: {
+                return (int)(((Creature) this).empathy - ((Creature) ge).empathy);
+            }
+            case FEAR: {
+                return (int)( ((Creature) this).fear - ((Creature) ge).fear);
+            }
+            case CAPACITY: {
+                return (int)(((Creature) this).carryingCapacity - ((Creature) ge).carryingCapacity);
+            }
+            case AGE: {
+                return ((Creature) this).age - (((Creature) ge).age);
+            }
+            case WEIGHT: {
+                return (int)(((Creature) this).weight - ((Creature) ge).weight);
+            }
+            case HEIGHT: {
+                return ((Creature) this).name.compareTo(((Creature) ge).name);
+            }
+
+            default:
+                return 0;
+        }
+    }
+
+    private int compareAtPartyLevel(Party ge) {
+        switch (currentFilterField) {
+            case ID: {
+                return ((Party)this).getID() - ((Party) ge).getID();
+            }
+            case NAME: {
+                return ((Party) this).name.compareTo(((Party) ge).name);
+            }
+            default:
+                return 0;
+        }
     }
 }

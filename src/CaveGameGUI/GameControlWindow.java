@@ -9,7 +9,6 @@ import DataFileInput.LoadGameData;
 import DataTree.Cave;
 import DataTree.FilterField;
 import DataTree.GameLayer;
-import javafx.scene.control.RadioButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +37,7 @@ public class GameControlWindow extends JFrame{
     boolean lastJCBC = true;
     boolean lastJCBT = true;
     boolean lastJCBA = true;
-
+    final Dimension WINDOWDIMENSIONS = new Dimension(800, 1000);
 
     String lastStr = "text to search for...";
 
@@ -54,7 +53,7 @@ public class GameControlWindow extends JFrame{
 
         System.out.println("In constructor");
         setTitle("Sorcerer's Cave");
-        setSize(900, 1000);
+        setSize(WINDOWDIMENSIONS);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -112,9 +111,6 @@ public class GameControlWindow extends JFrame{
         jbr.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
                 loadFileData();
-//                String treeStr = cave.toString();
-//                jta.setText(treeStr);
-//                jta.setCaretPosition(0);
                 tree.treeDidChange();
                 tree.updateUI();
 
@@ -154,10 +150,6 @@ public class GameControlWindow extends JFrame{
 
     private void loadFileData(){
         LoadGameData.LoadData(cave);
-        //tree = new JTree(cave);
-
-        //System.out.println(gameCave.toString());
-        //System.out.println(gameCave.sortTree());
     }
 
     private String searchGame(Cave cave){
@@ -302,27 +294,27 @@ public class GameControlWindow extends JFrame{
         if(filterDomain == GameLayer.PARTY){
             generateRadioButtonFF(FilterField.ID, "ID", jp, bg);
             generateRadioButtonFF(FilterField.NAME, "Name", jp, bg);
+
         } else if (filterDomain == GameLayer.CREATURE){
             generateRadioButtonFF(FilterField.ID, "ID", jp, bg);
             generateRadioButtonFF(FilterField.CREATURETYPE, "Type", jp, bg);
             generateRadioButtonFF(FilterField.NAME, "Name", jp, bg);
-            generateRadioButtonFF(FilterField.PARTYID, "Party", jp, bg);
             generateRadioButtonFF(FilterField.EMPATHY, "Empathy", jp, bg);
             generateRadioButtonFF(FilterField.FEAR, "Fear", jp, bg);
             generateRadioButtonFF(FilterField.CAPACITY, "Carrying capacity", jp, bg);
             generateRadioButtonFF(FilterField.AGE, "Age", jp, bg);
             generateRadioButtonFF(FilterField.HEIGHT, "Height", jp, bg);
             generateRadioButtonFF(FilterField.WEIGHT, "Weight", jp, bg);
+
         } else if(filterDomain == GameLayer.TREASURE){
             generateRadioButtonFF(FilterField.ID, "ID", jp, bg);
             generateRadioButtonFF(FilterField.TREASURETYPE, "Type", jp, bg);
-            generateRadioButtonFF(FilterField.CREATUREID, "Creature", jp, bg);
             generateRadioButtonFF(FilterField.WEIGHT, "Weight", jp, bg);
             generateRadioButtonFF(FilterField.VALUE, "Value", jp, bg);
+
         } else if (filterDomain == GameLayer.ARTIFACT){
             generateRadioButtonFF(FilterField.ID, "ID", jp, bg);
             generateRadioButtonFF(FilterField.ARTIFACTTYPE, "Type", jp, bg);
-            generateRadioButtonFF(FilterField.CREATUREID, "Creature", jp, bg);
             generateRadioButtonFF(FilterField.NAME, "Name", jp, bg);
         }
         return jp;
