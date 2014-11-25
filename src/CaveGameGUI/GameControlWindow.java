@@ -14,11 +14,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * GameControlWindow.java
- * Created by NickRadonic on 11/1/14.
+ * Created by Nick Radonic on 11/1/14.
  * with JFrame hints from Nicholas Duchon at http://sandsduchon.org/duchon/cs335/cave/strategy.html
  */
 public class GameControlWindow extends JFrame{
@@ -41,11 +40,14 @@ public class GameControlWindow extends JFrame{
 
     String lastStr = "text to search for...";
 
-    ArrayList<JRadioButton> partyFilterFields = new ArrayList<>();
-    ArrayList<JRadioButton> creatureFilterFields = new ArrayList<>();
-    ArrayList<JRadioButton> treasureFilterFields = new ArrayList<>();
-    ArrayList<JRadioButton> artifactFilterFields = new ArrayList<>();
     JPanel filterFieldJPanel = new JPanel();
+    FilterField selectedButtonParty = FilterField.ID;
+    FilterField selectedButtonCreature = FilterField.ID;
+    FilterField selectedButtonTreasure = FilterField.ID;
+    FilterField selectedButtonArtifact = FilterField.ID;
+
+
+
 
     public GameControlWindow (Cave cave) {
         this.cave = cave;
@@ -120,8 +122,7 @@ public class GameControlWindow extends JFrame{
 
         jbs.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                String searchGameResults = searchGame(cave);
-                String treeStr = searchGameResults;
+                String treeStr = searchGame(cave);
                 jta.setText(treeStr);
                 jta.setCaretPosition(0);
             } // end required method
@@ -216,12 +217,7 @@ public class GameControlWindow extends JFrame{
         jcbParty.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
                 filterDomain = GameLayer.PARTY;
-                framepanelHolder.remove(filterFieldJPanel);
-                JPanel jp = loadSortFieldButtons();
-                filterFieldJPanel = jp;
-                framepanelHolder.add(jp);
-                revalidate();
-                updateFiltering();
+                selectGameLayer(filterDomain);
             } // end required method
         } // end local definition of inner class
         ); //
@@ -229,36 +225,21 @@ public class GameControlWindow extends JFrame{
         jcbCreature.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
                 filterDomain = GameLayer.CREATURE;
-                framepanelHolder.remove(filterFieldJPanel);
-                JPanel jp = loadSortFieldButtons();
-                filterFieldJPanel = jp;
-                framepanelHolder.add(jp);
-                revalidate();
-                updateFiltering();
+                selectGameLayer(filterDomain);
             } // end required method
         } // end local definition of inner class
         ); //
         jcbTreasure.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 filterDomain = GameLayer.TREASURE;
-                framepanelHolder.remove(filterFieldJPanel);
-                JPanel jp = loadSortFieldButtons();
-                filterFieldJPanel = jp;
-                framepanelHolder.add(jp);
-                revalidate();
-                updateFiltering();
+                selectGameLayer(filterDomain);
             } // end required method
         } // end local definition of inner class
         ); //
         jcbArticle.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
                 filterDomain = GameLayer.ARTIFACT;
-                framepanelHolder.remove(filterFieldJPanel);
-                JPanel jp = loadSortFieldButtons();
-                filterFieldJPanel = jp;
-                framepanelHolder.add(jp);
-                revalidate();
-                updateFiltering();
+                selectGameLayer(filterDomain);
             } // end required method
         } // end local definition of inner class
         ); //
@@ -285,6 +266,16 @@ public class GameControlWindow extends JFrame{
         return jcbFilter;
     }
 
+    private void selectGameLayer(GameLayer filterDomain) {
+        this.filterDomain = filterDomain;
+        framepanelHolder.remove(filterFieldJPanel);
+        JPanel jp = loadSortFieldButtons();
+        filterFieldJPanel = jp;
+        framepanelHolder.add(jp);
+        revalidate();
+        updateFiltering();
+    }
+
 
     JPanel loadSortFieldButtons(){
         ButtonGroup bg = new ButtonGroup();
@@ -292,44 +283,62 @@ public class GameControlWindow extends JFrame{
         jp.add(new Label("Filters:  "));
 
         if(filterDomain == GameLayer.PARTY){
-            generateRadioButtonFF(FilterField.ID, "ID", jp, bg);
-            generateRadioButtonFF(FilterField.NAME, "Name", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.ID, "ID", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.NAME, "Name", jp, bg);
 
         } else if (filterDomain == GameLayer.CREATURE){
-            generateRadioButtonFF(FilterField.ID, "ID", jp, bg);
-            generateRadioButtonFF(FilterField.CREATURETYPE, "Type", jp, bg);
-            generateRadioButtonFF(FilterField.NAME, "Name", jp, bg);
-            generateRadioButtonFF(FilterField.EMPATHY, "Empathy", jp, bg);
-            generateRadioButtonFF(FilterField.FEAR, "Fear", jp, bg);
-            generateRadioButtonFF(FilterField.CAPACITY, "Carrying capacity", jp, bg);
-            generateRadioButtonFF(FilterField.AGE, "Age", jp, bg);
-            generateRadioButtonFF(FilterField.HEIGHT, "Height", jp, bg);
-            generateRadioButtonFF(FilterField.WEIGHT, "Weight", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.ID, "ID", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.CREATURETYPE, "Type", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.NAME, "Name", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.EMPATHY, "Empathy", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.FEAR, "Fear", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.CAPACITY, "Carrying capacity", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.AGE, "Age", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.HEIGHT, "Height", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.WEIGHT, "Weight", jp, bg);
 
         } else if(filterDomain == GameLayer.TREASURE){
-            generateRadioButtonFF(FilterField.ID, "ID", jp, bg);
-            generateRadioButtonFF(FilterField.TREASURETYPE, "Type", jp, bg);
-            generateRadioButtonFF(FilterField.WEIGHT, "Weight", jp, bg);
-            generateRadioButtonFF(FilterField.VALUE, "Value", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.ID, "ID", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.TREASURETYPE, "Type", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.WEIGHT, "Weight", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.VALUE, "Value", jp, bg);
 
         } else if (filterDomain == GameLayer.ARTIFACT){
-            generateRadioButtonFF(FilterField.ID, "ID", jp, bg);
-            generateRadioButtonFF(FilterField.ARTIFACTTYPE, "Type", jp, bg);
-            generateRadioButtonFF(FilterField.NAME, "Name", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.ID, "ID", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.ARTIFACTTYPE, "Type", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.NAME, "Name", jp, bg);
         }
         return jp;
     }
 
 
-    private JPanel generateRadioButtonFF(FilterField ff, String buttonLabel, JPanel jp, ButtonGroup bg){
+    private JPanel generateRadioButtonFF(GameLayer filterDomain, FilterField ff, String buttonLabel, JPanel jp, ButtonGroup bg){
         JRadioButton jcb = new JRadioButton(buttonLabel);
         bg.add(jcb);
+
+        if ( filterDomain==GameLayer.PARTY && ff == selectedButtonParty ||
+                filterDomain==GameLayer.CREATURE && ff == selectedButtonCreature ||
+                filterDomain==GameLayer.TREASURE && ff == selectedButtonTreasure ||
+                filterDomain==GameLayer.ARTIFACT && ff == selectedButtonArtifact )
+        {
+            jcb.setSelected(true);
+        }
 
         jp.add(jcb);
 
         jcb.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 filterField = ff;
+                if(filterDomain == GameLayer.PARTY){
+                    selectedButtonParty = ff;
+                } else if (filterDomain == GameLayer.CREATURE){
+                    selectedButtonCreature = ff;
+                } else if (filterDomain == GameLayer.TREASURE){
+                    selectedButtonTreasure = ff;
+                } else if (filterDomain == GameLayer.ARTIFACT){
+                    selectedButtonArtifact = ff;
+                }
+                ((JRadioButton)e.getSource()).setSelected(true);
                 updateFiltering();
             } // end required method
         } // end local definition of inner class
