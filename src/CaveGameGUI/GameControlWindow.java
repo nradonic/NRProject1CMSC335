@@ -11,6 +11,7 @@ import DataTree.FilterField;
 import DataTree.GameLayer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,9 +47,6 @@ public class GameControlWindow extends JFrame{
     FilterField selectedButtonTreasure = FilterField.ID;
     FilterField selectedButtonArtifact = FilterField.ID;
 
-
-
-
     public GameControlWindow (Cave cave) {
         this.cave = cave;
         this.tree = new JTree(cave);
@@ -69,6 +67,7 @@ public class GameControlWindow extends JFrame{
         framePanel.add(buttonsScrollPanel);
 
         JScrollPane treeScrollPane = new JScrollPane (tree);
+        treeScrollPane.setMinimumSize(new Dimension(500, 500));
         framePanel.add(treeScrollPane);
 
         jta.setText(cave.getName()+"\nUse READ button to get game file");
@@ -91,9 +90,6 @@ public class GameControlWindow extends JFrame{
 
         getContentPane().add(framePanel);
         setVisible (true);
-
-
-
     } // end no-parameter constructor
 
     public JPanel setupButtons() {
@@ -115,7 +111,6 @@ public class GameControlWindow extends JFrame{
                 loadFileData();
                 tree.treeDidChange();
                 tree.updateUI();
-
             } // end required method
         } // end local definition of inner class
         ); // the anonymous inner class
@@ -132,8 +127,6 @@ public class GameControlWindow extends JFrame{
         jba.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
                 //JPanel jp = sortGameLayerButtons(cave);
-
-
             } // end required method
         } // end local definition of inner class
         ); // the anonymous inner class
@@ -154,6 +147,9 @@ public class GameControlWindow extends JFrame{
     }
 
     private String searchGame(Cave cave){
+        JPanel jp = new JPanel();
+        jp.setBorder(BorderFactory.createTitledBorder("Search"));
+
         JCheckBox jcbParty = new JCheckBox("Party");
         jcbParty.setSelected(lastJCBP);
 
@@ -207,7 +203,7 @@ public class GameControlWindow extends JFrame{
         bg.add(jcbArticle);
 
         JPanel jcbFilter = new JPanel();
-        jcbFilter.add(new JLabel("Search domain:    "));
+        jcbFilter.add(new JLabel("Sort Level:    "));
         jcbFilter.add(jcbParty);
         jcbFilter.add(jcbCreature);
         jcbFilter.add(jcbTreasure);
