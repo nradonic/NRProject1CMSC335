@@ -1,0 +1,12 @@
+p : 1 :  Red Hot Raiders 1
+    c : 1 :  ghoul :  Freed1  : 1 : 15.5 : 22.9 : 44.0 : 22 : 1.9 : 82.0
+
+          a : 1 : scroll : 1 :  index of Names
+
+          a : 2 : map : 1 :  Southern Labrador
+
+          a : 3 : pen : 1 :  Shakespear's pen
+
+          a : 4 : eraser : 1 :  rub a dub dub
+
+          a : 5 : paint : 1 :  splash
