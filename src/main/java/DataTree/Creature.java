@@ -59,7 +59,7 @@ public class Creature extends GameElement{
 
     public String toString(){
         String creatureOutput = "    c : "+ID+" : "+creatureType+" : "+name+" : "+partyID+" : "+empathy+" : "+fear+" : "+carryingCapacity;
-        creatureOutput += " : "+age +" : "+height +" : "+weight +"\n";
+        creatureOutput += " : "+age +" : "+height +" : "+weight ;
 
         String treasureOutput = "";
         int treasureCount = 0;
@@ -79,9 +79,11 @@ public class Creature extends GameElement{
             }
         }
 
-        creatureOutput += (treasureCount>0) ? "  // "+name+" has " + treasureCount + " treasure"+(treasureCount>1?"s":"")+"\n" : "";
-        creatureOutput += (artifactCount>0) ? "  // "+name+" has " + artifactCount + " artifact"+(artifactCount>1?"s":"")+"\n" : "";
-
+        if (treasureCount>0 || artifactCount > 0 ){ creatureOutput +=  "  // "+name.trim()+" has " ;}
+        creatureOutput += (treasureCount>0) ?  treasureCount + " treasure"+(treasureCount>1?"s":"") : "";
+        creatureOutput += (treasureCount>0 && artifactCount>0) ? " and " : "";
+        creatureOutput += (artifactCount>0) ?  artifactCount + " artifact"+(artifactCount>1?"s":"") : "";
+        creatureOutput += "\n";
         return creatureOutput;
     }
 

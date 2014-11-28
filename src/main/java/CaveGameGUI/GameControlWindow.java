@@ -63,6 +63,13 @@ public class GameControlWindow extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        JPanel framePanel = setupDisplayPanels(cave);
+
+        getContentPane().add(framePanel);
+        setVisible (true);
+    } // end no-parameter constructor
+
+    private JPanel setupDisplayPanels(Cave cave) {
         JPanel framePanel = new JPanel();
         framepanelHolder = framePanel;
         framePanel.setLayout(new BoxLayout(framePanel, BoxLayout.Y_AXIS));
@@ -79,6 +86,7 @@ public class GameControlWindow extends JFrame{
         jta.setText(cave.getName()+"\nUse READ button to get game file");
         jta.setRows(10);
         JScrollPane messagesScrollPane = new JScrollPane (jta);
+        messagesScrollPane.setMinimumSize(new Dimension(100, 100));
 
         framePanel.add(messagesScrollPane);
 
@@ -93,10 +101,8 @@ public class GameControlWindow extends JFrame{
         framePanel.add(sortGameLayerButtons());
         filterFieldJPanel = loadSortFieldButtons();
         framePanel.add(filterFieldJPanel);
-
-        getContentPane().add(framePanel);
-        setVisible (true);
-    } // end no-parameter constructor
+        return framePanel;
+    }
 
     public JPanel setupButtons() {
         JButton jbr = new JButton ("Read");
