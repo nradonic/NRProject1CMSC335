@@ -56,6 +56,7 @@ public class GameControlWindow extends JFrame{
     String searchText = "";
 
     JScrollPane treeScrollPane = new JScrollPane();
+    JFrame taskDisplay ;
 
     public GameControlWindow (Cave cave) {
         this.cave = cave;
@@ -71,6 +72,9 @@ public class GameControlWindow extends JFrame{
 
         getContentPane().add(framePanel);
         setVisible (true);
+
+
+
     } // end no-parameter constructor
 
     private JPanel setupDisplayPanels(Cave cave) {
@@ -147,6 +151,8 @@ public class GameControlWindow extends JFrame{
                 );
                 if (n == 0 ){
                     cave.removeAllChildren();
+                    cave.unassignedCaveCreatures.removeAllChildren();
+                    cave.unassignedCaveTreasuresArtifactsJobs.removeAllChildren();
                     updateFiltering();
                 }
             } // end required method
@@ -157,6 +163,8 @@ public class GameControlWindow extends JFrame{
 
     private void loadFileData(){
         LoadGameData.LoadData(cave);
+        taskDisplay = new JobTaskDisplay(cave);
+        taskDisplay.setVisible(true);
     }
 
     private String searchGame(){

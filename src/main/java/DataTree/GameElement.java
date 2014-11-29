@@ -157,9 +157,6 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 }
             }
         }
-
-
-
         return result;
     }
 
@@ -617,4 +614,25 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
             }
         }
     }
+
+public Vector<GameElement> getTasks(){
+    Vector<GameElement> geV = new Vector<>();
+
+    Vector<GameElement> ge = this.children;
+    if (ge != null) {
+        for (GameElement g : ge) {
+            if (g.gameLayer == GameLayer.JOB){
+                geV.add(g);
+            } if (g.gameLayer == GameLayer.CAVE || g.gameLayer == GameLayer.PARTY ||g.gameLayer == GameLayer.CREATURE ){
+                for(GameElement geSub:  g.getTasks()){
+                    geV.add(geSub);
+                };
+
+            }
+        }
+    }
+
+    return geV;
+}
+
 }
