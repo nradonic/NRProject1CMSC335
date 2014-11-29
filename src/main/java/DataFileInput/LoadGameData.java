@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LoadGameData {
     public static void LoadData(Cave cave){
@@ -22,11 +23,13 @@ public class LoadGameData {
         final String CCOLON = "c:";
         final String ACOLON = "a:";
         final String TCOLON = "t:";
+        final String JCOLON = "j:";
 
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Cave Game Data Files", "txt");
         chooser.setFileFilter(filter);
         chooser.setCurrentDirectory(new File("."));
+
         int returnVal = chooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
@@ -41,7 +44,7 @@ public class LoadGameData {
             while ((s=br.readLine())!=null){
                 String t = s.trim();
                 String u = t.replace(" ","");
-                if (u.startsWith(CCOLON) || u.startsWith(PCOLON) || u.startsWith(TCOLON) || u.startsWith(ACOLON)){
+                if (u.startsWith(CCOLON) || u.startsWith(PCOLON) || u.startsWith(TCOLON) || u.startsWith(ACOLON) || u.startsWith(JCOLON)){
                     gameData.add(t);
                 }
             }
@@ -78,7 +81,7 @@ public class LoadGameData {
                     double fear = Double.parseDouble(attributes[6].trim());
                     double carryingCapacity = Double.parseDouble(attributes[7].trim());
 
-                    int age = attributes.length>8 ? Integer.parseInt(attributes[8].trim()) : 0;
+                    double age = attributes.length>8 ? Double.parseDouble(attributes[8].trim()) : 0;
                     double height = attributes.length>9 ? Double.parseDouble(attributes[9].trim()) : 0;
                     double weight = attributes.length>10 ? Double.parseDouble(attributes[10].trim()) : 0;
 
@@ -109,6 +112,28 @@ public class LoadGameData {
                     cave.addGameElement(artifact);
                 } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
             }
+
+            if (s.trim().startsWith("j")) {
+                try {
+                    HashMap<String, Double> resources = new HashMap<>();
+
+                    int ID = Integer.parseInt(attributes[1].trim());
+                    String jobType = attributes[2].trim();
+                    int creatureID = Integer.parseInt(attributes[3].trim());
+                    double time = Double.parseDouble(attributes[4].trim());
+
+                    int fields = attributes.length;
+                    for (int index = 5; fields - index > 2; index += 2){
+                        String rez = attributes[index].trim();
+                        double quantity = Double.parseDouble(attributes[index+1].trim());
+                        resources.put(rez, quantity);
+                    }
+
+                    Job job = new Job(ID, jobType, creatureID, time, resources);
+                    cave.addGameElement(job);
+                } catch (Exception ex) {System.out.println("Creature failed to parse data: "+s);}
+            }
+
         }
      }
 }

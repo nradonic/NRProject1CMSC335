@@ -8,11 +8,9 @@ package CaveGameGUI;
 import DataFileInput.LoadGameData;
 import DataTree.Cave;
 import DataTree.FilterField;
-import DataTree.GameElement;
 import DataTree.GameLayer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,15 +28,20 @@ public class GameControlWindow extends JFrame{
     FilterField filterField = FilterField.ID;
 
     JTextArea jta = new JTextArea ();
+    JScrollPane messagesScrollPane = new JScrollPane();
+
     Cave cave;
     JTree tree;
     JPanel sortPanel = new JPanel();
+
     // store previous search terms
     boolean lastJCBP = true;
     boolean lastJCBC = true;
     boolean lastJCBT = true;
     boolean lastJCBA = true;
-    final Dimension WINDOWDIMENSIONS = new Dimension(800, 1000);
+    boolean lastJCBJ = true;
+
+    final Dimension WINDOWDIMENSIONS = new Dimension(860, 1000);
 
     String lastStr = "text to search for...";
 
@@ -47,6 +50,7 @@ public class GameControlWindow extends JFrame{
     FilterField selectedButtonCreature = FilterField.ID;
     FilterField selectedButtonTreasure = FilterField.ID;
     FilterField selectedButtonArtifact = FilterField.ID;
+    FilterField selectedButtonJob = FilterField.ID;
 
     GameLayer searchLayer = GameLayer.NONE;
     String searchText = "";
@@ -85,18 +89,18 @@ public class GameControlWindow extends JFrame{
 
         jta.setText(cave.getName()+"\nUse READ button to get game file");
         jta.setRows(10);
-        JScrollPane messagesScrollPane = new JScrollPane (jta);
+        messagesScrollPane = new JScrollPane (jta);
         messagesScrollPane.setMinimumSize(new Dimension(100, 100));
-
+        messagesScrollPane.setBorder(BorderFactory.createTitledBorder("Search Results"));
         framePanel.add(messagesScrollPane);
 
         JScrollPane unassignedCreaturesPane = new JScrollPane(new JTree(cave.unassignedCaveCreatures));
-        JScrollPane unassignedTreasuresPane = new JScrollPane(new JTree(cave.unassignedCaveTreasures));
-        JScrollPane unassignedArtifactsPane = new JScrollPane(new JTree(cave.unassignedCaveArtifacts));
+        JScrollPane unassignedTreasuresPane = new JScrollPane(new JTree(cave.unassignedCaveTreasuresArtifactsJobs));
+//        JScrollPane unassignedArtifactsPane = new JScrollPane(new JTree(cave.unassignedCaveArtifacts));
 
         framePanel.add(unassignedCreaturesPane);
         framePanel.add(unassignedTreasuresPane);
-        framePanel.add(unassignedArtifactsPane);
+//        framePanel.add(unassignedArtifactsPane);
 
         framePanel.add(sortGameLayerButtons());
         filterFieldJPanel = loadSortFieldButtons();
@@ -107,14 +111,14 @@ public class GameControlWindow extends JFrame{
     public JPanel setupButtons() {
         JButton jbr = new JButton ("Read");
         JButton jbs = new JButton ("Search");
-        JButton jbm = new JButton("Redraw");
+        JButton jbc = new JButton("Clear Data");
 
         JPanel jp = new JPanel ();
         jp.setLayout(new FlowLayout());
 
         jp.add (jbr);
         jp.add (jbs);
-        jp.add (jbm);
+        jp.add (jbc);
 
         jbr.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
@@ -130,18 +134,24 @@ public class GameControlWindow extends JFrame{
                 String tempStr = searchGame();
                 jta.setText("Search: "+searchLayer.toString() + " : " + searchText+"\n"+tempStr);
                 jta.setCaretPosition(0);
+                messagesScrollPane.setBorder(BorderFactory.createTitledBorder("Search: "+searchLayer.toString() + " : " + searchText));
+
             } // end required method
         } // end local definition of inner class
         ); // the anonymous inner class
 
-       jbm.addActionListener ( new ActionListener() {
+        jbc.addActionListener( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                searchLayer = GameLayer.NONE;
-                searchText = "";
-
+                int n = JOptionPane.showConfirmDialog(null,
+                        "Clear Cave Data?","", JOptionPane.YES_NO_OPTION
+                );
+                if (n == 0 ){
+                    cave.removeAllChildren();
+                    updateFiltering();
+                }
             } // end required method
-        } // end local definition of inner class
-        ); // the anonymous inner class
+        });
+
         return jp;
     }
 
@@ -198,6 +208,9 @@ public class GameControlWindow extends JFrame{
         if ( lastJCBA) {
             searchLayer = GameLayer.ARTIFACT;
         }
+        if ( lastJCBJ) {
+            searchLayer = GameLayer.JOB;
+        }
         return cave.treeList(searchLayer, searchText);
     }
 
@@ -213,15 +226,20 @@ public class GameControlWindow extends JFrame{
         JRadioButton jcbTreasure = new JRadioButton("Treasure");
         bg.add(jcbTreasure);
 
-        JRadioButton jcbArticle = new JRadioButton("Artifact");
-        bg.add(jcbArticle);
+        JRadioButton jcbArtifact = new JRadioButton("Artifact");
+        bg.add(jcbArtifact);
+
+        JRadioButton jcbJob = new JRadioButton("Job");
+        bg.add(jcbJob);
 
         JPanel jcbFilter = new JPanel();
         jcbFilter.add(new JLabel("Sort Level:    "));
         jcbFilter.add(jcbParty);
         jcbFilter.add(jcbCreature);
         jcbFilter.add(jcbTreasure);
-        jcbFilter.add(jcbArticle);
+        jcbFilter.add(jcbArtifact);
+        jcbFilter.add(jcbJob);
+
 
 
         jcbParty.addActionListener ( new ActionListener() {
@@ -246,9 +264,16 @@ public class GameControlWindow extends JFrame{
             } // end required method
         } // end local definition of inner class
         ); //
-        jcbArticle.addActionListener ( new ActionListener() {
-            public void actionPerformed (ActionEvent e) {
+        jcbArtifact.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 filterDomain = GameLayer.ARTIFACT;
+                selectGameLayer(filterDomain);
+            } // end required method
+        } // end local definition of inner class
+        ); //
+        jcbJob.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                filterDomain = GameLayer.JOB;
                 selectGameLayer(filterDomain);
             } // end required method
         } // end local definition of inner class
@@ -268,7 +293,11 @@ public class GameControlWindow extends JFrame{
                 break;
             }
             case ARTIFACT:{
-                jcbArticle.setSelected(true);
+                jcbArtifact.setSelected(true);
+                break;
+            }
+            case JOB:{
+                jcbJob.setSelected(true);
                 break;
             }
         }
@@ -317,6 +346,10 @@ public class GameControlWindow extends JFrame{
             generateRadioButtonFF(filterDomain, FilterField.ID, "ID", jp, bg);
             generateRadioButtonFF(filterDomain, FilterField.ARTIFACTTYPE, "Type", jp, bg);
             generateRadioButtonFF(filterDomain, FilterField.NAME, "Name", jp, bg);
+
+        } else if (filterDomain == GameLayer.JOB){
+            generateRadioButtonFF(filterDomain, FilterField.ID, "ID", jp, bg);
+            generateRadioButtonFF(filterDomain, FilterField.JOBTYPE, "Type", jp, bg);
         }
         return jp;
     }
@@ -329,7 +362,8 @@ public class GameControlWindow extends JFrame{
         if ( filterDomain==GameLayer.PARTY && ff == selectedButtonParty ||
                 filterDomain==GameLayer.CREATURE && ff == selectedButtonCreature ||
                 filterDomain==GameLayer.TREASURE && ff == selectedButtonTreasure ||
-                filterDomain==GameLayer.ARTIFACT && ff == selectedButtonArtifact )
+                filterDomain==GameLayer.ARTIFACT && ff == selectedButtonArtifact ||
+                filterDomain==GameLayer.JOB && ff == selectedButtonJob )
         {
             jcb.setSelected(true);
         }
@@ -347,6 +381,8 @@ public class GameControlWindow extends JFrame{
                     selectedButtonTreasure = ff;
                 } else if (filterDomain == GameLayer.ARTIFACT){
                     selectedButtonArtifact = ff;
+                } else if (filterDomain == GameLayer.JOB){
+                    selectedButtonJob = ff;
                 }
                 ((JRadioButton)e.getSource()).setSelected(true);
                 updateFiltering();

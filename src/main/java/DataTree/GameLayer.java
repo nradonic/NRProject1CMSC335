@@ -8,7 +8,7 @@ package DataTree;
  */
 
 
-public enum GameLayer {CAVE, PARTY, CREATURE, TREASURE, ARTIFACT, NONE;
+public enum GameLayer {CAVE, PARTY, CREATURE, TREASURE, ARTIFACT, JOB, NONE;
 
     GameLayer Next(){
         if(this == CAVE){return PARTY;}

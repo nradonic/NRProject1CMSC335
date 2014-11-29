@@ -6,10 +6,6 @@
 
 package DataTree;
 
-import javax.swing.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
 
 public class Cave extends GameElement{
@@ -17,16 +13,16 @@ public class Cave extends GameElement{
 
     public Cave displayCave;
     public Cave unassignedCaveCreatures;
-    public Cave unassignedCaveTreasures;
-    public Cave unassignedCaveArtifacts;
+    public Cave unassignedCaveTreasuresArtifactsJobs;
+//    public Cave unassignedCaveArtifacts;
 
     public Cave(String name){
         super(GameLayer.CAVE, 1);
         this.name = name;
 
         unassignedCaveCreatures = new Cave("Unassigned Cave Creatures", 0);
-        unassignedCaveTreasures = new Cave("Unassigned Cave Treasures", 0);
-        unassignedCaveArtifacts = new Cave("Unassigned Cave Artifacts", 0);
+        unassignedCaveTreasuresArtifactsJobs = new Cave("Unassigned Cave Treasures, Artifacts and Jobs", 0);
+//        unassignedCaveArtifacts = new Cave("Unassigned Cave Artifacts", 0);
         displayCave = new Cave(name,0);
     }
 
@@ -43,11 +39,15 @@ public class Cave extends GameElement{
                     break;
                 }
                 case TREASURE:{
-                    addToUnassignedElements(gameElement, unassignedCaveTreasures);
+                    addToUnassignedElements(gameElement, unassignedCaveTreasuresArtifactsJobs);
                     break;
                 }
                 case ARTIFACT:{
-                    addToUnassignedElements(gameElement, unassignedCaveArtifacts);
+                    addToUnassignedElements(gameElement, unassignedCaveTreasuresArtifactsJobs);
+                    break;
+                }
+                case JOB:{
+                    addToUnassignedElements(gameElement, unassignedCaveTreasuresArtifactsJobs);
                     break;
                 }
                 default:break;
