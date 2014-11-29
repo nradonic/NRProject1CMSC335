@@ -31,7 +31,8 @@ public class Treasure extends GameElement{
     }
 
     public String toString(){
-        String treasureOutput = "          t : "+ID+" : "+treasureType+" : "+creatureID+" : "+weight+" : "+value+"\n";
+        String treasureOutput = String.format("          t : %6d : %8s : %6d : %4.1f : %4.1f\n",
+                ID, treasureType, creatureID, weight, value);
         return treasureOutput;
     }
 

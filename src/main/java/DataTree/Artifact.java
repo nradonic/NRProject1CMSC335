@@ -30,7 +30,8 @@ public class Artifact extends GameElement{
     }
 
     public String toString(){
-        String artifactOutput = "          a : "+ID+" : "+artifactType+" : "+creatureID+" : "+name+"\n";
+        String artifactOutput = String.format("          a : %6d : %8s : %6d : %8s\n",
+                ID, artifactType, creatureID, name);
         return artifactOutput;
     }
 

@@ -182,7 +182,11 @@ public class GameControlWindow extends JFrame{
         jcbArticle.setSelected(lastJCBA);
         bg.add(jcbArticle);
 
-        JRadioButton[] jcbSearch = {jcbParty, jcbCreature, jcbTreasure, jcbArticle};
+        JRadioButton jcbJob = new JRadioButton("Job");
+        jcbJob.setSelected(lastJCBJ);
+        bg.add(jcbJob);
+
+        JRadioButton[] jcbSearch = {jcbParty, jcbCreature, jcbTreasure, jcbArticle, jcbJob};
 
 
         String caveString = cave.toString();
@@ -194,6 +198,7 @@ public class GameControlWindow extends JFrame{
         lastJCBC = jcbCreature.isSelected();
         lastJCBT = jcbTreasure.isSelected();
         lastJCBA = jcbArticle.isSelected();
+        lastJCBJ = jcbJob.isSelected();
 
         searchText = searchStr;
         if ( lastJCBP) {
