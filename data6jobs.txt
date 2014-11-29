@@ -1,0 +1,36 @@
+// sample data file for CMSC 335, Summer 2013
+// Nicholas Duchon
+// Jan 23, 2012
+// May 22, 2013
+
+// Parties format:
+//    p:<index>:<name>
+p : 10003 : Drove
+
+// Creatures format:
+//    c:<index>:<type>:<name>:<party>:<empathy>:<fear>:<carrying capacity>[:<age>:<height>:<weight>]
+c : 20014 :     Kobold :     Bertie : 10003 :  16 :  58 : 218 :  270.74 :  224.47 :  167.66
+
+// Treasures format:
+//    t:<index>:<type>:<creature>:<weight>:<value>
+// creature = 0 means noone is carrying that treasure at the moment
+t : 30020 :    Gold Nuggets : 20014 : 101.1 :    47
+t : 30021 :           Dinar : 20014 :  17.1 :    68
+
+// Artifacts format:
+//    a:<index>:<type>:<creature>[:<name>]
+a : 40096 :   Stone : 20014 : Iolite
+a : 40097 :  Potion : 20014 : Rejuvenation
+a : 40098 :    Wand : 20014 : Wand
+a : 40099 :  Weapon : 20014 : Throwing Spear
+a : 40100 :  Weapon : 20014 : Shortsword
+a : 40101 :  Weapon : 20014 : Rapier
+
+// Jobs for creatures
+// measure time in seconds
+//    j:<index>:<name>:<creature index>:<time>[:<required artifact:type>:<number>]*
+j : 50051 :                Throw : 20014 :   3.00 : Stone : 1 : Potions : 1 : Wands : 1 : Weapons : 0
+j : 50052 :             Get Help : 20014 :   2.00 : Stone : 2 : Potions : 0 : Wands : 1 : Weapons : 2
+j : 50053 :                Swing : 20014 :  10.00 : Stone : 2 : Potions : 1 : Wands : 1 : Weapons : 1
+j : 50054 :                Swing : 20014 :   7.00 : Stone : 0 : Potions : 2 : Wands : 0 : Weapons : 2
+j : 50055 :                  Hit : 20014 :   3.00 : Stone : 1 : Potions : 0 : Wands : 0 : Weapons : 0
