@@ -45,7 +45,7 @@ public class Treasure extends GameElement{
     }
 
     public int getCreatureID(){
-        return ID;
+        return creatureID;
     }
 
     public void setCreatureID(int creatureID){

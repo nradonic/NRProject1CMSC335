@@ -164,7 +164,6 @@ public class GameControlWindow extends JFrame{
     private void loadFileData(){
         LoadGameData.LoadData(cave);
         taskDisplay = new JobTaskDisplay(cave);
-        taskDisplay.setVisible(true);
     }
 
     private String searchGame(){
