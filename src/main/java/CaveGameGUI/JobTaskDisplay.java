@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.*;
@@ -39,14 +40,25 @@ public class JobTaskDisplay extends JFrame implements TableModel {
                     default : return new CustomJButtonRenderer(JobState.CANCEL, row, column);
                 }
             }
+            public TableCellEditor getCellEditor(int row, int column){
+                switch (column) {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3: return super.getCellEditor(row, column);
+                    case 4: return new CustomButtonEditor(JobState.RUN, row, column);
+                    default : return new CustomButtonEditor(JobState.CANCEL, row, column);
+                }
+            }
         }; // note this implements TableModel interface
+
         jt.getModel().addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
                     System.out.println("Interrupt e"+e.toString());
                     int col = e.getColumn();
                     int row = e.getFirstRow();
-                    System.out.printf("table changed Row: %d Column: %d\n", row, col);
+                    System.out.printf("\ntable changed Row: %d Column: %d\n", row, col);
             }
         });
         JScrollPane jsp = new JScrollPane(jt);
@@ -76,7 +88,7 @@ public class JobTaskDisplay extends JFrame implements TableModel {
                 "Job",
                 "Job ID",
                 "Creature ID",
-                "Button",
+                "Run/Pause",
                 "Cancel"
         };
 
@@ -91,9 +103,11 @@ public class JobTaskDisplay extends JFrame implements TableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if(columnIndex==4 || columnIndex == 5){
-            return true;
-        } else { return false;}
+//        if(columnIndex==4 || columnIndex == 5){
+//            return true;
+//        } else { return false;}
+        System.out.printf("interrupt iscelleditable Row %d  Column %d\n",rowIndex, columnIndex);
+        return true;
     }
 
     @Override

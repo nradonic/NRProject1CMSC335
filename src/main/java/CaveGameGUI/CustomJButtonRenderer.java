@@ -3,15 +3,18 @@ package CaveGameGUI;
 import DataTree.JobState;
 
 import javax.swing.*;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by NickRadonic on 11/29/14.
  */
-public class CustomJButtonRenderer extends JButton implements TableCellRenderer, ActionListener {
+public class CustomJButtonRenderer extends JButton implements TableCellRenderer {
     JobState initialJobState = JobState.NEVERSTARTED;
     int row = 0;
     int column = 0;
@@ -25,20 +28,25 @@ public class CustomJButtonRenderer extends JButton implements TableCellRenderer,
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        return this;
+        JPanel jp = new JPanel();
+
+        jp.add(this);
+        table.setRowHeight(30);
+
+        return jp;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (initialJobState == JobState.CANCEL){
-            System.out.println("JButton "+initialJobState.toString());
-            initialJobState = JobState.CANCELLED;
-            this.setText("CANCELLED");
-        } else { initialJobState = JobState.CANCEL;
-        this.setText("CANCEL");
-        }
-
-    }
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        if (initialJobState == JobState.CANCEL){
+//            System.out.println("JButton "+initialJobState.toString());
+//            initialJobState = JobState.CANCELLED;
+//            this.setText("CANCELLED");
+//        } else { initialJobState = JobState.CANCEL;
+//        this.setText("CANCEL");
+//        }
+//
+//    }
 
     public int getRow(){
         return row;
@@ -47,4 +55,6 @@ public class CustomJButtonRenderer extends JButton implements TableCellRenderer,
     public int getColumn(){
         return column;
     }
+
+
 }
