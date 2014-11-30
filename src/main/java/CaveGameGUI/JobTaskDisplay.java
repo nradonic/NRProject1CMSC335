@@ -3,10 +3,13 @@ package CaveGameGUI;
 import DataTree.Cave;
 import DataTree.GameElement;
 import DataTree.Job;
+import DataTree.JobState;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.lang.reflect.Array;
@@ -19,14 +22,33 @@ import java.util.Vector;
 public class JobTaskDisplay extends JFrame implements TableModel {
     Cave cave;
     Vector<GameElement> geV;
-    final int COLUMNCOUNT = 5;
+    final int COLUMNCOUNT = 6;
 
     JobTaskDisplay(Cave cave){
         this.cave = cave;
         geV = cave.getTasks();
 
-        //JTable jt = setupTaskTable();
-        JTable jt = new JTable(this);
+        JTable jt = new JTable(this){
+            public TableCellRenderer getCellRenderer(int row, int column){
+                switch (column) {
+                    case 0: return new ProgressRenderer();
+                    case 1:
+                    case 2:
+                    case 3: return super.getCellRenderer(row, column);
+                    case 4: return new CustomJButtonRenderer(JobState.RUN, row, column);
+                    default : return new CustomJButtonRenderer(JobState.CANCEL, row, column);
+                }
+            }
+        }; // note this implements TableModel interface
+        jt.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                    System.out.println("Interrupt e"+e.toString());
+                    int col = e.getColumn();
+                    int row = e.getFirstRow();
+                    System.out.printf("table changed Row: %d Column: %d\n", row, col);
+            }
+        });
         JScrollPane jsp = new JScrollPane(jt);
         jsp.setPreferredSize(new Dimension(500, 500));
         jsp.setBorder(BorderFactory.createTitledBorder("Task Status"));
@@ -35,20 +57,6 @@ public class JobTaskDisplay extends JFrame implements TableModel {
 
         this.pack();
         this.setVisible(true);
-    }
-
-    private JTable setupTaskTable(){
-
-//        String[][] rowData = {{"zero","one","two","three","four"},
-//                {"zero","one","two","three","four"}};
-
-        JTable jt = new JTable();
-        if(geV.size()>0) {
-            for (GameElement ge : geV) {
-                System.out.println(ge.toString());
-            }
-        }
-        return jt;
     }
 
     @Override
@@ -68,19 +76,24 @@ public class JobTaskDisplay extends JFrame implements TableModel {
                 "Job",
                 "Job ID",
                 "Creature ID",
-                "Button"};
+                "Button",
+                "Cancel"
+        };
 
         return columnNames[columnIndex];
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        return getValueAt(0, columnIndex).getClass();
+        Class<?> klass =  getValueAt(0, columnIndex).getClass();
+        return klass;
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
+        if(columnIndex==4 || columnIndex == 5){
+            return true;
+        } else { return false;}
     }
 
     @Override
@@ -104,9 +117,10 @@ public class JobTaskDisplay extends JFrame implements TableModel {
             case 3: {
                 return job.getCreatureID();
             }
-            default: {
+            case 4: {
                 return new JButton("state");
             }
+            default : return new JButton("cancel");
         }
 
     }
@@ -116,13 +130,15 @@ public class JobTaskDisplay extends JFrame implements TableModel {
         System.out.println(aValue + " row: " + rowIndex + "  columnIndex: "+columnIndex);
     }
 
-    @Override
-    public void addTableModelListener(TableModelListener l) {
-
+   @Override
+   public void addTableModelListener(TableModelListener l) {
+        System.out.println("\nInterrupt l "+l.toString()+"\n");
     }
 
     @Override
     public void removeTableModelListener(TableModelListener l) {
 
     }
+
+
 }
