@@ -12,16 +12,17 @@ public class Job extends GameElement implements Runnable {
 
     String jobType;
     int creatureID = 0;
-    double time = 0;
     HashMap<String, Double> resources = new HashMap<>();
 
     double progress = 0.0;
 
     JobState jobState = JobState.NEW;
+
     int MILLISPERSECOND = 1000;
 
+    double time = 0;
     long startTime;
-    long elapsedTime;
+    long elapsedTime; // runs till this goes to input 'time'
 
     boolean pause = false;
     boolean cancel = false;
@@ -35,6 +36,8 @@ public class Job extends GameElement implements Runnable {
     }
 
     public void run(){
+        long intervalTime = (long)(time * 1000) - elapsedTime;
+        long runTime = 0;
         cancel = false;
         pause = false;
 
@@ -42,22 +45,23 @@ public class Job extends GameElement implements Runnable {
         jobState = JobState.RUNNING;
 //        elapsedTime = 0;
 
-        System.out.printf("Start Job %12s  Job ID %6d  Time %4.0f Elapsed Time %5d Progress %4.4f Status %8s\n",
-                getName(), getID(), time, elapsedTime, getProgress(), jobState.name());
+        System.out.printf("Start Job %12s  Job ID %6d  Time %4.0f IntervalTime %8d Elapsed Time %5d Progress %3d Status %8s\n",
+                getName(), getID(), time, intervalTime, elapsedTime, getProgress(), jobState.name());
 
-        while (elapsedTime < time * MILLISPERSECOND && pause != true && cancel != true) {
+        while (runTime < intervalTime && pause != true && cancel != true) {
             try {
 //                System.out.printf("Job %12s  Job ID %6d  Time %4.0f Elapsed Time %5d Progress %4.4f Status %8s\n",
 //                        getName(), getID(), time, elapsedTime, getProgress(), jobState.name());
-                elapsedTime = System.currentTimeMillis() - startTime;
-                sleep(Math.min( 1000,(int) Math.floor(time*MILLISPERSECOND - elapsedTime) ));
-                elapsedTime = System.currentTimeMillis() - startTime;
+                runTime = System.currentTimeMillis() - startTime;
+                sleep(Math.max(  Math.min( 1000,(int) Math.floor(intervalTime - runTime)),0  ));
+                runTime = System.currentTimeMillis() - startTime;
 
             } catch (InterruptedException ex) {
-                System.out.printf("timeout exception job: %d  Elapsed(millisec): %d\n", this.getID(), elapsedTime);
+                runTime = System.currentTimeMillis() - startTime;
+                System.out.printf("timeout exception job: %d  Elapsed(millisec): %d\n", this.getID(), elapsedTime+runTime);
 
             } finally {
-                elapsedTime = System.currentTimeMillis() - startTime;
+                elapsedTime += System.currentTimeMillis() - startTime; // add increment in operating time
                // System.out.printf("finally sleep block: job: %d exited  Elapsed(millisec): %d\n", this.getID(), elapsedTime);
             }
         }
@@ -69,8 +73,8 @@ public class Job extends GameElement implements Runnable {
         } else if (cancel == true){
             jobState = JobState.CANCELLED;
         }
-        System.out.printf("Exit job %10s  Job ID %6d  Time %4.0f Elapsed Time %5d Progress %4.4f Status %8s\n",
-                getName(), getID(), time, elapsedTime, getProgress(), jobState.name());
+        System.out.printf("Exit job %10s  Job ID %6d  Time %4.0f IntervalTime %8d Elapsed Time %5d Progress %3d Status %8s\n",
+                getName(), getID(), time, intervalTime, elapsedTime, getProgress(), jobState.name());
 
     }
 
@@ -112,12 +116,12 @@ public class Job extends GameElement implements Runnable {
         return jobType;
     }
 
-    public double getProgress(){
-        double progress = 0;
+    public int getProgress(){
+        int progress = 0;
         if (time == 0 ) {
             progress = 1;
         } else {
-            progress = Math.min(elapsedTime / time / MILLISPERSECOND, 1);
+            progress = (int) Math.floor(Math.min(elapsedTime / time / MILLISPERSECOND, 1)*100);
         }
         return progress;  // todo
     }

@@ -53,8 +53,8 @@ public class JobTaskDisplay extends JFrame implements TableModel {
                     case 1:
                     case 2:
                     case 3: return super.getCellEditor(row, column);
-                    case 4: return new CustomButtonEditor(JobState.RUN, row, column);
-                    case 5: return new CustomButtonEditor(JobState.CANCEL, row, column);
+                    case 4: return new CustomButtonEditor((Job)(geV.get(row)), row, column);
+                    case 5: return new CustomButtonEditor((Job)(geV.get(row)), row, column);
                     default : return null;
                 }
             }
@@ -87,24 +87,21 @@ public class JobTaskDisplay extends JFrame implements TableModel {
 
             Job job = (Job)jobGE;
             double progress = job.getProgress();
-            ProgressRenderer pr = new ProgressRenderer(JobState.NEW, rowCount, PROGRESSBAR );
+            ProgressRenderer pr = new ProgressRenderer(job, rowCount, PROGRESSBAR );
             pr.setMinimum(0);
             pr.setMaximum(100);
             pr.setValue((int)Math.floor(progress*100));
             pr.setStringPainted(true);
             rowOfCells.add(PROGRESSBAR, pr);
 
-            DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-            dtcr.setText(job.getJobType());
-            rowOfCells.add(JOBTYPE, dtcr);
+            DefaultTableCellRendererWithData dtcrt = new DefaultTableCellRendererWithData(job, rowCount, JOBTYPE);
+            rowOfCells.add(JOBTYPE, dtcrt);
 
-            dtcr = new DefaultTableCellRenderer();
-            dtcr.setText(((Integer)job.getID()).toString());
-            rowOfCells.add(JOBID, dtcr);
+            DefaultTableCellRendererWithData dtcri = new DefaultTableCellRendererWithData(job, rowCount, JOBID);
+            rowOfCells.add(JOBID, dtcri);
 
-            dtcr = new DefaultTableCellRenderer();
-            dtcr.setText(((Integer)job.getCreatureID()).toString());
-            rowOfCells.add(CREATUREID, dtcr);
+            DefaultTableCellRendererWithData dtcrc = new DefaultTableCellRendererWithData(job, rowCount, CREATUREID);
+            rowOfCells.add(CREATUREID, dtcrc);
 
             CustomJButtonRenderer cjbrr = new CustomJButtonRenderer(job.getJobState(), rowCount, RUNBUTTON);
             cjbrr.addMouseListener(new MouseAdapter() {
@@ -141,16 +138,17 @@ public class JobTaskDisplay extends JFrame implements TableModel {
 
     public void startJob(int rowIndex){
         rowOfCells = (ArrayList)columnOfCells.get(rowIndex);
+        JobState jobState = ((Job) rowOfCells.get(JOB)).getJobState();
 
         Thread thread;
-        if(rowOfCells.get(THREAD) == null ){
+        if(rowOfCells.get(THREAD) == null || jobState == JobState.CANCELLED ){
             thread = new Thread((Job)rowOfCells.get(JOB));
             rowOfCells.add(THREAD, thread );
         } else {
             thread = (Thread) rowOfCells.get(THREAD);
         }
-        JobState jobState = ((Job) rowOfCells.get(JOB)).getJobState();
-        if( jobState != JobState.RUNNING || jobState != JobState.FINISHED) {
+
+        if( jobState != JobState.RUNNING && jobState != JobState.FINISHED) {
             thread.start();
         }
     }

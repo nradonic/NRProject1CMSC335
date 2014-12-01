@@ -1,5 +1,6 @@
 package CaveGameGUI;
 
+import DataTree.Job;
 import DataTree.JobState;
 
 import javax.swing.*;
@@ -18,11 +19,17 @@ public class CustomButtonEditor implements TableCellEditor {
     int row;
     int column ;
     JButton button;
+    Job job;
 
-    public CustomButtonEditor(JobState jobState, int row, int column){
+    public CustomButtonEditor(Job job, int row, int column){
         this.row = row;
         this.column  = column;
-        button = new JButton(jobState.name());
+        this.job = job;
+        if(column == 4) {
+            button = new JButton(this.job.getJobState().name());
+        } else if(column==5){
+            button = new JButton(JobState.CANCEL.name());
+        }
         button.setOpaque(true);
 
     }
