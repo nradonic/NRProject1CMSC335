@@ -25,13 +25,12 @@ public class CustomButtonEditor implements TableCellEditor {
         this.row = row;
         this.column  = column;
         this.job = job;
-        if(column == 4) {
+        if(column == 5) {
             button = new JButton(this.job.getJobState().name());
-        } else if(column==5){
+        } else if(column==6){
             button = new JButton(JobState.CANCEL.name());
         }
         button.setOpaque(true);
-
     }
 
 

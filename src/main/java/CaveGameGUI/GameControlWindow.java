@@ -126,6 +126,7 @@ public class GameControlWindow extends JFrame{
 
         jbr.addActionListener ( new ActionListener() {
             public void actionPerformed (ActionEvent e) {
+               if( taskDisplay != null) {taskDisplay.dispose();}
                 loadFileData();
                 tree.treeDidChange();
                 tree.updateUI();

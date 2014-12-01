@@ -1,5 +1,6 @@
 package CaveGameGUI;
 
+import DataTree.Job;
 import DataTree.JobState;
 
 import javax.swing.*;
@@ -15,22 +16,23 @@ import java.awt.event.MouseListener;
  * Created by NickRadonic on 11/29/14.
  */
 public class CustomJButtonRenderer extends JButton implements TableCellRenderer {
-    JobState initialJobState = JobState.NEW;
     int row = 0;
     int column = 0;
+    Job job;
+    final int JOBSTATECOLUMN = 5;
 
-    public CustomJButtonRenderer(JobState jsInitial, int row, int column){
-        super(jsInitial.toString());
-        initialJobState = jsInitial;
+    public CustomJButtonRenderer(Job job, int row, int column){
+        super((column==5) ? job.getJobState().name() : JobState.CANCEL.name());
+
         this.row = row;
         this.column=column;
-        this.setText(jsInitial.name());
+        this.job = job;
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         JPanel jp = new JPanel();
-
+        this.setText((column==JOBSTATECOLUMN) ? job.getJobState().name() : JobState.CANCEL.name());
         jp.add(this);
         table.setRowHeight(30);
 

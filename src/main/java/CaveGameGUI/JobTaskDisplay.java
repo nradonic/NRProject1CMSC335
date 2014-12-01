@@ -15,8 +15,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Created by NickRadonic on 11/29/14.
@@ -24,24 +23,28 @@ import java.util.Vector;
 public class JobTaskDisplay extends JFrame implements TableModel {
     Cave cave;
     Vector<GameElement> geV;
-    final int COLUMNCOUNT = 6;
+    final int COLUMNCOUNT = 7;
 
-    ArrayList rowOfCells = new ArrayList(7);
+    ArrayList rowOfCells = new ArrayList(COLUMNCOUNT+1);
     ArrayList columnOfCells = new ArrayList();
 
     final int PROGRESSBAR = 0;
     final int JOBTYPE = 1;
     final int JOBID = 2;
     final int CREATUREID = 3;
-    final int RUNBUTTON = 4;
-    final int CANCELBUTTON = 5;
-    final int JOB = 6;
-    final int THREAD = 7;
+    final int TIME = 4;
+
+    final int RUNBUTTON = 5;
+    final int CANCELBUTTON = 6;
+    final int JOB = 7;
+    final int THREAD = 8;
+    HashMap<Integer, Boolean> creatureIDs;
 
     JobTaskDisplay(Cave cave){
         this.cave = cave;
         geV = cave.getTasks();
         createTableModel();
+        creatureIDs = createCreatureSet(geV);
 
         JTable jt = new JTable(this){
             public TableCellRenderer getCellRenderer(int row, int column){
@@ -52,9 +55,10 @@ public class JobTaskDisplay extends JFrame implements TableModel {
                     case 0:
                     case 1:
                     case 2:
-                    case 3: return super.getCellEditor(row, column);
-                    case 4: return new CustomButtonEditor((Job)(geV.get(row)), row, column);
+                    case 3:
+                    case 4: return super.getCellEditor(row, column);
                     case 5: return new CustomButtonEditor((Job)(geV.get(row)), row, column);
+                    case 6: return new CustomButtonEditor((Job)(geV.get(row)), row, column);
                     default : return null;
                 }
             }
@@ -79,6 +83,14 @@ public class JobTaskDisplay extends JFrame implements TableModel {
         this.setVisible(true);
     }
 
+    private  HashMap<Integer, Boolean> createCreatureSet(Vector<GameElement> geV){
+        HashMap<Integer, Boolean> creatureIDs = new  HashMap<Integer, Boolean>();
+        for(GameElement ge: geV){
+            creatureIDs.put(((Job) ge).getCreatureID(), new Boolean(false));
+        }
+        return creatureIDs;
+    }
+
     private void createTableModel(){  //crates renderers for each column
 
         int rowCount = 0;
@@ -100,10 +112,13 @@ public class JobTaskDisplay extends JFrame implements TableModel {
             DefaultTableCellRendererWithData dtcri = new DefaultTableCellRendererWithData(job, rowCount, JOBID);
             rowOfCells.add(JOBID, dtcri);
 
+            DefaultTableCellRendererWithData dtcrtime = new DefaultTableCellRendererWithData(job, rowCount, TIME);
+            rowOfCells.add(CREATUREID, dtcrtime);
+
             DefaultTableCellRendererWithData dtcrc = new DefaultTableCellRendererWithData(job, rowCount, CREATUREID);
             rowOfCells.add(CREATUREID, dtcrc);
 
-            CustomJButtonRenderer cjbrr = new CustomJButtonRenderer(job.getJobState(), rowCount, RUNBUTTON);
+            CustomJButtonRenderer cjbrr = new CustomJButtonRenderer(job, rowCount, RUNBUTTON);
             cjbrr.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -115,7 +130,7 @@ public class JobTaskDisplay extends JFrame implements TableModel {
             });
             rowOfCells.add(RUNBUTTON, cjbrr);
 
-            CustomJButtonRenderer cjbrc = new CustomJButtonRenderer(JobState.CANCEL, rowCount, CANCELBUTTON);
+            CustomJButtonRenderer cjbrc = new CustomJButtonRenderer(job, rowCount, CANCELBUTTON);
             cjbrc.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -138,18 +153,23 @@ public class JobTaskDisplay extends JFrame implements TableModel {
 
     public void startJob(int rowIndex){
         rowOfCells = (ArrayList)columnOfCells.get(rowIndex);
-        JobState jobState = ((Job) rowOfCells.get(JOB)).getJobState();
+        Job job = (Job) rowOfCells.get(JOB);
+        Integer creatureID = job.getCreatureID();
+        synchronized (creatureIDs.get(creatureID)) {
 
-        Thread thread;
-        if(rowOfCells.get(THREAD) == null || jobState == JobState.CANCELLED ){
-            thread = new Thread((Job)rowOfCells.get(JOB));
-            rowOfCells.add(THREAD, thread );
-        } else {
-            thread = (Thread) rowOfCells.get(THREAD);
-        }
+            JobState jobState = job.getJobState();
 
-        if( jobState != JobState.RUNNING && jobState != JobState.FINISHED) {
-            thread.start();
+            Thread thread;
+            if (rowOfCells.get(THREAD) == null || jobState == JobState.CANCELLED) {
+                thread = new Thread((Job) rowOfCells.get(JOB));
+                rowOfCells.add(THREAD, thread);
+            } else {
+                thread = (Thread) rowOfCells.get(THREAD);
+            }
+
+            if (jobState != JobState.RUNNING && jobState != JobState.FINISHED) {
+                thread.start();
+            }
         }
     }
 
@@ -186,6 +206,7 @@ public class JobTaskDisplay extends JFrame implements TableModel {
         String[] columnNames = {"Progress",
                 "Job",
                 "Job ID",
+                "Job Time",
                 "Creature ID",
                 "Run/Pause",
                 "Cancel"
@@ -221,12 +242,13 @@ public class JobTaskDisplay extends JFrame implements TableModel {
             }
             case 1:
             case 2:
-            case 3: {
+            case 3:
+            case 4:{
                 DefaultTableCellRenderer dtcr = (DefaultTableCellRenderer) rowOfCells.get(columnIndex);
                 return dtcr;
             }
-            case 4:
-            case 5: {
+            case 5:
+            case 6: {
                 CustomJButtonRenderer cjbr = (CustomJButtonRenderer) rowOfCells.get(columnIndex);
                 return cjbr;
             }

@@ -34,6 +34,10 @@ public class DefaultTableCellRendererWithData extends DefaultTableCellRenderer{
                 break;
             }
             case 3: {
+                setText(String.format("%4.1f",job.getTime()));
+                break;
+            }
+            case 4: {
                 setText(Integer.toString(job.getCreatureID()));
                 break;
             }
