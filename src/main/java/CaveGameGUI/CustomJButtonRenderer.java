@@ -15,7 +15,7 @@ import java.awt.event.MouseListener;
  * Created by NickRadonic on 11/29/14.
  */
 public class CustomJButtonRenderer extends JButton implements TableCellRenderer {
-    JobState initialJobState = JobState.NEVERSTARTED;
+    JobState initialJobState = JobState.NEW;
     int row = 0;
     int column = 0;
 
@@ -24,6 +24,7 @@ public class CustomJButtonRenderer extends JButton implements TableCellRenderer 
         initialJobState = jsInitial;
         this.row = row;
         this.column=column;
+        this.setText(jsInitial.name());
     }
 
     @Override
@@ -35,18 +36,6 @@ public class CustomJButtonRenderer extends JButton implements TableCellRenderer 
 
         return jp;
     }
-
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        if (initialJobState == JobState.CANCEL){
-//            System.out.println("JButton "+initialJobState.toString());
-//            initialJobState = JobState.CANCELLED;
-//            this.setText("CANCELLED");
-//        } else { initialJobState = JobState.CANCEL;
-//        this.setText("CANCEL");
-//        }
-//
-//    }
 
     public int getRow(){
         return row;

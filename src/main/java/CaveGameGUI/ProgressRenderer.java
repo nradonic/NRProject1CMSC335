@@ -1,5 +1,7 @@
 package CaveGameGUI;
 
+import DataTree.JobState;
+
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
@@ -11,7 +13,7 @@ public class ProgressRenderer extends JProgressBar implements TableCellRenderer 
     int jpbWidth = 100;
     int jpbHeight = 20;
 
-    public ProgressRenderer(){
+    public ProgressRenderer(JobState jobState, int row, int column){
         super();
         this.setPreferredSize(new Dimension(jpbWidth, jpbHeight));
     }

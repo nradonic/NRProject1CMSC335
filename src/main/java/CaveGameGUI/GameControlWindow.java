@@ -62,7 +62,7 @@ public class GameControlWindow extends JFrame{
         this.cave = cave;
         this.tree = new JTree(cave);
 
-        System.out.println("In constructor");
+       // System.out.println("In constructor");
         setTitle("Sorcerer's Cave");
         setSize(WINDOWDIMENSIONS);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
