@@ -9,9 +9,9 @@ package DataTree;
 import java.util.*;
 
 public class Cave extends GameElement{
-    private String name;
+    private final String name;
 
-    public Cave displayCave;
+    private Cave displayCave;
     public Cave unassignedCaveCreatures;
     public Cave unassignedCaveTreasuresArtifactsJobs;
 //    public Cave unassignedCaveArtifacts;
@@ -56,7 +56,7 @@ public class Cave extends GameElement{
     }
 
     private void addToUnassignedElements(GameElement gameElement, Cave unassignedCave){
-        Enumeration<GameElement> gameElementEnumeration = unassignedCave.children();
+        Enumeration<GameElement> gameElementEnumeration = (Enumeration<GameElement>) unassignedCave.children();
 
         while (gameElementEnumeration.hasMoreElements()) {
             GameElement ge = gameElementEnumeration.nextElement();
@@ -84,6 +84,13 @@ public class Cave extends GameElement{
 
     public Cave makeCopy(){
         return new Cave(name);
+    }
+
+    public void resetDataStructures(){
+        removeAllChildren();
+        unassignedCaveCreatures.removeAllChildren();
+        unassignedCaveTreasuresArtifactsJobs.removeAllChildren();
+        clearTreeMaps();
     }
 
 }

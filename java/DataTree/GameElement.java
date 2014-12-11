@@ -16,33 +16,33 @@ import java.util.*;
  */
 
 public class GameElement extends DefaultMutableTreeNode implements Comparable<GameElement> {
-    public static FilterField treeMapFF = FilterField.ID;
-    public static FilterField currentFilterField = FilterField.ID;
+    private static FilterField treeMapFF = FilterField.ID;
+    private static FilterField currentFilterField = FilterField.ID;
 
-    protected GameLayer gameLayer = GameLayer.NONE;
-    protected Integer ID = 0;
+    GameLayer gameLayer = GameLayer.NONE;
+    Integer ID = 0;
 
     private FilterField filterField = FilterField.ID;
     private GameLayer filterDomain = GameLayer.CAVE;
 
-    TreeMap<GameElement, Integer> tmID = new TreeMap<>();
+    private TreeMap<GameElement, Integer> tmID = new TreeMap<GameElement, Integer>();
 
-    TreeMap<GameElement, String> tmName = new TreeMap<>();
-    TreeMap<GameElement, String> tmType = new TreeMap<>();
+    private TreeMap<GameElement, String> tmName = new TreeMap<GameElement, String>();
+    private TreeMap<GameElement, String> tmType = new TreeMap<GameElement, String>();
 
-    TreeMap<GameElement, Double> tmHeight = new TreeMap<>();
-    TreeMap<GameElement, Double> tmAge = new TreeMap<>();
+    private TreeMap<GameElement, Double> tmHeight = new TreeMap<GameElement, Double>();
+    private TreeMap<GameElement, Double> tmAge = new TreeMap<GameElement, Double>();
 
-    TreeMap<GameElement, Double> tmEmpathy = new TreeMap<>();
-    TreeMap<GameElement, Double> tmFear = new TreeMap<>();
-    TreeMap<GameElement, Double> tmCapacity = new TreeMap<>();
+    private TreeMap<GameElement, Double> tmEmpathy = new TreeMap<GameElement, Double>();
+    private TreeMap<GameElement, Double> tmFear = new TreeMap<GameElement, Double>();
+    private TreeMap<GameElement, Double> tmCapacity = new TreeMap<GameElement, Double>();
 
-    TreeMap<GameElement, Double> tmValue = new TreeMap<>();
-    TreeMap<GameElement, Double> tmWeight = new TreeMap<>();
+    private TreeMap<GameElement, Double> tmValue = new TreeMap<GameElement, Double>();
+    private TreeMap<GameElement, Double> tmWeight = new TreeMap<GameElement, Double>();
 
 
 
-    public GameElement() {
+    GameElement() {
     }
 
     public GameElement(GameLayer layer, int ID) {
@@ -55,11 +55,11 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         return gameLayer;
     }
 
-    public int getID() {
+    int getID() {
         return ID;
     }
 
-    public boolean addGameElementTree(GameElement gameElement) {
+    boolean addGameElementTree(GameElement gameElement) {
         boolean result = false;
         switch (gameLayer) {
             case CAVE: {
@@ -399,7 +399,6 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
 
                         currentFilterField = FilterField.WEIGHT;
                         tmWeight.put((Creature)ge, ((Creature) ge).weight);
-
                     }
                     break;
                 }
@@ -479,23 +478,26 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     }
 
     private int compareAtArtifactLevel(Artifact ge) {
+        int result = compareArtifactID(ge);
         switch (currentFilterField) {
             case ID: {
-                return ((Artifact)this).getID() - ((Artifact) ge).getID();
+                break;
             }
             case NAME: {
                 int tempCompare =   ((Artifact) this).name.compareToIgnoreCase(((Artifact) ge).name);
                 if(tempCompare == 0 ){ tempCompare = compareArtifactID(ge);}
-                return tempCompare;
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case ARTIFACTTYPE: {
                 int tempCompare = ((Artifact) this).artifactType.compareToIgnoreCase(((Artifact) ge).artifactType);
-                if(tempCompare == 0 ){ tempCompare = compareArtifactID(ge);}
-                return tempCompare;
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             default:
-                return 0;
+                break;
         }
+        return result;
     }
 
     private int compareArtifactID(Artifact ge) {
@@ -503,28 +505,30 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     }
 
     private int compareAtTreasureLevel(Treasure ge) {
+        int result = compareTreasureID(ge);
         switch (currentFilterField) {
             case ID: {
-                return compareTreasureID(ge);
+                break;
             }
             case TREASURETYPE: {
                 int tempCompare =  (int)(((Treasure) this).treasureType.compareToIgnoreCase(((Treasure) ge).treasureType));
-                if(tempCompare == 0 ){ tempCompare = compareTreasureID(ge);}
-                return tempCompare;
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case WEIGHT: {
                 int tempCompare =   (int)(((Treasure) this).weight - ((Treasure) ge).weight);
-                if(tempCompare == 0 ){ tempCompare = compareTreasureID(ge);}
-                return tempCompare;
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case VALUE: {
                 int tempCompare = (int)(((Treasure) this).value - ((Treasure) ge).value);
-                if(tempCompare == 0 ){ tempCompare = compareTreasureID(ge);}
-                return tempCompare;
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             default:
-                return 0;
+                break;
         }
+        return result;
     }
 
     private int compareTreasureID(Treasure ge) {
@@ -532,18 +536,20 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     }
 
     private int compareAtJobLevel(Job ge) {
+        int result = compareJobID(ge);
         switch (currentFilterField) {
             case ID: {
-                return ((Job)this).getID() - ((Job) ge).getID();
+                break;
             }
             case JOBTYPE: {
                 int tempCompare = (int)( ((Job) this).jobType.compareToIgnoreCase( ((Job) ge).jobType ) );
-                if(tempCompare == 0 ){ tempCompare = compareJobID(ge);}
-                return tempCompare;
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             default:
-                return 0;
+                break;
         }
+        return result;
     }
 
     private int compareJobID(Job ge) {
@@ -552,58 +558,88 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
 
 
     private int compareAtCreatureLevel(Creature ge) {
+        int result = compareCreatureID(ge);
         switch (currentFilterField) {
             case ID: {
-                return ((Creature)this).getID() - ((Creature) ge).getID();
+                break;
             }
             case NAME: {
-                return ((Creature) this).name.compareToIgnoreCase(((Creature) ge).name);
+                int tempCompare = ((Creature) this).name.compareToIgnoreCase(((Creature) ge).name);
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case CREATURETYPE: {
-                return ((Creature) this).creatureType.compareToIgnoreCase(((Creature) ge).creatureType);
+                int tempCompare = ((Creature) this).creatureType.compareToIgnoreCase(((Creature) ge).creatureType);
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case EMPATHY: {
-                return (int)(((Creature) this).empathy - ((Creature) ge).empathy);
+                int tempCompare =  (int)(((Creature) this).empathy - ((Creature) ge).empathy);
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case FEAR: {
-                return (int)( ((Creature) this).fear - ((Creature) ge).fear);
+                int tempCompare = (int)( ((Creature) this).fear - ((Creature) ge).fear);
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case CAPACITY: {
-                return (int)(((Creature) this).carryingCapacity - ((Creature) ge).carryingCapacity);
+                int tempCompare = (int)(((Creature) this).carryingCapacity - ((Creature) ge).carryingCapacity);
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case AGE: {
-                return (int)(((Creature) this).age - (((Creature) ge).age));
+                int tempCompare = (int)(((Creature) this).age - (((Creature) ge).age));
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case WEIGHT: {
-                return (int)(((Creature) this).weight - ((Creature) ge).weight);
+                int tempCompare = (int)(((Creature) this).weight - ((Creature) ge).weight);
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             case HEIGHT: {
-                return (int)(((Creature) this).height -((Creature) ge).height);
+                int tempCompare = (int)(((Creature) this).height -((Creature) ge).height);
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
 
             default:
-                return 0;
+                break;
         }
+        return result;
+    }
+
+    private int compareCreatureID(Creature ge) {
+        return ((Creature)this).getID() - ((Creature) ge).getID();
     }
 
     private int compareAtPartyLevel(Party ge) {
+        int result = comparePartyID(ge);
         switch (currentFilterField) {
             case ID: {
-                return ((Party)this).getID() - ((Party) ge).getID();
+                break;
             }
             case NAME: {
-                return ((Party) this).name.compareToIgnoreCase(((Party) ge).name);
+                int tempCompare = ((Party) this).name.compareToIgnoreCase(((Party) ge).name);
+                result = tempCompare != 0 ? tempCompare : result;
+                break;
             }
             default:
                 return 0;
         }
+        return result;
     }
 
-    public GameElement makeCopy(){
+    private int comparePartyID(Party ge) {
+        return ((Party)this).getID() - ((Party) ge).getID();
+    }
+
+    GameElement makeCopy(){
         return new GameElement(gameLayer, getID());
     }
 
-    public static void Koppy(GameElement source, GameElement destination, GameLayer searchLayer, String searchText){
+    private static void Koppy(GameElement source, GameElement destination, GameLayer searchLayer, String searchText){
         Enumeration<GameElement> geSource = source.children();
         while(geSource.hasMoreElements()){
             GameElement geS = geSource.nextElement();
@@ -626,13 +662,27 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
                 } if (g.gameLayer == GameLayer.CAVE || g.gameLayer == GameLayer.PARTY ||g.gameLayer == GameLayer.CREATURE ){
                     for(GameElement geSub:  g.getTasks()){
                         geV.add(geSub);
-                    };
-
+                    }
                 }
             }
         }
-
         return geV;
     }
 
+    protected void clearTreeMaps(){
+        tmID = new TreeMap<GameElement, Integer>();
+
+        tmName = new TreeMap<GameElement, String>();
+        tmType = new TreeMap<GameElement, String>();
+
+        tmHeight = new TreeMap<GameElement, Double>();
+        tmAge = new TreeMap<GameElement, Double>();
+
+        tmEmpathy = new TreeMap<GameElement, Double>();
+        tmFear = new TreeMap<GameElement, Double>();
+        tmCapacity = new TreeMap<GameElement, Double>();
+
+        tmValue = new TreeMap<GameElement, Double>();
+        tmWeight = new TreeMap<GameElement, Double>();
+    }
 }

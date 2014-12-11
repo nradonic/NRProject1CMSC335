@@ -20,25 +20,25 @@ import java.util.*;
 /**
  * Created by NickRadonic on 11/29/14.
  */
-public class JobTaskDisplay extends JFrame implements TableModel {
-    Cave cave;
-    Vector<GameElement> geV;
-    final int COLUMNCOUNT = 7;
+class JobTaskDisplay extends JFrame implements TableModel {
+    private final Cave cave;
+    private final Vector<GameElement> geV;
+    private final int COLUMNCOUNT = 7;
 
-    ArrayList rowOfCells = new ArrayList(COLUMNCOUNT+1);
-    ArrayList columnOfCells = new ArrayList();
+    private ArrayList rowOfCells = new ArrayList(COLUMNCOUNT+1);
+    private final ArrayList columnOfCells = new ArrayList();
 
-    final int PROGRESSBAR = 0;
-    final int JOBTYPE = 1;
-    final int JOBID = 2;
-    final int CREATUREID = 3;
-    final int TIME = 4;
+    private final int PROGRESSBAR = 0;
+    private final int JOBTYPE = 1;
+    private final int JOBID = 2;
+    private final int CREATUREID = 3;
+    private final int TIME = 4;
 
-    final int RUNBUTTON = 5;
-    final int CANCELBUTTON = 6;
-    final int JOB = 7;
-    final int THREAD = 8;
-    HashMap<Integer, Boolean> creatureIDs;
+    private final int RUNBUTTON = 5;
+    private final int CANCELBUTTON = 6;
+    private final int JOB = 7;
+    private final int THREAD = 8;
+    private final HashMap<Integer, Boolean> creatureIDs;
 
     JobTaskDisplay(Cave cave){
         this.cave = cave;
@@ -151,7 +151,7 @@ public class JobTaskDisplay extends JFrame implements TableModel {
         }
     }
 
-    public void startJob(int rowIndex){
+    void startJob(int rowIndex){
         rowOfCells = (ArrayList)columnOfCells.get(rowIndex);
         Job job = (Job) rowOfCells.get(JOB);
         Integer creatureID = job.getCreatureID();
@@ -181,7 +181,7 @@ public class JobTaskDisplay extends JFrame implements TableModel {
         thread.interrupt();
     }
 
-    public void cancelJob(int rowIndex){
+    void cancelJob(int rowIndex){
         rowOfCells = (ArrayList)columnOfCells.get(rowIndex);
         Job job = (Job) rowOfCells.get(JOB);
         Thread thread = (Thread) rowOfCells.get(THREAD);

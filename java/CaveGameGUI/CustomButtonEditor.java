@@ -7,32 +7,21 @@ import javax.swing.*;
 import javax.swing.event.CellEditorListener;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.EventObject;
 
 /**
  * Created by NickRadonic on 11/30/14.
  */
-public class CustomButtonEditor implements TableCellEditor {
-    int row;
-    int column ;
-    JButton button;
-    Job job;
+class CustomButtonEditor implements TableCellEditor {
+    private final int row;
+    private final int column ;
+    private final Job job;
 
     public CustomButtonEditor(Job job, int row, int column){
         this.row = row;
         this.column  = column;
         this.job = job;
-        if(column == 5) {
-            button = new JButton(this.job.getJobState().name());
-        } else if(column==6){
-            button = new JButton(JobState.CANCEL.name());
-        }
-        button.setOpaque(true);
     }
-
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

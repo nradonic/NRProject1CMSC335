@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NRProject1CMSC335">
+    <output-path>$PROJECT_DIR$/out/artifacts/NRProject1CMSC335</output-path>
+    <root id="archive" name="NRProject1CMSC335.jar">
+      <element id="module-output" name="NRProject4CMSC335" />
+      <element id="dir-copy" path="$PROJECT_DIR$/java" />
+      <element id="file-copy" path="$PROJECT_DIR$/data1.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/data2.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/data3.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/data4.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/data5.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/data6.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/data6jobs.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/gamedata5.txt" />
+      <element id="file-copy" path="$PROJECT_DIR$/gamedata1.txt" />
+    </root>
+  </artifact>
+</component>

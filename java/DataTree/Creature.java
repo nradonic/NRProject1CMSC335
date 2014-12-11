@@ -6,18 +6,16 @@
  */
 package DataTree;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Optional;
 
 public class Creature extends GameElement{
     private static int creaturesCreated = 0;
-    String name;
-    String creatureType;
+    final String name;
+    final String creatureType;
     int partyID;
-    double empathy;
-    double fear;
-    double carryingCapacity;
+    final double empathy;
+    final double fear;
+    final double carryingCapacity;
     double age;
     double height;
     double weight;
@@ -74,7 +72,7 @@ public class Creature extends GameElement{
         String jobOutput = "";
         int jobCount = 0;
 
-        Enumeration<GameElement> e = this.breadthFirstEnumeration();
+        Enumeration<GameElement> e = (Enumeration<GameElement>) this.breadthFirstEnumeration();
         while(e.hasMoreElements()){
 
             GameElement k = e.nextElement();

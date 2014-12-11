@@ -8,15 +8,13 @@ package GameControl;
 import CaveGameGUI.GameControlWindow;
 import DataTree.Cave;
 
-import javax.swing.*;
-
 /**
  * CaveGame.java
  * 11/1/14
  * Created by Nick Radonic
  * Top level Cave Game entry point
  */
-public class CaveGame {
+class CaveGame {
 
     public static void main(String[] args){
 

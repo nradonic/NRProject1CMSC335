@@ -1,18 +1,16 @@
 package CaveGameGUI;
 
 import DataTree.Job;
-
-import javax.swing.*;
+import static java.lang.Thread.sleep;
 import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.*;
 
 /**
  * Created by Nick Radonic on 11/30/14.
  */
-public class DefaultTableCellRendererWithData extends DefaultTableCellRenderer{
-    int row;
-    int column;
-    Job job;
+class DefaultTableCellRendererWithData extends DefaultTableCellRenderer{
+    private final int row;
+    private final int column;
+    private final Job job;
 
     public DefaultTableCellRendererWithData(Job job, int row, int column){
         this.row = row;
@@ -34,7 +32,7 @@ public class DefaultTableCellRendererWithData extends DefaultTableCellRenderer{
                 break;
             }
             case 3: {
-                setText(String.format("%4.1f",job.getTime()));
+                setText(String.format("%4.1f", job.getTime()));
                 break;
             }
             case 4: {

@@ -2,7 +2,6 @@ package DataTree;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
 
 import static java.lang.Thread.sleep;
 
@@ -11,20 +10,20 @@ import static java.lang.Thread.sleep;
  */
 public class Job extends GameElement implements Runnable {
 
-    String jobType;
+    final String jobType;
     int creatureID = 0;
-    HashMap<String, Double> resources = new HashMap<>();
+    private HashMap<String, Double> resources = new HashMap<>();
 
-    JobState jobState = JobState.NEW;
+    private JobState jobState = JobState.NEW;
 
-    int MILLISPERSECOND = 1000;
+    private final int MILLISPERSECOND = 1000;
 
-    double time = 0;
-    long startTime;
-    long elapsedTime; // runs till this goes to input 'time'
+    private double time = 0;
+    private long startTime;
+    private long elapsedTime; // runs till this goes to input 'time'
 
-    boolean pause = false;
-    boolean cancel = false;
+    private boolean pause = false;
+    private boolean cancel = false;
     Object lock = new Object();
 
     public Job(int ID, String jobType, int creatureID, Double time, HashMap<String, Double> resources ){
@@ -45,15 +44,16 @@ public class Job extends GameElement implements Runnable {
         jobState = JobState.RUNNING;
 //        elapsedTime = 0;
 
-        System.out.printf("Start Job %12s  Job ID %6d  Time %4.0f IntervalTime %8d Elapsed Time %5d Progress %3d Status %8s\n",
-                getName(), getID(), time, intervalTime, elapsedTime, getProgress(), jobState.name());
+        System.out.printf("Start Job %12s  Job ID %6d  Time %4.0f IntervalTime %8d Run Time %5d Elapsed Time %5d Progress %3d Status %8s\n",
+                getName(), getID(), time, intervalTime, runTime, elapsedTime, getProgress(), jobState.name());
 
-        while (runTime < intervalTime && pause != true && cancel != true) {
+        while (elapsedTime < intervalTime && pause != true && cancel != true) {
+            startTime = System.currentTimeMillis();
             try {
-//                System.out.printf("Job %12s  Job ID %6d  Time %4.0f Elapsed Time %5d Progress %4.4f Status %8s\n",
-//                        getName(), getID(), time, elapsedTime, getProgress(), jobState.name());
+                System.out.printf("Job %12s  Job ID %6d  Time %4.0f IntervalTime %8d Run Time %5d Elapsed Time %5d Progress %3d Status %8s\n",
+                        getName(), getID(), time, intervalTime, runTime, elapsedTime, getProgress(), jobState.name());
                 runTime = System.currentTimeMillis() - startTime;
-                sleep(Math.max(Math.min(1000, (int) Math.floor(intervalTime - runTime)), 0));
+                sleep(Math.max(Math.min(1000, (int) Math.floor(intervalTime - elapsedTime)), 0));
                 runTime = System.currentTimeMillis() - startTime;
 
             } catch (InterruptedException ex) {
@@ -89,7 +89,7 @@ public class Job extends GameElement implements Runnable {
         return ID;
     }
 
-    public String getName(){
+    String getName(){
         return jobType;
     }
 

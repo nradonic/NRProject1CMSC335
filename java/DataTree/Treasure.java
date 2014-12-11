@@ -9,9 +9,9 @@ package DataTree;
 public class Treasure extends GameElement{
     private static int treasuresCreated = 0;
     int creatureID;
-    double weight;
-    double value;
-    String treasureType;
+    final double weight;
+    final double value;
+    final String treasureType;
 
     public Treasure(String treasureType, double weight, double value){
         super(GameLayer.TREASURE, treasuresCreated+1);

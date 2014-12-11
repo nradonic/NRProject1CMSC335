@@ -22,41 +22,41 @@ import java.awt.event.ActionListener;
  */
 public class GameControlWindow extends JFrame{
     static final long serialVersionUID = 123L;
-    JPanel framepanelHolder = new JPanel();
+    private JPanel framepanelHolder = new JPanel();
 
-    GameLayer filterDomain = GameLayer.PARTY;
-    FilterField filterField = FilterField.ID;
+    private GameLayer filterDomain = GameLayer.PARTY;
+    private FilterField filterField = FilterField.ID;
 
-    JTextArea jta = new JTextArea ();
-    JScrollPane messagesScrollPane = new JScrollPane();
+    private final JTextArea jta = new JTextArea ();
+    private JScrollPane messagesScrollPane = new JScrollPane();
 
-    Cave cave;
-    JTree tree;
+    private final Cave cave;
+    private final JTree tree;
     JPanel sortPanel = new JPanel();
 
     // store previous search terms
-    boolean lastJCBP = true;
-    boolean lastJCBC = true;
-    boolean lastJCBT = true;
-    boolean lastJCBA = true;
-    boolean lastJCBJ = true;
+    private boolean lastJCBP = true;
+    private boolean lastJCBC = true;
+    private boolean lastJCBT = true;
+    private boolean lastJCBA = true;
+    private boolean lastJCBJ = true;
 
-    final Dimension WINDOWDIMENSIONS = new Dimension(860, 1000);
+    private final Dimension WINDOWDIMENSIONS = new Dimension(860, 1000);
 
-    String lastStr = "text to search for...";
+    private String lastStr = "text to search for...";
 
-    JPanel filterFieldJPanel = new JPanel();
-    FilterField selectedButtonParty = FilterField.ID;
-    FilterField selectedButtonCreature = FilterField.ID;
-    FilterField selectedButtonTreasure = FilterField.ID;
-    FilterField selectedButtonArtifact = FilterField.ID;
-    FilterField selectedButtonJob = FilterField.ID;
+    private JPanel filterFieldJPanel = new JPanel();
+    private FilterField selectedButtonParty = FilterField.ID;
+    private FilterField selectedButtonCreature = FilterField.ID;
+    private FilterField selectedButtonTreasure = FilterField.ID;
+    private FilterField selectedButtonArtifact = FilterField.ID;
+    private FilterField selectedButtonJob = FilterField.ID;
 
-    GameLayer searchLayer = GameLayer.NONE;
-    String searchText = "";
+    private GameLayer searchLayer = GameLayer.NONE;
+    private String searchText = "";
 
-    JScrollPane treeScrollPane = new JScrollPane();
-    JFrame taskDisplay ;
+    private JScrollPane treeScrollPane = new JScrollPane();
+    private JFrame taskDisplay ;
 
     public GameControlWindow (Cave cave) {
         this.cave = cave;
@@ -112,7 +112,7 @@ public class GameControlWindow extends JFrame{
         return framePanel;
     }
 
-    public JPanel setupButtons() {
+    JPanel setupButtons() {
         JButton jbr = new JButton ("Read");
         JButton jbs = new JButton ("Search");
         JButton jbc = new JButton("Clear Data");
@@ -151,10 +151,8 @@ public class GameControlWindow extends JFrame{
                         "Clear Cave Data?","", JOptionPane.YES_NO_OPTION
                 );
                 if (n == 0 ){
-                    cave.removeAllChildren();
-                    cave.unassignedCaveCreatures.removeAllChildren();
-                    cave.unassignedCaveTreasuresArtifactsJobs.removeAllChildren();
-                    updateFiltering();
+                    taskDisplay.dispose();
+                    cave.resetDataStructures();
                 }
             } // end required method
         });
@@ -324,6 +322,7 @@ public class GameControlWindow extends JFrame{
         JPanel jp = loadSortFieldButtons();
         filterFieldJPanel = jp;
         framepanelHolder.add(jp);
+        framepanelHolder.repaint();
         revalidate();
         updateFiltering();
     }
@@ -368,7 +367,7 @@ public class GameControlWindow extends JFrame{
     }
 
 
-    private JPanel generateRadioButtonFF(GameLayer filterDomain, FilterField ff, String buttonLabel, JPanel jp, ButtonGroup bg){
+    private void generateRadioButtonFF(GameLayer filterDomain, FilterField ff, String buttonLabel, JPanel jp, ButtonGroup bg){
         JRadioButton jcb = new JRadioButton(buttonLabel);
         bg.add(jcb);
 
@@ -402,7 +401,7 @@ public class GameControlWindow extends JFrame{
             } // end required method
         } // end local definition of inner class
         );
-        return jp;
+
     }
 
     void updateFiltering(){

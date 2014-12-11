@@ -4,22 +4,17 @@ import DataTree.Job;
 import DataTree.JobState;
 
 import javax.swing.*;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * Created by NickRadonic on 11/29/14.
  */
-public class CustomJButtonRenderer extends JButton implements TableCellRenderer {
-    int row = 0;
-    int column = 0;
-    Job job;
-    final int JOBSTATECOLUMN = 5;
+class CustomJButtonRenderer extends JButton implements TableCellRenderer {
+    private int row = 0;
+    private int column = 0;
+    private final Job job;
+    private final int JOBSTATECOLUMN = 5;
 
     public CustomJButtonRenderer(Job job, int row, int column){
         super((column==5) ? job.getJobState().name() : JobState.CANCEL.name());

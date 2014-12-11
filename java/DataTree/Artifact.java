@@ -8,9 +8,9 @@ package DataTree;
 
 public class Artifact extends GameElement{
     private static int artifactsCreated = 0;
-    String name;
+    final String name;
     int creatureID;
-    String artifactType;
+    final String artifactType;
 
     public Artifact(String name, String artifactType){
         super(GameLayer.ARTIFACT, artifactsCreated+1);

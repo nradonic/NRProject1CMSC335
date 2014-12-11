@@ -8,7 +8,7 @@ package DataTree;
 
 public class Party extends  GameElement{
     private static int partiesCreated = 0;
-    String name;
+    final String name;
 
     public Party(String name){
         super(GameLayer.PARTY, partiesCreated+1);
