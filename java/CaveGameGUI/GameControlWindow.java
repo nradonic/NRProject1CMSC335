@@ -41,7 +41,7 @@ public class GameControlWindow extends JFrame{
     private boolean lastJCBA = true;
     private boolean lastJCBJ = true;
 
-    private final Dimension WINDOWDIMENSIONS = new Dimension(860, 1000);
+    private final Dimension WINDOWDIMENSIONS = new Dimension(1000, 1000);
 
     private String lastStr = "text to search for...";
 
@@ -61,8 +61,8 @@ public class GameControlWindow extends JFrame{
     public GameControlWindow (Cave cave) {
         this.cave = cave;
         this.tree = new JTree(cave);
-
-       // System.out.println("In constructor");
+        this.tree.setFont(new Font(Font.MONOSPACED, jta.getFont().getStyle(), 11));
+        // System.out.println("In constructor");
         setTitle("Sorcerer's Cave");
         setSize(WINDOWDIMENSIONS);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -113,9 +113,10 @@ public class GameControlWindow extends JFrame{
     }
 
     JPanel setupButtons() {
-        JButton jbr = new JButton ("Read");
+        JButton jbr = new JButton ("Read Game Data");
         JButton jbs = new JButton ("Search");
         JButton jbc = new JButton("Clear Data");
+        JButton jbt = new JButton("Show Tasks");
 
         JPanel jp = new JPanel ();
         jp.setLayout(new FlowLayout());
@@ -123,11 +124,15 @@ public class GameControlWindow extends JFrame{
         jp.add (jbr);
         jp.add (jbs);
         jp.add (jbc);
+        jp.add (jbt);
 
-        jbr.addActionListener ( new ActionListener() {
-            public void actionPerformed (ActionEvent e) {
-               if( taskDisplay != null) {taskDisplay.dispose();}
+        jbr.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (taskDisplay != null) {
+                    taskDisplay.dispose();
+                }
                 loadFileData();
+                updateFiltering();
                 tree.treeDidChange();
                 tree.updateUI();
             } // end required method
@@ -153,7 +158,16 @@ public class GameControlWindow extends JFrame{
                 if (n == 0 ){
                     taskDisplay.dispose();
                     cave.resetDataStructures();
+                    tree.treeDidChange();
+                    tree.updateUI();
+
                 }
+            } // end required method
+        });
+
+        jbt.addActionListener( new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                taskDisplay.setVisible(true);
             } // end required method
         });
 

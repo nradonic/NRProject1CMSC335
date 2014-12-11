@@ -57,7 +57,7 @@ public class Creature extends GameElement{
     }
 
     public String toString(){
-        String creatureOutput = String.format("    c : %6d : %8s : %8s : %6d : %4.1f : %4.1f : %4.1f : %4.0f : %4.1f : %4.1f",
+        String creatureOutput = String.format("    c : %5d : %9s : %9s : %5d : %4.0f : %4.0f : %5.0f : %4.0f : %5.0f : %5.0f",
                 ID, creatureType, name, partyID, empathy, fear, carryingCapacity, age, height, weight);
 
                 //"    c : "+ID+" : "+creatureType+" : "+name+" : "+partyID+" : "+empathy+" : "+fear+" : "+carryingCapacity;

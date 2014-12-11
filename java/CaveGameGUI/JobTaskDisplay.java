@@ -42,6 +42,7 @@ class JobTaskDisplay extends JFrame implements TableModel {
 
     JobTaskDisplay(Cave cave){
         this.cave = cave;
+        this.setTitle("Sorcerer's Cave Job Display");
         geV = cave.getTasks();
         createTableModel();
         creatureIDs = createCreatureSet(geV);
@@ -78,7 +79,7 @@ class JobTaskDisplay extends JFrame implements TableModel {
         jsp.setBorder(BorderFactory.createTitledBorder("Task Status"));
 
         this.getContentPane().add(jsp);
-
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.pack();
         this.setVisible(true);
     }
