@@ -10,6 +10,7 @@ p : 10003 : Drove
 // Creatures format:
 //    c:<index>:<type>:<name>:<party>:<empathy>:<fear>:<carrying capacity>[:<age>:<height>:<weight>]
 c : 20014 :     Kobold :     Bertie : 10003 :  16 :  58 : 218 :  270.74 :  224.47 :  167.66
+c : 20015 :     Knight :      Zuzzy : 10003 :  16 :  58 : 218 :  270.74 :  224.47 :  167.66
 
 // Treasures format:
 //    t:<index>:<type>:<creature>:<weight>:<value>
@@ -29,8 +30,13 @@ a : 40101 :  Weapon : 20014 : Rapier
 // Jobs for creatures
 // measure time in seconds
 //    j:<index>:<name>:<creature index>:<time>[:<required artifact:type>:<number>]*
-j : 50051 :                Throw : 20014 :   30.00 : Stone : 1 : Potions : 1 : Wands : 1 : Weapons : 0
+j : 50051 :                Throw : 20014 :   20.00 : Stone : 1 : Potions : 1 : Wands : 1 : Weapons : 0
 j : 50052 :             Get Help : 20014 :   20.00 : Stone : 2 : Potions : 0 : Wands : 1 : Weapons : 2
-j : 50053 :                Swing : 20014 :  100.00 : Stone : 2 : Potions : 1 : Wands : 1 : Weapons : 1
-j : 50054 :                Swing : 20014 :   70.00 : Stone : 0 : Potions : 2 : Wands : 0 : Weapons : 2
-j : 50055 :                  Hit : 20014 :   30.00 : Stone : 1 : Potions : 0 : Wands : 0 : Weapons : 0
+j : 50053 :                Swing : 20014 :   20.00 : Stone : 2 : Potions : 1 : Wands : 1 : Weapons : 1
+j : 50054 :                Swing : 20014 :   20.00 : Stone : 0 : Potions : 2 : Wands : 0 : Weapons : 2
+j : 50055 :                  Hit : 20014 :   20.00 : Stone : 1 : Potions : 0 : Wands : 0 : Weapons : 0
+j : 50056 :                Throw : 20015 :   20.00 : Stone : 1 : Potions : 1 : Wands : 1 : Weapons : 0
+j : 50057 :             Get Help : 20015 :   20.00 : Stone : 2 : Potions : 0 : Wands : 1 : Weapons : 2
+j : 50058 :                Swing : 20015 :   20.00 : Stone : 2 : Potions : 1 : Wands : 1 : Weapons : 1
+j : 50059 :                Swing : 20015 :   20.00 : Stone : 0 : Potions : 2 : Wands : 0 : Weapons : 2
+j : 50060 :                  Hit : 20015 :   20.00 : Stone : 1 : Potions : 0 : Wands : 0 : Weapons : 0

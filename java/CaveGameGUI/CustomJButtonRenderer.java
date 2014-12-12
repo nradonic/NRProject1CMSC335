@@ -37,6 +37,7 @@ class CustomJButtonRenderer extends JButton implements TableCellRenderer {
     }
 
     private String getLabel(int column) {
+//        System.out.println("CustomJButtonRenderer.java:getLabel("+column+")");
         JobState js = job.getJobState();
         if(column == JOBSTATECOLUMN) {
             switch (js) {
@@ -46,10 +47,10 @@ class CustomJButtonRenderer extends JButton implements TableCellRenderer {
                     return "RUNNING";
                 }
                 case PAUSED: {
-                    return "RUNNING";
+                    return "PAUSED";
                 }
                 case CANCELLED: {
-                    return "CANCELLED";
+                    return "NEW JOB";
                 }
                 case FINISHED: {
                     return "FINISHED";
@@ -82,6 +83,9 @@ class CustomJButtonRenderer extends JButton implements TableCellRenderer {
                 }
                 case NEEDSRESOURCES: {
                     return "CANCEL";
+                }
+                case BLOCKED:{
+                    return "PAUSE";
                 }
                 default: {
                     return "";

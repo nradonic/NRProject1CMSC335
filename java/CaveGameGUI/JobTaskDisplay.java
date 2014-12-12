@@ -4,6 +4,7 @@ import DataTree.Cave;
 import DataTree.GameElement;
 import DataTree.Job;
 import DataTree.JobState;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -13,6 +14,8 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -70,17 +73,24 @@ class JobTaskDisplay extends JFrame implements TableModel {
         jt.getModel().addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
-                    System.out.println("Interrupt e"+e.toString());
-                    int col = e.getColumn();
-                    int row = e.getFirstRow();
-                    System.out.printf("\ntable changed Row: %d Column: %d\n", row, col);
+                System.out.println("Interrupt e"+e.toString());
+                int col = e.getColumn();
+                int row = e.getFirstRow();
+                System.out.printf("\ntable changed Row: %d Column: %d\n", row, col);
             }
         });
         JScrollPane jsp = new JScrollPane(jt);
         jsp.setPreferredSize(new Dimension(700, 500));
         jsp.setBorder(BorderFactory.createTitledBorder("Task Status"));
 
-        this.getContentPane().add(jsp);
+        JPanel jpAll = new JPanel();
+        jpAll.setLayout(new BoxLayout(jpAll, BoxLayout.Y_AXIS));
+        JPanel jp = getButtonPanel();
+        jpAll.add(jp);
+        jpAll.add(jsp);
+
+        this.getContentPane().add(jpAll);
+
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.pack();
         this.setVisible(true);
@@ -128,7 +138,7 @@ class JobTaskDisplay extends JFrame implements TableModel {
                     super.mouseClicked(e);
                     int buttonRow = ((CustomJButtonRenderer)e.getSource()).getRow();
                     System.out.printf("Mouse Event RUN: row %d\n", buttonRow);
-                    startJob(buttonRow);
+                    runJob(buttonRow);
                 }
             });
             rowOfCells.add(RUNBUTTON, cjbrr);
@@ -154,44 +164,40 @@ class JobTaskDisplay extends JFrame implements TableModel {
         }
     }
 
-    void startJob(int rowIndex){
+    void runJob(int rowIndex){
         rowOfCells = (ArrayList)columnOfCells.get(rowIndex);
         Job job = (Job) rowOfCells.get(JOB);
+        Thread thread = new Thread(job);
+        rowOfCells.set(THREAD, thread);  //store current thread information
+
         Integer creatureID = job.getCreatureID();
-        lock.lock();
-        {
-            Boolean creatureBusy = creatureIDs.get(creatureID);
+        JobState jobState = job.getJobState();
 
-            JobState jobState = job.getJobState();
-
-            Thread thread;
-            if (rowOfCells.get(THREAD) == null || jobState == JobState.CANCELLED) {
-                thread = new Thread((Job) rowOfCells.get(JOB));
-                rowOfCells.add(THREAD, thread);
-            } else {
-                thread = (Thread) rowOfCells.get(THREAD);
-            }
-
-            if (jobState != JobState.RUNNING && jobState != JobState.FINISHED) {
-                thread.start();
-            }
+        if(jobState == JobState.NEW||
+                jobState == JobState.PAUSED ||
+                jobState == JobState.CANCELLED){
+            thread.start();
         }
-    }
-
-    public void pauseJob(int rowIndex){
-        rowOfCells = (ArrayList)columnOfCells.get(rowIndex);
-        Job job = (Job) rowOfCells.get(JOB);
-        Thread thread = (Thread) rowOfCells.get(THREAD);
-        job.pause();
-        thread.interrupt();
+        repaint();
     }
 
     void cancelJob(int rowIndex){
         rowOfCells = (ArrayList)columnOfCells.get(rowIndex);
         Job job = (Job) rowOfCells.get(JOB);
         Thread thread = (Thread) rowOfCells.get(THREAD);
-        job.cancel();
-        thread.interrupt();
+
+        JobState jobState = job.getJobState();
+        if(jobState == JobState.RUNNING){
+            job.pause();
+            thread.interrupt();
+        } else if(jobState == JobState.PAUSED) {
+            job.cancel();
+        } else if(jobState == JobState.BLOCKED) {
+            job.pause();
+        } else if (jobState == JobState.NEEDSRESOURCES){
+            job.cancel();
+        }
+        repaint();
     }
 
 
@@ -268,9 +274,9 @@ class JobTaskDisplay extends JFrame implements TableModel {
         System.out.println(aValue + " setValueAt row: " + rowIndex + "  columnIndex: "+columnIndex);
     }
 
-   @Override
-   public void addTableModelListener(TableModelListener l) {
-       // System.out.println("\naddTableModelListener Interrupt l "+l.toString()+"\n");
+    @Override
+    public void addTableModelListener(TableModelListener l) {
+        // System.out.println("\naddTableModelListener Interrupt l "+l.toString()+"\n");
     }
 
     @Override
@@ -278,5 +284,28 @@ class JobTaskDisplay extends JFrame implements TableModel {
 
     }
 
+    JPanel getButtonPanel() {
+        JButton jbstartAll = new JButton ("Start All Jobs");
+
+        JPanel jp = new JPanel ();
+        jp.setLayout(new FlowLayout());
+
+        jp.add (jbstartAll);
+        jp.setMaximumSize(new Dimension(1000, 50));
+        jbstartAll.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                startAllJobs();
+            } // end required method
+        } // end local definition of inner class
+        ); // the anonymous inner class
+
+        return jp;
+    }
+
+    void startAllJobs(){
+        for(int i =0; i<columnOfCells.size(); i++){
+            runJob(i);
+        }
+    }
 
 }

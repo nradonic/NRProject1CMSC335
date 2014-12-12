@@ -32,14 +32,13 @@ class CustomButtonEditor implements TableCellEditor {
     @Override
     public Object getCellEditorValue() {
 
-        System.out.println("CustomButtonEditor:getCellEditorValue");
+        //System.out.println("CustomButtonEditor:getCellEditorValue");
         return null;
     }
 
     @Override
     public boolean isCellEditable(EventObject anEvent) {
         //System.out.println("CustomButtonEditor:isCellEditable" + anEvent.toString());
-        //if (anEvent. == MouseEvent.MOUSE_CLICKED)
         return true;
     }
 
@@ -59,16 +58,17 @@ class CustomButtonEditor implements TableCellEditor {
 
     @Override
     public void cancelCellEditing() {
-        System.out.println("CustomButtonEditor:cancelCellEditing");
+        //System.out.println("CustomButtonEditor:cancelCellEditing");
     }
 
     @Override
     public void addCellEditorListener(CellEditorListener l) {
-//        System.out.println("CustomButtonEditor:addCellEditorListener");
+        //System.out.println("CustomButtonEditor:addCellEditorListener");
     }
 
     @Override
     public void removeCellEditorListener(CellEditorListener l) {
-
+        //System.out.println("CustomButtonEditor:removeCellEditorListener");
     }
+
 }
