@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by NickRadonic on 11/29/14.
@@ -39,6 +40,7 @@ class JobTaskDisplay extends JFrame implements TableModel {
     private final int JOB = 7;
     private final int THREAD = 8;
     private final HashMap<Integer, Boolean> creatureIDs;
+    private ReentrantLock lock = new ReentrantLock();
 
     JobTaskDisplay(Cave cave){
         this.cave = cave;
@@ -92,7 +94,7 @@ class JobTaskDisplay extends JFrame implements TableModel {
         return creatureIDs;
     }
 
-    private void createTableModel(){  //crates renderers for each column
+    private void createTableModel(){  //creates renderers for each column
 
         int rowCount = 0;
         for(GameElement jobGE : geV){
@@ -156,7 +158,9 @@ class JobTaskDisplay extends JFrame implements TableModel {
         rowOfCells = (ArrayList)columnOfCells.get(rowIndex);
         Job job = (Job) rowOfCells.get(JOB);
         Integer creatureID = job.getCreatureID();
-        synchronized (creatureIDs.get(creatureID)) {
+        lock.lock();
+        {
+            Boolean creatureBusy = creatureIDs.get(creatureID);
 
             JobState jobState = job.getJobState();
 
@@ -209,8 +213,8 @@ class JobTaskDisplay extends JFrame implements TableModel {
                 "Job ID",
                 "Job Time",
                 "Creature ID",
-                "Run/Pause",
-                "Cancel"
+                "Run",
+                "Pause/Cancel"
         };
 
         return columnNames[columnIndex];

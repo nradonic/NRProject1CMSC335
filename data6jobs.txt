@@ -29,8 +29,8 @@ a : 40101 :  Weapon : 20014 : Rapier
 // Jobs for creatures
 // measure time in seconds
 //    j:<index>:<name>:<creature index>:<time>[:<required artifact:type>:<number>]*
-j : 50051 :                Throw : 20014 :   3.00 : Stone : 1 : Potions : 1 : Wands : 1 : Weapons : 0
-j : 50052 :             Get Help : 20014 :   2.00 : Stone : 2 : Potions : 0 : Wands : 1 : Weapons : 2
-j : 50053 :                Swing : 20014 :  10.00 : Stone : 2 : Potions : 1 : Wands : 1 : Weapons : 1
-j : 50054 :                Swing : 20014 :   7.00 : Stone : 0 : Potions : 2 : Wands : 0 : Weapons : 2
-j : 50055 :                  Hit : 20014 :   3.00 : Stone : 1 : Potions : 0 : Wands : 0 : Weapons : 0
+j : 50051 :                Throw : 20014 :   30.00 : Stone : 1 : Potions : 1 : Wands : 1 : Weapons : 0
+j : 50052 :             Get Help : 20014 :   20.00 : Stone : 2 : Potions : 0 : Wands : 1 : Weapons : 2
+j : 50053 :                Swing : 20014 :  100.00 : Stone : 2 : Potions : 1 : Wands : 1 : Weapons : 1
+j : 50054 :                Swing : 20014 :   70.00 : Stone : 0 : Potions : 2 : Wands : 0 : Weapons : 2
+j : 50055 :                  Hit : 20014 :   30.00 : Stone : 1 : Potions : 0 : Wands : 0 : Weapons : 0
