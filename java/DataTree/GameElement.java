@@ -40,7 +40,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     private TreeMap<GameElement, Double> tmValue = new TreeMap<GameElement, Double>();
     private TreeMap<GameElement, Double> tmWeight = new TreeMap<GameElement, Double>();
 
-
+    //private GameElement parent;
 
     GameElement() {
     }
@@ -49,6 +49,14 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         gameLayer = layer;
         this.ID = ID;
 
+    }
+
+    public void setParentElement(GameElement ge){
+        parent = ge;
+    }
+
+    public GameElement getParent(){
+        return (GameElement)parent;
     }
 
     public GameLayer getGameLayer() {
@@ -116,6 +124,7 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         if (!result) {
             this.add(gameElement);
         }
+        gameElement.setParentElement(this);
         result = true;
         updateMaps(gameElement.gameLayer);
         return result;
@@ -636,13 +645,15 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
     }
 
     GameElement makeCopy(){
-        return new GameElement(gameLayer, getID());
+        GameElement ge = new GameElement(gameLayer, getID());
+        return ge;
     }
 
     private static void Koppy(GameElement source, GameElement destination, GameLayer searchLayer, String searchText){
         Enumeration<GameElement> geSource = source.children();
         while(geSource.hasMoreElements()){
             GameElement geS = geSource.nextElement();
+
             if(geS.gameLayer != searchLayer || geS.gameLayer == searchLayer && geS.toString().toLowerCase().contains(searchText.toLowerCase())) {
                 GameElement geTemp = geS.makeCopy();
                 destination.add(geTemp);
@@ -651,16 +662,65 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         }
     }
 
-    public Vector<GameElement> getTasks(){
+//    public Vector<GameElement> getTasks(){
+//        Vector<GameElement> geV = new Vector<>();
+//
+//        Vector<GameElement> ge = this.children;
+//        if (ge != null) {
+//            for (GameElement g : ge) {
+//                if (g.gameLayer == GameLayer.JOB){
+//                    geV.add(g);
+//                } if (g.gameLayer == GameLayer.CAVE || g.gameLayer == GameLayer.PARTY ||g.gameLayer == GameLayer.CREATURE ){
+//                    for(GameElement geSub:  g.getTasks()){
+//                        geV.add(geSub);
+//                    }
+//                }
+//            }
+//        }
+//        return geV;
+//    }
+
+    public Vector<Job> getTasks(){
+        Vector<Job> jobs = new Vector<>();
+        if(gameLayer == GameLayer.CAVE || gameLayer==GameLayer.PARTY || gameLayer==GameLayer.CREATURE) {
+            for(GameElement ge : getCreatureStuff(GameLayer.JOB)){
+                jobs.add((Job) ge);
+            };
+        } else {return null;}
+        return jobs;
+    }
+
+    public Vector<Artifact> getArtifacts(){
+        Vector<Artifact> artifacts = new Vector<>();
+        if(gameLayer == GameLayer.CAVE || gameLayer==GameLayer.PARTY || gameLayer==GameLayer.CREATURE) {
+            for(GameElement ge : getCreatureStuff(GameLayer.ARTIFACT)){
+                artifacts.add((Artifact) ge);
+            };
+        } else {return null;}
+        return artifacts;
+    }
+
+    public Vector<Treasure> getTreasures(){
+        Vector<Treasure> treasures = new Vector<>();
+        if(gameLayer == GameLayer.CAVE || gameLayer==GameLayer.PARTY || gameLayer==GameLayer.CREATURE) {
+            for(GameElement ge : getCreatureStuff(GameLayer.TREASURE)){
+                treasures.add((Treasure) ge);
+            };
+        } else {return null;}
+        return treasures;
+    }
+
+
+    public Vector<GameElement> getCreatureStuff(GameLayer gameLayerS){
         Vector<GameElement> geV = new Vector<>();
 
         Vector<GameElement> ge = this.children;
         if (ge != null) {
             for (GameElement g : ge) {
-                if (g.gameLayer == GameLayer.JOB){
+                if (g.gameLayer == gameLayerS){
                     geV.add(g);
                 } if (g.gameLayer == GameLayer.CAVE || g.gameLayer == GameLayer.PARTY ||g.gameLayer == GameLayer.CREATURE ){
-                    for(GameElement geSub:  g.getTasks()){
+                    for(GameElement geSub:  g.getCreatureStuff(gameLayerS)){
                         geV.add(geSub);
                     }
                 }
@@ -668,6 +728,30 @@ public class GameElement extends DefaultMutableTreeNode implements Comparable<Ga
         }
         return geV;
     }
+
+
+//    public Creature findCreatureFromID(int targetCreatureID){
+//        GameElement geV = new GameElement();
+//        Creature tempCreature = null;
+//        Vector<GameElement> ge = this.children;
+//
+//        if (ge != null) {
+//            for (GameElement g : ge) {
+//                if(tempCreature == null) {
+//                    if (g.gameLayer == GameLayer.CREATURE) {
+//                        tempCreature = (targetCreatureID == getID()) ? (Creature)this : null;
+//                    } else if (g.gameLayer == GameLayer.CAVE ||
+//                            g.gameLayer == GameLayer.PARTY) {
+//                        tempCreature = g.findCreatureFromID(targetCreatureID);
+//                    } else {
+//                        tempCreature = null;
+//                    }
+//                }
+//            }
+//        }
+//        return tempCreature;
+//    }
+
 
     protected void clearTreeMaps(){
         tmID = new TreeMap<GameElement, Integer>();

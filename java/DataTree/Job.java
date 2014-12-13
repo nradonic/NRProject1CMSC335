@@ -1,8 +1,11 @@
 package DataTree;
 
+import ResourcePool.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static java.lang.Thread.sleep;
@@ -14,9 +17,10 @@ public class Job extends GameElement implements Runnable {
 
     final String jobType;
     int creatureID = 0;
-    private HashMap<String, Double> resources = new HashMap<>();
+    private HashMap<String, Integer> resources = new HashMap<>();
 
     private JobState jobState = JobState.NEW;
+    private Creature creature;
 
     private final int MILLISPERSECOND = 1000;
 
@@ -29,11 +33,13 @@ public class Job extends GameElement implements Runnable {
     private static ReentrantLock lock = new ReentrantLock();
     private static HashMap<Integer, ReentrantLock> creaturesList = new HashMap<>();
 
-    public Job(int ID, String jobType, int creatureID, Double time, HashMap<String, Double> resources ){
+    private PartyResourcePools partyResourcePool;
+
+    public Job(int ID, String jobType, int creatureID, Double time, HashMap<String, Integer> resources ){
         super(GameLayer.JOB, ID);
         this.jobType = jobType;
         this.creatureID = creatureID;
-        this.resources = resources;
+        this.resources = copyHashMap(resources);
         this.time = time;
         synchronized (creaturesList){
             if(creaturesList.containsKey(creatureID) == false){
@@ -43,24 +49,50 @@ public class Job extends GameElement implements Runnable {
     }
 
     public void run(){
+        long intervalTime = 0;
+
+        while (!partyResourcePool.checkResources(copyHashMap(resources))){
+            jobState = JobState.NEEDSRESOURCES;
+            synchronized (new ReentrantLock()){
+                try{
+                    wait(100);
+                }catch(Exception ex){}
+            }
+        }
+        jobState = JobState.BLOCKED;
+        intervalTime = executionLoop();
+
+        if (elapsedTime >= time * MILLISPERSECOND) {
+            jobState = JobState.FINISHED;
+        } else if (pause == true) {
+            jobState = JobState.PAUSED;
+        } else if (cancel == true) {
+            jobState = JobState.CANCELLED;
+            elapsedTime = 0;
+        }
+        System.out.printf("Exit Creature %5d job %10s  Job ID %6d  Time %4.0f IntervalTime %8d Elapsed Time %5d Progress %3d Status %8s\n",
+                creatureID, getName(), getID(), time, intervalTime, elapsedTime, getProgress(), jobState.name());
+        //System.out.printf("Cancel: %B Pause %B JobStatus %S\n", cancel, pause, jobState.toString());
+    }
+
+    private HashMap<String, Integer>  copyHashMap(HashMap<String, Integer> hm){
+        HashMap<String, Integer> localResources = new HashMap<>();
+        for(String string : hm.keySet()){
+            localResources.put(string, hm.get(string));
+        }
+        return localResources;
+    }
+
+    public HashMap<String, Integer> getResourceList(){
+        return resources;
+    }
+
+    private long executionLoop() {
         long intervalTime = (long) (time * 1000) - elapsedTime;
         long localInterval = 0;
-        jobState = JobState.BLOCKED;
-            cancel = false;
-            pause = false;
-//        Boolean creatureIsActive = false;
-//        while(creatureIsActive == false) {
-//            synchronized (creaturesList) {
-//                //System.out.printf("Job Synch 1: Creature ID: %6d  Job ID: %6d creatures list value: %B\n",creatureID, this.getID(), creaturesList.get(creatureID));
-//                ReentrantLock rl = creaturesList.get(creatureID);
-//
-//                if(creaturesList.get(creatureID)) {
-//                    creaturesList.put(creatureID, Boolean.TRUE);
-//                    creatureIsActive = true;
-//                }
-//            }
-//            if(!creatureIsActive){try{Thread.sleep(100);} catch(Exception ex){};}
-//        }
+        cancel = false;
+        pause = false;
+
         ReentrantLock tempRL = creaturesList.get(creatureID);
         synchronized (tempRL){
             jobState = JobState.RUNNING;
@@ -89,22 +121,7 @@ public class Job extends GameElement implements Runnable {
             }
             System.out.printf("Exit block: Creature ID %6d job: %d exited  Elapsed(millisec): %d\n", creatureID, this.getID(), elapsedTime);
         }
-//        synchronized (creaturesList) {
-//            creaturesList.put(creatureID, Boolean.FALSE);
-//            creatureIsActive = false;
-//        }
-
-        if (elapsedTime >= time * MILLISPERSECOND) {
-            jobState = JobState.FINISHED;
-        } else if (pause == true) {
-            jobState = JobState.PAUSED;
-        } else if (cancel == true) {
-            jobState = JobState.CANCELLED;
-            elapsedTime = 0;
-        }
-        System.out.printf("Exit Creature %5d job %10s  Job ID %6d  Time %4.0f IntervalTime %8d Elapsed Time %5d Progress %3d Status %8s\n",
-                creatureID, getName(), getID(), time, intervalTime, elapsedTime, getProgress(), jobState.name());
-        System.out.printf("Cancel: %B Pause %B JobStatus %S\n", cancel, pause, jobState.toString());
+        return intervalTime;
     }
 
     public synchronized void pause(){
@@ -129,6 +146,11 @@ public class Job extends GameElement implements Runnable {
         }
     }
 
+    public void setResourcePool(PartyResourcePools partyResourcePool){
+
+        this.partyResourcePool = partyResourcePool;
+    }
+
     public int getID(){
         return ID;
     }
@@ -144,7 +166,7 @@ public class Job extends GameElement implements Runnable {
     public String toString(){
         String jobOutput = String.format("          j : %6d : %8s : %6d : %4.1f ", ID, jobType, creatureID, time);
 
-        for (Map.Entry<String, Double> me : resources.entrySet()){
+        for (Map.Entry<String, Integer> me : resources.entrySet()){
             jobOutput += String.format(": %8s : %4.1f", me.getKey(), me.getValue());
         }
         jobOutput += "\n";

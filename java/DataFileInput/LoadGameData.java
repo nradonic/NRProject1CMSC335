@@ -115,7 +115,7 @@ public class LoadGameData {
 
             if (s.trim().startsWith("j")) {
                 try {
-                    HashMap<String, Double> resources = new HashMap<>();
+                    HashMap<String, Integer> resources = new HashMap<>();
 
                     int ID = Integer.parseInt(attributes[1].trim());
                     String jobType = attributes[2].trim();
@@ -125,7 +125,7 @@ public class LoadGameData {
                     int fields = attributes.length;
                     for (int index = 5; fields - index > 2; index += 2){
                         String rez = attributes[index].trim();
-                        double quantity = Double.parseDouble(attributes[index+1].trim());
+                        Integer quantity = Integer.parseInt(attributes[index+1].trim());
                         resources.put(rez, quantity);
                     }
 

@@ -1,10 +1,7 @@
 package CaveGameGUI;
 
-import DataTree.Cave;
-import DataTree.GameElement;
-import DataTree.Job;
-import DataTree.JobState;
-import com.sun.org.apache.bcel.internal.generic.NEW;
+import DataTree.*;
+import ResourcePool.ResourcePool;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -26,7 +23,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 class JobTaskDisplay extends JFrame implements TableModel {
     private final Cave cave;
-    private final Vector<GameElement> geV;
+    private final Vector<Job> geV;
     private final int COLUMNCOUNT = 7;
 
     private ArrayList rowOfCells = new ArrayList(COLUMNCOUNT+1);
@@ -45,12 +42,16 @@ class JobTaskDisplay extends JFrame implements TableModel {
     private final HashMap<Integer, Boolean> creatureIDs;
     private ReentrantLock lock = new ReentrantLock();
 
+    private ResourcePool caveResourcePool;
+
     JobTaskDisplay(Cave cave){
         this.cave = cave;
         this.setTitle("Sorcerer's Cave Job Display");
         geV = cave.getTasks();
         createTableModel();
         creatureIDs = createCreatureSet(geV);
+
+        caveResourcePool = new ResourcePool(cave);
 
         JTable jt = new JTable(this){
             public TableCellRenderer getCellRenderer(int row, int column){
@@ -96,10 +97,10 @@ class JobTaskDisplay extends JFrame implements TableModel {
         this.setVisible(true);
     }
 
-    private  HashMap<Integer, Boolean> createCreatureSet(Vector<GameElement> geV){
+    private  HashMap<Integer, Boolean> createCreatureSet(Vector<Job> geV){
         HashMap<Integer, Boolean> creatureIDs = new  HashMap<Integer, Boolean>();
-        for(GameElement ge: geV){
-            creatureIDs.put(((Job) ge).getCreatureID(), new Boolean(false));
+        for(Job ge: geV){
+            creatureIDs.put( ge.getCreatureID(), new Boolean(false));
         }
         return creatureIDs;
     }
@@ -107,10 +108,9 @@ class JobTaskDisplay extends JFrame implements TableModel {
     private void createTableModel(){  //creates renderers for each column
 
         int rowCount = 0;
-        for(GameElement jobGE : geV){
+        for(Job job : geV){
             rowOfCells = new ArrayList(6);
 
-            Job job = (Job)jobGE;
             double progress = job.getProgress();
             ProgressRenderer pr = new ProgressRenderer(job, rowCount, PROGRESSBAR );
             pr.setMinimum(0);
@@ -167,6 +167,8 @@ class JobTaskDisplay extends JFrame implements TableModel {
     void runJob(int rowIndex){
         rowOfCells = (ArrayList)columnOfCells.get(rowIndex);
         Job job = (Job) rowOfCells.get(JOB);
+        job.setResourcePool(caveResourcePool.getPartyResourcePool(job));
+
         Thread thread = new Thread(job);
         rowOfCells.set(THREAD, thread);  //store current thread information
 
@@ -306,6 +308,11 @@ class JobTaskDisplay extends JFrame implements TableModel {
         for(int i =0; i<columnOfCells.size(); i++){
             runJob(i);
         }
+    }
+
+    static Boolean checkJobResources(Job jobForCheck){
+
+        return true;
     }
 
 }

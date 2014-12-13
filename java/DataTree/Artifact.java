@@ -55,7 +55,7 @@ public class Artifact extends GameElement{
         this.creatureID = creatureID;
     }
 
-    public String getTreasureType(){
+    public String getArtifactType(){
         return artifactType;
     }
 

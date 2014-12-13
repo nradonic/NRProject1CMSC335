@@ -93,4 +93,7 @@ public class Cave extends GameElement{
         clearTreeMaps();
     }
 
+    public Vector<Party> getParties(){
+        return this.children;
+    }
 }
