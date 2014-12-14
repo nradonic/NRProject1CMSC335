@@ -50,12 +50,12 @@ public class Job extends GameElement implements Runnable {
 
     public void run(){
         long intervalTime = 0;
-
-        while (!partyResourcePool.checkResources(copyHashMap(resources))){
+        HashMap<String, Integer> tempResources = copyHashMap(resources);
+        while (!partyResourcePool.checkResources(tempResources)){
             jobState = JobState.NEEDSRESOURCES;
             synchronized (new ReentrantLock()){
                 try{
-                    wait(100);
+                    sleep(100);
                 }catch(Exception ex){}
             }
         }
@@ -70,6 +70,7 @@ public class Job extends GameElement implements Runnable {
             jobState = JobState.CANCELLED;
             elapsedTime = 0;
         }
+        partyResourcePool.releaseResources(tempResources);
         System.out.printf("Exit Creature %5d job %10s  Job ID %6d  Time %4.0f IntervalTime %8d Elapsed Time %5d Progress %3d Status %8s\n",
                 creatureID, getName(), getID(), time, intervalTime, elapsedTime, getProgress(), jobState.name());
         //System.out.printf("Cancel: %B Pause %B JobStatus %S\n", cancel, pause, jobState.toString());

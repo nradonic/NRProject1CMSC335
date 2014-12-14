@@ -65,10 +65,6 @@ public class PartyResourcePools {
         while (it.hasNext() && hasResources) {
             Map.Entry pairs = (Map.Entry) it.next();
             nameOfResource = (String) pairs.getKey();
-            if(nameOfResource.endsWith("s") && nameOfResource.length()>1){
-                nameOfResource = nameOfResource.substring(0,nameOfResource.length()-1);
-            }
-
             quantityOfResourceNeeded = (Integer) pairs.getValue();
 
             Integer quantityInInventory = artifactInventory.get(nameOfResource);
@@ -108,4 +104,25 @@ public class PartyResourcePools {
         }
         return hasResources;
     }
-}
+
+    public synchronized void releaseResources(HashMap<String, Integer> resourcesFromJob){
+        String nameOfResource;
+        Integer quantityOfResourceNeeded;
+
+        Iterator it = resourcesFromJob.entrySet().iterator();
+        // move inventory
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry) it.next();
+            nameOfResource = (String) pairs.getKey();
+            quantityOfResourceNeeded = (Integer) pairs.getValue();
+
+            Integer quantityBusy = artifactInventoryBusy.get(nameOfResource);
+            if (quantityOfResourceNeeded > 0) {
+                Integer leftOverArtifacts = quantityBusy - quantityOfResourceNeeded;
+                artifactInventoryBusy.put(nameOfResource, leftOverArtifacts);
+                artifactInventory.put(nameOfResource, artifactInventory.get(nameOfResource)+quantityOfResourceNeeded);
+            }
+        }
+    }
+};
+

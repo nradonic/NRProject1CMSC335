@@ -7,18 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="340704cb-7ac3-486f-95d0-d147ef8a65b8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/ResourcePool/ResourcePool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/DataTree/Artifact.class" afterPath="$PROJECT_DIR$/target/classes/DataTree/Artifact.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/DataTree/Cave.class" afterPath="$PROJECT_DIR$/target/classes/DataTree/Cave.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/DataTree/GameElement$1.class" afterPath="$PROJECT_DIR$/target/classes/DataTree/GameElement$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/DataTree/GameElement.class" afterPath="$PROJECT_DIR$/target/classes/DataTree/GameElement.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/DataTree/Artifact.java" afterPath="$PROJECT_DIR$/java/DataTree/Artifact.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/DataTree/Cave.java" afterPath="$PROJECT_DIR$/java/DataTree/Cave.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/DataTree/GameElement.java" afterPath="$PROJECT_DIR$/java/DataTree/GameElement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/DataFileInput/LoadGameData.class" afterPath="$PROJECT_DIR$/target/classes/DataFileInput/LoadGameData.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/DataTree/Job.java" afterPath="$PROJECT_DIR$/java/DataTree/Job.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/CaveGameGUI/JobTaskDisplay.java" afterPath="$PROJECT_DIR$/java/CaveGameGUI/JobTaskDisplay.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/DataFileInput/LoadGameData.java" afterPath="$PROJECT_DIR$/java/DataFileInput/LoadGameData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java" afterPath="$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NRProject1CMSC335.iws" />
@@ -59,12 +51,12 @@
             <file leaf-file-name="Job.java" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/java/DataTree/Job.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.28" vertical-offset="364" max-vertical-offset="2535">
+                  <state vertical-scroll-proportion="0.28" vertical-offset="364" max-vertical-offset="2548">
                     <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
                     <folding>
                       <element signature="imports" expanded="true" />
-                      <element signature="e#2881#2882#0" expanded="true" />
-                      <element signature="e#2913#2914#0" expanded="true" />
+                      <element signature="e#3004#3005#0" expanded="true" />
+                      <element signature="e#3036#3037#0" expanded="true" />
                     </folding>
                   </state>
                 </provider>
@@ -80,22 +72,24 @@
     <favorites_list name="NRProject1CMSC335" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.74920636">
+    <splitter split-orientation="horizontal" split-proportion="0.7828877">
       <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.4375446">
+        <splitter split-orientation="horizontal" split-proportion="0.4125683">
           <split-first>
             <leaf>
               <file leaf-file-name="Job.java" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/java/DataTree/Job.java">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.33261338" vertical-offset="160" max-vertical-offset="1443">
-                      <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+                    <state vertical-scroll-proportion="0.0841639" vertical-offset="249" max-vertical-offset="1482">
+                      <caret line="35" column="49" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
                       <folding>
                         <element signature="docComment;class#Job#0" expanded="false" />
                         <element signature="method#Job#0;class#Job#0" expanded="false" />
+                        <element signature="e#3004#3005#0" expanded="true" />
+                        <element signature="e#3036#3037#0" expanded="true" />
                         <element signature="method#executionLoop#0;class#Job#0" expanded="false" />
-                        <element signature="e#3818#3966#0" expanded="false" />
-                        <element signature="e#4563#4597#0" expanded="false" />
+                        <element signature="e#3941#4089#0" expanded="false" />
+                        <element signature="e#4686#4720#0" expanded="false" />
                         <element signature="method#pause#0;class#Job#0" expanded="false" />
                         <element signature="method#cancel#0;class#Job#0" expanded="false" />
                         <element signature="method#getProgress#0;class#Job#0" expanded="false" />
@@ -136,7 +130,7 @@
               <file leaf-file-name="PartyResourcePools.java" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="604" max-vertical-offset="1521">
+                    <state vertical-scroll-proportion="0.0" vertical-offset="604" max-vertical-offset="1742">
                       <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
                       <folding>
                         <element signature="imports" expanded="true" />
@@ -162,8 +156,8 @@
               <file leaf-file-name="PartyResourcePools.java" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.56302524" vertical-offset="231" max-vertical-offset="1183">
-                      <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+                    <state vertical-scroll-proportion="0.94079655" vertical-offset="439" max-vertical-offset="1404">
+                      <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
                       <folding>
                         <element signature="imports" expanded="true" />
                         <element signature="method#PartyResourcePools#0;class#PartyResourcePools#0" expanded="false" />
@@ -189,6 +183,26 @@
                   <provider selected="true" editor-type-id="text-editor">
                     <state vertical-scroll-proportion="0.0" vertical-offset="2797" max-vertical-offset="4368">
                       <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="data6jobs.txt" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/data6jobs.txt">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
+                      <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="LoadGameData.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/java/DataFileInput/LoadGameData.java">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1846">
+                      <caret line="127" column="77" selection-start-line="127" selection-start-column="77" selection-end-line="127" selection-end-column="77" />
                       <folding />
                     </state>
                   </provider>
@@ -281,7 +295,7 @@
           <file leaf-file-name="ResourcePool.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/java/ResourcePool/ResourcePool.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.4642857" vertical-offset="0" max-vertical-offset="952">
+                <state vertical-scroll-proportion="0.4757804" vertical-offset="0" max-vertical-offset="929">
                   <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -524,9 +538,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-1" />
-    <option name="y" value="106" />
+    <option name="y" value="129" />
     <option name="width" value="1912" />
-    <option name="height" value="1085" />
+    <option name="height" value="1062" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1426,7 +1440,7 @@
       <workItem from="1418192775387" duration="9690000" />
       <workItem from="1418322612722" duration="23681000" />
       <workItem from="1418365598591" duration="31034000" />
-      <workItem from="1418486308335" duration="20992000" />
+      <workItem from="1418486308335" duration="24413000" />
     </task>
     <task id="LOCAL-00001" summary="Intermediate state, can show data, but can't show all JTrees at once&#10;">
       <created>1415998881552</created>
@@ -1632,11 +1646,17 @@
       <option name="project" value="LOCAL" />
       <updated>1418418879609</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="intermediate stage, some resource lookup and sequestration.">
+      <created>1418511997874</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1418511997874</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="519022000" />
+    <option name="totallyTimeSpent" value="522443000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1659,8 +1679,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="106" width="1912" height="1085" extended-state="0" />
-    <editor active="false" />
+    <frame x="-1" y="129" width="1912" height="1062" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1744,7 +1764,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="TreeMap sorts Parties now on ID and Name - yahoo&#10;" />
     <MESSAGE value="Revised filter button display. Does not sort any more." />
     <MESSAGE value="Got the data to sort - the comparison uses internal values to the compared elements....needed to set up a static variable." />
     <MESSAGE value="can now sort on all fields in all game levels" />
@@ -1769,7 +1788,8 @@
     <MESSAGE value="Improved GUI - fixed font in JTree display, button to reopen taskWindow" />
     <MESSAGE value="Starting to put in common locks for thread blocking - need to add conditions for creature ID. Each job was also a separate task, therefore they were not cooperating on the locks until the lock was made static." />
     <MESSAGE value="threads lock - with one thread per creature ID. imported dataZ08.txt and dataZ09.txt test files. Have START ALL JOBS button on jobs display." />
-    <option name="LAST_COMMIT_MESSAGE" value="threads lock - with one thread per creature ID. imported dataZ08.txt and dataZ09.txt test files. Have START ALL JOBS button on jobs display." />
+    <MESSAGE value="intermediate stage, some resource lookup and sequestration." />
+    <option name="LAST_COMMIT_MESSAGE" value="intermediate stage, some resource lookup and sequestration." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1788,13 +1808,13 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/java/DataTree/Job.java</url>
-          <line>132</line>
+          <line>133</line>
           <properties />
           <option name="timeStamp" value="171" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/java/DataTree/Job.java</url>
-          <line>146</line>
+          <line>147</line>
           <properties />
           <option name="timeStamp" value="172" />
         </line-breakpoint>
@@ -1804,11 +1824,23 @@
           <properties />
           <option name="timeStamp" value="180" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java</url>
+          <line>111</line>
+          <properties />
+          <option name="timeStamp" value="207" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java</url>
+          <line>60</line>
+          <properties />
+          <option name="timeStamp" value="209" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="207" />
+      <option name="time" value="210" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2161,22 +2193,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data6jobs.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/java/DataFileInput/LoadGameData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.153847" vertical-offset="984" max-vertical-offset="1768">
-          <caret line="117" column="73" selection-start-line="117" selection-start-column="73" selection-end-line="117" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/DataTree/Artifact.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="741">
@@ -2224,7 +2240,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/java/ResourcePool/ResourcePool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4642857" vertical-offset="0" max-vertical-offset="952">
+        <state vertical-scroll-proportion="0.4757804" vertical-offset="0" max-vertical-offset="929">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2236,14 +2252,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="403">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data6.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2797" max-vertical-offset="4368">
-          <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -2282,30 +2290,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java">
+    <entry file="file://$PROJECT_DIR$/java/DataFileInput/LoadGameData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="604" max-vertical-offset="1521">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1846">
+          <caret line="127" column="77" selection-start-line="127" selection-start-column="77" selection-end-line="127" selection-end-column="77" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/java/DataTree/Job.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33261338" vertical-offset="160" max-vertical-offset="1443">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0841639" vertical-offset="249" max-vertical-offset="1482">
+          <caret line="35" column="49" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
           <folding>
             <element signature="docComment;class#Job#0" expanded="false" />
             <element signature="method#Job#0;class#Job#0" expanded="false" />
+            <element signature="e#3004#3005#0" expanded="true" />
+            <element signature="e#3036#3037#0" expanded="true" />
             <element signature="method#executionLoop#0;class#Job#0" expanded="false" />
-            <element signature="e#3818#3966#0" expanded="false" />
-            <element signature="e#4563#4597#0" expanded="false" />
+            <element signature="e#3941#4089#0" expanded="false" />
+            <element signature="e#4686#4720#0" expanded="false" />
             <element signature="method#pause#0;class#Job#0" expanded="false" />
             <element signature="method#cancel#0;class#Job#0" expanded="false" />
             <element signature="method#getProgress#0;class#Job#0" expanded="false" />
             <element signature="method#getTime#0;class#Job#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data6.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2797" max-vertical-offset="4368">
+          <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data6jobs.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.94079655" vertical-offset="439" max-vertical-offset="1404">
+          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#PartyResourcePools#0;class#PartyResourcePools#0" expanded="false" />
+            <element signature="method#makeInventoryOfArtifacts#0;class#PartyResourcePools#0" expanded="false" />
+            <element signature="method#makeInventoryOfTreasures#0;class#PartyResourcePools#0" expanded="false" />
           </folding>
         </state>
       </provider>

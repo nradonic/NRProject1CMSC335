@@ -125,6 +125,12 @@ public class LoadGameData {
                     int fields = attributes.length;
                     for (int index = 5; fields - index > 2; index += 2){
                         String rez = attributes[index].trim();
+                        // Data cleaning for later standard lookup of strings
+                        if(rez.compareToIgnoreCase("stones")==0){rez="Stone";}
+                        if(rez.compareToIgnoreCase("weapons")==0){rez="Weapon";}
+                        if(rez.compareToIgnoreCase("potions")==0){rez="Potion";}
+                        if(rez.compareToIgnoreCase("wands")==0){rez="Wand";}
+
                         Integer quantity = Integer.parseInt(attributes[index+1].trim());
                         resources.put(rez, quantity);
                     }
