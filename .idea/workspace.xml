@@ -6,11 +6,54 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="340704cb-7ac3-486f-95d0-d147ef8a65b8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/DataFileInput/LoadGameData.class" afterPath="$PROJECT_DIR$/target/classes/DataFileInput/LoadGameData.class" />
+    <list default="true" id="340704cb-7ac3-486f-95d0-d147ef8a65b8" name="Default" comment="Threads share resources in common pool. Keeps track of artifact that are uncommitted, and artifacts that are busy.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/java/Project4UMLDiagram.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/Artifact.html" afterPath="$PROJECT_DIR$/DataTree/Artifact.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/Cave.html" afterPath="$PROJECT_DIR$/DataTree/Cave.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/Creature.html" afterPath="$PROJECT_DIR$/DataTree/Creature.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/FilterField.html" afterPath="$PROJECT_DIR$/DataTree/FilterField.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CaveGameGUI/GameControlWindow.html" afterPath="$PROJECT_DIR$/CaveGameGUI/GameControlWindow.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/GameElement.html" afterPath="$PROJECT_DIR$/DataTree/GameElement.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/GameLayer.html" afterPath="$PROJECT_DIR$/DataTree/GameLayer.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/DataTree/Job.java" afterPath="$PROJECT_DIR$/java/DataTree/Job.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/DataFileInput/LoadGameData.java" afterPath="$PROJECT_DIR$/java/DataFileInput/LoadGameData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java" afterPath="$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataFileInput/LoadGameData.html" afterPath="$PROJECT_DIR$/DataFileInput/LoadGameData.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/Party.html" afterPath="$PROJECT_DIR$/DataTree/Party.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/Treasure.html" afterPath="$PROJECT_DIR$/DataTree/Treasure.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/allclasses-frame.html" afterPath="$PROJECT_DIR$/allclasses-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/allclasses-noframe.html" afterPath="$PROJECT_DIR$/allclasses-noframe.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constant-values.html" afterPath="$PROJECT_DIR$/constant-values.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deprecated-list.html" afterPath="$PROJECT_DIR$/deprecated-list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/help-doc.html" afterPath="$PROJECT_DIR$/help-doc.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-1.html" afterPath="$PROJECT_DIR$/index-files/index-1.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-10.html" afterPath="$PROJECT_DIR$/index-files/index-10.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-11.html" afterPath="$PROJECT_DIR$/index-files/index-11.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-12.html" afterPath="$PROJECT_DIR$/index-files/index-12.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-2.html" afterPath="$PROJECT_DIR$/index-files/index-2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-3.html" afterPath="$PROJECT_DIR$/index-files/index-3.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-4.html" afterPath="$PROJECT_DIR$/index-files/index-4.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-5.html" afterPath="$PROJECT_DIR$/index-files/index-5.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-6.html" afterPath="$PROJECT_DIR$/index-files/index-6.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-7.html" afterPath="$PROJECT_DIR$/index-files/index-7.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-8.html" afterPath="$PROJECT_DIR$/index-files/index-8.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index-files/index-9.html" afterPath="$PROJECT_DIR$/index-files/index-9.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/overview-frame.html" afterPath="$PROJECT_DIR$/overview-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/overview-summary.html" afterPath="$PROJECT_DIR$/overview-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/overview-tree.html" afterPath="$PROJECT_DIR$/overview-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CaveGameGUI/package-frame.html" afterPath="$PROJECT_DIR$/CaveGameGUI/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataFileInput/package-frame.html" afterPath="$PROJECT_DIR$/DataFileInput/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/package-frame.html" afterPath="$PROJECT_DIR$/DataTree/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameControl/package-frame.html" afterPath="$PROJECT_DIR$/GameControl/package-frame.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-list" afterPath="$PROJECT_DIR$/package-list" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CaveGameGUI/package-summary.html" afterPath="$PROJECT_DIR$/CaveGameGUI/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataFileInput/package-summary.html" afterPath="$PROJECT_DIR$/DataFileInput/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/package-summary.html" afterPath="$PROJECT_DIR$/DataTree/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameControl/package-summary.html" afterPath="$PROJECT_DIR$/GameControl/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CaveGameGUI/package-tree.html" afterPath="$PROJECT_DIR$/CaveGameGUI/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataFileInput/package-tree.html" afterPath="$PROJECT_DIR$/DataFileInput/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataTree/package-tree.html" afterPath="$PROJECT_DIR$/DataTree/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameControl/package-tree.html" afterPath="$PROJECT_DIR$/GameControl/package-tree.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serialized-form.html" afterPath="$PROJECT_DIR$/serialized-form.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NRProject1CMSC335.iws" />
@@ -43,270 +86,141 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="Job.java" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/java/DataTree/Job.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.28" vertical-offset="364" max-vertical-offset="2548">
-                    <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                      <element signature="e#3004#3005#0" expanded="true" />
-                      <element signature="e#3036#3037#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="NRProject1CMSC335" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.7828877">
-      <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.4125683">
-          <split-first>
-            <leaf>
-              <file leaf-file-name="Job.java" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/java/DataTree/Job.java">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0841639" vertical-offset="249" max-vertical-offset="1482">
-                      <caret line="35" column="49" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
-                      <folding>
-                        <element signature="docComment;class#Job#0" expanded="false" />
-                        <element signature="method#Job#0;class#Job#0" expanded="false" />
-                        <element signature="e#3004#3005#0" expanded="true" />
-                        <element signature="e#3036#3037#0" expanded="true" />
-                        <element signature="method#executionLoop#0;class#Job#0" expanded="false" />
-                        <element signature="e#3941#4089#0" expanded="false" />
-                        <element signature="e#4686#4720#0" expanded="false" />
-                        <element signature="method#pause#0;class#Job#0" expanded="false" />
-                        <element signature="method#cancel#0;class#Job#0" expanded="false" />
-                        <element signature="method#getProgress#0;class#Job#0" expanded="false" />
-                        <element signature="method#getTime#0;class#Job#0" expanded="false" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="JobTaskDisplay.java" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/java/CaveGameGUI/JobTaskDisplay.java">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="3120">
-                      <caret line="169" column="0" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
-                      <folding>
-                        <element signature="imports" expanded="true" />
-                        <element signature="docComment;class#JobTaskDisplay#0" expanded="false" />
-                        <element signature="method#getCellRenderer#0;class#1698:2425" expanded="false" />
-                        <element signature="class#5003:5380" expanded="false" />
-                        <element signature="method#mouseClicked#0;class#5003:5380" expanded="false" />
-                        <element signature="class#5567:5950" expanded="false" />
-                        <element signature="method#mouseClicked#0;class#5567:5950" expanded="false" />
-                        <element signature="method#cancelJob#0;class#JobTaskDisplay#0" expanded="false" />
-                        <element signature="method#getColumnName#0;class#JobTaskDisplay#0" expanded="false" />
-                        <element signature="method#getColumnClass#0;class#JobTaskDisplay#0" expanded="false" />
-                        <element signature="method#isCellEditable#0;class#JobTaskDisplay#0" expanded="false" />
-                        <element signature="e#8148#8197#0" expanded="false" />
-                        <element signature="method#setValueAt#0;class#JobTaskDisplay#0" expanded="false" />
-                        <element signature="method#addTableModelListener#0;class#JobTaskDisplay#0" expanded="false" />
-                        <element signature="method#removeTableModelListener#0;class#JobTaskDisplay#0" expanded="false" />
-                        <element signature="method#getButtonPanel#0;class#JobTaskDisplay#0" expanded="false" />
-                        <element signature="class#10000:10154" expanded="false" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="PartyResourcePools.java" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="604" max-vertical-offset="1742">
-                      <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-                      <folding>
-                        <element signature="imports" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="CaveGame.java" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/java/GameControl/CaveGame.java">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="403">
-                      <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-first>
-          <split-second>
-            <leaf>
-              <file leaf-file-name="PartyResourcePools.java" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.94079655" vertical-offset="439" max-vertical-offset="1404">
-                      <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-                      <folding>
-                        <element signature="imports" expanded="true" />
-                        <element signature="method#PartyResourcePools#0;class#PartyResourcePools#0" expanded="false" />
-                        <element signature="method#makeInventoryOfArtifacts#0;class#PartyResourcePools#0" expanded="false" />
-                        <element signature="method#makeInventoryOfTreasures#0;class#PartyResourcePools#0" expanded="false" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="Thread.java" pinned="false" current-in-tab="false">
-                <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/src.zip!/java/lang/Thread.java">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="8703" max-vertical-offset="25532">
-                      <caret line="744" column="0" selection-start-line="744" selection-start-column="0" selection-end-line="745" selection-end-column="0" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="data6.txt" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/data6.txt">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="2797" max-vertical-offset="4368">
-                      <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="data6jobs.txt" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/data6jobs.txt">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
-                      <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="LoadGameData.java" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/java/DataFileInput/LoadGameData.java">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1846">
-                      <caret line="127" column="77" selection-start-line="127" selection-start-column="77" selection-end-line="127" selection-end-column="77" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-second>
-        </splitter>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="GameControlWindow.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/java/CaveGameGUI/GameControlWindow.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="988">
-                  <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
-                  <folding>
-                    <element signature="docComment;class#GameControlWindow#0" expanded="false" />
-                    <element signature="method#GameControlWindow#0;class#GameControlWindow#0" expanded="false" />
-                    <element signature="method#setupDisplayPanels#0;class#GameControlWindow#0" expanded="false" />
-                    <element signature="method#setupButtons#0;class#GameControlWindow#0" expanded="false" />
-                    <element signature="class#4444:4808" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#4444:4808" expanded="false" />
-                    <element signature="class#4925:5371" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#4925:5371" expanded="false" />
-                    <element signature="class#5487:5981" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#5487:5981" expanded="false" />
-                    <element signature="class#6020:6189" expanded="false" />
-                    <element signature="method#loadFileData#0;class#GameControlWindow#0" expanded="false" />
-                    <element signature="method#searchGame#0;class#GameControlWindow#0" expanded="false" />
-                    <element signature="method#sortGameLayerButtons#0;class#GameControlWindow#0" expanded="false" />
-                    <element signature="class#9086:9304" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#9086:9304" expanded="false" />
-                    <element signature="class#9403:9624" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#9403:9624" expanded="false" />
-                    <element signature="class#9720:9940" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#9720:9940" expanded="false" />
-                    <element signature="class#10036:10256" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#10036:10256" expanded="false" />
-                    <element signature="class#10347:10562" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#10347:10562" expanded="false" />
-                    <element signature="method#selectGameLayer#0;class#GameControlWindow#0" expanded="false" />
-                    <element signature="method#loadSortFieldButtons#0;class#GameControlWindow#0" expanded="false" />
-                    <element signature="method#generateRadioButtonFF#0;class#GameControlWindow#0" expanded="false" />
-                    <element signature="class#14476:15291" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#14476:15291" expanded="false" />
-                    <element signature="method#updateFiltering#0;class#GameControlWindow#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="GameElement.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/java/DataTree/GameElement.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="2587">
-                  <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-                  <folding>
-                    <element signature="docComment;class#GameElement#0" expanded="false" />
-                    <element signature="method#GameElement#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#GameElement#1;class#GameElement#0" expanded="false" />
-                    <element signature="e#1966#1967#0" expanded="true" />
-                    <element signature="method#addGameElementTree#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#addGeUpdateMaps#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#insertIfDuplicateGameElement#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#recursiveInsertion#0;class#GameElement#0" expanded="false" />
-                    <element signature="e#5227#5296#0" expanded="false" />
-                    <element signature="method#toString#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#treeList#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#modifyDisplayJTree#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#recursivelyUpdateDisplayJTree#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#getGameElementsSetForCave#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#getGameElementsSetForParty#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#getGameElementsSetForCreature#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#updateMaps#0;class#GameElement#0" expanded="false" />
-                    <element signature="e#17368#17419#0" expanded="false" />
-                    <element signature="method#compareTo#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#compareAtArtifactLevel#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#compareAtTreasureLevel#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#compareAtJobLevel#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#compareAtCreatureLevel#0;class#GameElement#0" expanded="false" />
-                    <element signature="method#compareAtPartyLevel#0;class#GameElement#0" expanded="false" />
-                    <element signature="e#27071#27134#0" expanded="false" />
-                    <element signature="method#clearTreeMaps#0;class#GameElement#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ResourcePool.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/java/ResourcePool/ResourcePool.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.4757804" vertical-offset="0" max-vertical-offset="929">
-                  <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="Job.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/DataTree/Job.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.9230769" vertical-offset="249" max-vertical-offset="1482">
+              <caret line="35" column="49" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
+              <folding>
+                <element signature="docComment;class#Job#0" expanded="false" />
+                <element signature="method#Job#0;class#Job#0" expanded="false" />
+                <element signature="e#3004#3005#0" expanded="true" />
+                <element signature="e#3036#3037#0" expanded="true" />
+                <element signature="method#executionLoop#0;class#Job#0" expanded="false" />
+                <element signature="e#3941#4089#0" expanded="false" />
+                <element signature="e#4686#4720#0" expanded="false" />
+                <element signature="method#pause#0;class#Job#0" expanded="false" />
+                <element signature="method#cancel#0;class#Job#0" expanded="false" />
+                <element signature="method#getProgress#0;class#Job#0" expanded="false" />
+                <element signature="method#getTime#0;class#Job#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameControlWindow.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/java/CaveGameGUI/GameControlWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.44716242" vertical-offset="687" max-vertical-offset="5473">
+              <caret line="96" column="67" selection-start-line="96" selection-start-column="67" selection-end-line="96" selection-end-column="67" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameElement.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/DataTree/GameElement.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="325" max-vertical-offset="9893">
+              <caret line="17" column="55" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="55" />
+              <folding>
+                <element signature="e#1924#1925#0" expanded="true" />
+                <element signature="e#1966#1967#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PartyResourcePools.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="356" max-vertical-offset="1404">
+              <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#PartyResourcePools#0;class#PartyResourcePools#0" expanded="false" />
+                <element signature="method#makeInventoryOfArtifacts#0;class#PartyResourcePools#0" expanded="false" />
+                <element signature="method#makeInventoryOfTreasures#0;class#PartyResourcePools#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JobTaskDisplay.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/CaveGameGUI/JobTaskDisplay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="3120">
+              <caret line="169" column="0" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#JobTaskDisplay#0" expanded="false" />
+                <element signature="method#getCellRenderer#0;class#1698:2425" expanded="false" />
+                <element signature="class#5003:5380" expanded="false" />
+                <element signature="method#mouseClicked#0;class#5003:5380" expanded="false" />
+                <element signature="class#5567:5950" expanded="false" />
+                <element signature="method#mouseClicked#0;class#5567:5950" expanded="false" />
+                <element signature="method#cancelJob#0;class#JobTaskDisplay#0" expanded="false" />
+                <element signature="method#getColumnName#0;class#JobTaskDisplay#0" expanded="false" />
+                <element signature="method#getColumnClass#0;class#JobTaskDisplay#0" expanded="false" />
+                <element signature="method#isCellEditable#0;class#JobTaskDisplay#0" expanded="false" />
+                <element signature="e#8148#8197#0" expanded="false" />
+                <element signature="method#setValueAt#0;class#JobTaskDisplay#0" expanded="false" />
+                <element signature="method#addTableModelListener#0;class#JobTaskDisplay#0" expanded="false" />
+                <element signature="method#removeTableModelListener#0;class#JobTaskDisplay#0" expanded="false" />
+                <element signature="method#getButtonPanel#0;class#JobTaskDisplay#0" expanded="false" />
+                <element signature="class#10000:10154" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Thread.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home/src.zip!/java/lang/Thread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="8703" max-vertical-offset="25532">
+              <caret line="744" column="0" selection-start-line="744" selection-start-column="0" selection-end-line="745" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data6.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data6.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2797" max-vertical-offset="4368">
+              <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data6jobs.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data6jobs.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoadGameData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/DataFileInput/LoadGameData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1846">
+              <caret line="127" column="77" selection-start-line="127" selection-start-column="77" selection-end-line="127" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -337,8 +251,8 @@
         <option value="$PROJECT_DIR$/java/CaveGameGUI/JobTaskDisplay.java" />
         <option value="$PROJECT_DIR$/java/ResourcePool/ResourcePool.java" />
         <option value="$PROJECT_DIR$/java/DataFileInput/LoadGameData.java" />
-        <option value="$PROJECT_DIR$/java/DataTree/Job.java" />
         <option value="$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java" />
+        <option value="$PROJECT_DIR$/java/DataTree/Job.java" />
       </list>
     </option>
   </component>
@@ -537,10 +451,9 @@
     <option name="skipTests" value="true" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
-    <option name="y" value="129" />
+    <option name="y" value="23" />
     <option name="width" value="1912" />
-    <option name="height" value="1062" />
+    <option name="height" value="1168" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -617,42 +530,6 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ResourcePool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NRProject1CMSC335" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NRProject4CMSC335" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NRProject1CMSC335" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NRProject4CMSC335" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GameControl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -669,24 +546,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="DataTree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NRProject1CMSC335" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NRProject4CMSC335" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DataFileInput" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -733,7 +592,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Library/Caches/IntelliJIdea14/chronon-recordings/2014_12_10_CaveGame" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/java" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/NickRadonic/Documents/UMUC/CMSC335/NRProject1CMSC335/src/CaveGameGUI/GameControlWindow.java&#10;enum&#9;PSI&#9;JAVA://java.lang.Enum&#10;gameelementa&#9;PSI&#9;JAVA://DataTree.GameElement#gameElementArrayList" />
@@ -1440,7 +1299,7 @@
       <workItem from="1418192775387" duration="9690000" />
       <workItem from="1418322612722" duration="23681000" />
       <workItem from="1418365598591" duration="31034000" />
-      <workItem from="1418486308335" duration="24413000" />
+      <workItem from="1418486308335" duration="28421000" />
     </task>
     <task id="LOCAL-00001" summary="Intermediate state, can show data, but can't show all JTrees at once&#10;">
       <created>1415998881552</created>
@@ -1652,11 +1511,17 @@
       <option name="project" value="LOCAL" />
       <updated>1418511997874</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Threads share resources in common pool. Keeps track of artifact that are uncommitted, and artifacts that are busy.">
+      <created>1418515870214</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1418515870214</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="522443000" />
+    <option name="totallyTimeSpent" value="526451000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1679,8 +1544,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="129" width="1912" height="1062" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1912" height="1168" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1693,8 +1558,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32742536" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.157754" sideWeight="0.4994618" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.6530612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="2389" y="393" width="914" height="470" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.157754" sideWeight="0.4994618" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.6530612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="2335" y="344" width="1221" height="470" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17979798" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1764,7 +1629,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Revised filter button display. Does not sort any more." />
     <MESSAGE value="Got the data to sort - the comparison uses internal values to the compared elements....needed to set up a static variable." />
     <MESSAGE value="can now sort on all fields in all game levels" />
     <MESSAGE value="putting in some search functions&#10;" />
@@ -1789,7 +1653,8 @@
     <MESSAGE value="Starting to put in common locks for thread blocking - need to add conditions for creature ID. Each job was also a separate task, therefore they were not cooperating on the locks until the lock was made static." />
     <MESSAGE value="threads lock - with one thread per creature ID. imported dataZ08.txt and dataZ09.txt test files. Have START ALL JOBS button on jobs display." />
     <MESSAGE value="intermediate stage, some resource lookup and sequestration." />
-    <option name="LAST_COMMIT_MESSAGE" value="intermediate stage, some resource lookup and sequestration." />
+    <MESSAGE value="Threads share resources in common pool. Keeps track of artifact that are uncommitted, and artifacts that are busy." />
+    <option name="LAST_COMMIT_MESSAGE" value="Threads share resources in common pool. Keeps track of artifact that are uncommitted, and artifacts that are busy." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1849,38 +1714,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="uml://MAVEN/com.nradonic.cmsc335:NRProject1CMSC335:1.0-SNAPSHOT">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>MAVEN</ID>
-          <OriginalElement>com.nradonic.cmsc335:NRProject1CMSC335:1.0-SNAPSHOT</OriginalElement>
-          <nodes>
-            <node x="" y="">com.nradonic.cmsc335:NRProject1CMSC335:1.0-SNAPSHOT</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="78.0" y="15.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>All</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33264464" vertical-offset="644" max-vertical-offset="2142">
-          <caret line="69" column="64" selection-start-line="69" selection-start-column="63" selection-end-line="69" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="571">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="584">
@@ -2154,45 +1987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/CaveGameGUI/GameControlWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="988">
-          <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
-          <folding>
-            <element signature="docComment;class#GameControlWindow#0" expanded="false" />
-            <element signature="method#GameControlWindow#0;class#GameControlWindow#0" expanded="false" />
-            <element signature="method#setupDisplayPanels#0;class#GameControlWindow#0" expanded="false" />
-            <element signature="method#setupButtons#0;class#GameControlWindow#0" expanded="false" />
-            <element signature="class#4444:4808" expanded="false" />
-            <element signature="method#actionPerformed#0;class#4444:4808" expanded="false" />
-            <element signature="class#4925:5371" expanded="false" />
-            <element signature="method#actionPerformed#0;class#4925:5371" expanded="false" />
-            <element signature="class#5487:5981" expanded="false" />
-            <element signature="method#actionPerformed#0;class#5487:5981" expanded="false" />
-            <element signature="class#6020:6189" expanded="false" />
-            <element signature="method#loadFileData#0;class#GameControlWindow#0" expanded="false" />
-            <element signature="method#searchGame#0;class#GameControlWindow#0" expanded="false" />
-            <element signature="method#sortGameLayerButtons#0;class#GameControlWindow#0" expanded="false" />
-            <element signature="class#9086:9304" expanded="false" />
-            <element signature="method#actionPerformed#0;class#9086:9304" expanded="false" />
-            <element signature="class#9403:9624" expanded="false" />
-            <element signature="method#actionPerformed#0;class#9403:9624" expanded="false" />
-            <element signature="class#9720:9940" expanded="false" />
-            <element signature="method#actionPerformed#0;class#9720:9940" expanded="false" />
-            <element signature="class#10036:10256" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10036:10256" expanded="false" />
-            <element signature="class#10347:10562" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10347:10562" expanded="false" />
-            <element signature="method#selectGameLayer#0;class#GameControlWindow#0" expanded="false" />
-            <element signature="method#loadSortFieldButtons#0;class#GameControlWindow#0" expanded="false" />
-            <element signature="method#generateRadioButtonFF#0;class#GameControlWindow#0" expanded="false" />
-            <element signature="class#14476:15291" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14476:15291" expanded="false" />
-            <element signature="method#updateFiltering#0;class#GameControlWindow#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/DataTree/Artifact.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="741">
@@ -2203,47 +1997,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/DataTree/GameElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="2587">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#GameElement#0" expanded="false" />
-            <element signature="method#GameElement#0;class#GameElement#0" expanded="false" />
-            <element signature="method#GameElement#1;class#GameElement#0" expanded="false" />
-            <element signature="e#1966#1967#0" expanded="true" />
-            <element signature="method#addGameElementTree#0;class#GameElement#0" expanded="false" />
-            <element signature="method#addGeUpdateMaps#0;class#GameElement#0" expanded="false" />
-            <element signature="method#insertIfDuplicateGameElement#0;class#GameElement#0" expanded="false" />
-            <element signature="method#recursiveInsertion#0;class#GameElement#0" expanded="false" />
-            <element signature="e#5227#5296#0" expanded="false" />
-            <element signature="method#toString#0;class#GameElement#0" expanded="false" />
-            <element signature="method#treeList#0;class#GameElement#0" expanded="false" />
-            <element signature="method#modifyDisplayJTree#0;class#GameElement#0" expanded="false" />
-            <element signature="method#recursivelyUpdateDisplayJTree#0;class#GameElement#0" expanded="false" />
-            <element signature="method#getGameElementsSetForCave#0;class#GameElement#0" expanded="false" />
-            <element signature="method#getGameElementsSetForParty#0;class#GameElement#0" expanded="false" />
-            <element signature="method#getGameElementsSetForCreature#0;class#GameElement#0" expanded="false" />
-            <element signature="method#updateMaps#0;class#GameElement#0" expanded="false" />
-            <element signature="e#17368#17419#0" expanded="false" />
-            <element signature="method#compareTo#0;class#GameElement#0" expanded="false" />
-            <element signature="method#compareAtArtifactLevel#0;class#GameElement#0" expanded="false" />
-            <element signature="method#compareAtTreasureLevel#0;class#GameElement#0" expanded="false" />
-            <element signature="method#compareAtJobLevel#0;class#GameElement#0" expanded="false" />
-            <element signature="method#compareAtCreatureLevel#0;class#GameElement#0" expanded="false" />
-            <element signature="method#compareAtPartyLevel#0;class#GameElement#0" expanded="false" />
-            <element signature="e#27071#27134#0" expanded="false" />
-            <element signature="method#clearTreeMaps#0;class#GameElement#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/ResourcePool/ResourcePool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4757804" vertical-offset="0" max-vertical-offset="929">
+        <state vertical-scroll-proportion="0.42705315" vertical-offset="0" max-vertical-offset="1035">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <marker date="1418501363000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1418501363000" expanded="true" signature="-1:-1" placeholder="/**...*/" />
+            <marker date="1418501363000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1418501363000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1418501363000" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -2252,7 +2015,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="403">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1418185941000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1418185941000" expanded="true" signature="-1:-1" placeholder="/**...*/" />
+            <marker date="1418185941000" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2298,9 +2065,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data6.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2797" max-vertical-offset="4368">
+          <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data6jobs.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/java/DataTree/Job.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0841639" vertical-offset="249" max-vertical-offset="1482">
+        <state vertical-scroll-proportion="-2.9230769" vertical-offset="249" max-vertical-offset="1482">
           <caret line="35" column="49" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
           <folding>
             <element signature="docComment;class#Job#0" expanded="false" />
@@ -2318,25 +2101,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data6.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2797" max-vertical-offset="4368">
-          <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
-          <folding />
+    <entry file="file://$PROJECT_DIR$/java/Project4.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="935.0" y="510.5" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Constructors</Category>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+            <Category>Properties</Category>
+            <Category>Inner Classes</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data6jobs.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
+    <entry file="uml://JAVA/">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">ResourcePool.ResourcePool</node>
+            <node x="" y="">CaveGameGUI.DefaultTableCellRendererWithData</node>
+            <node x="" y="">CaveGameGUI.CustomJButtonRenderer</node>
+            <node x="" y="">DataTree.Party</node>
+            <node x="" y="">CaveGameGUI.GameControlWindow</node>
+            <node x="" y="">CaveGameGUI.ProgressRenderer</node>
+            <node x="" y="">DataFileInput.LoadGameData</node>
+            <node x="" y="">DataTree.Artifact</node>
+            <node x="" y="">DataTree.GameLayer</node>
+            <node x="" y="">CaveGameGUI.CustomButtonEditor</node>
+            <node x="" y="">DataTree.Job</node>
+            <node x="" y="">ResourcePool.PartyResourcePools</node>
+            <node x="" y="">DataTree.FilterField</node>
+            <node x="" y="">DataTree.GameElement</node>
+            <node x="" y="">META-INF</node>
+            <node x="" y="">DataTree.Creature</node>
+            <node x="" y="">CaveGameGUI.JobTaskDisplay</node>
+            <node x="" y="">DataTree.Treasure</node>
+            <node x="" y="">GameControl.CaveGame</node>
+            <node x="" y="">DataTree.JobState</node>
+            <node x="" y="">DataTree.Cave</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.38711903392754465" x="812.2777777777774" y="1298.7158348187756" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Constructors</Category>
+            <Category>Methods</Category>
+            <Category>Properties</Category>
+            <Category>Inner Classes</Category>
+            <Category>Fields</Category>
+          </Categories>
+          <SCOPE>Project Files</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///private/var/folders/95/_278c4_9439fgwqzzdrchbl00000gn/T/modules0.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MODULES</ID>
+          <OriginalElement />
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="577.5" y="53.0" />
+          <SelectedNodes />
+          <Categories />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/java/ResourcePool/PartyResourcePools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.94079655" vertical-offset="439" max-vertical-offset="1404">
+        <state vertical-scroll-proportion="0.0" vertical-offset="356" max-vertical-offset="1404">
           <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2344,6 +2191,25 @@
             <element signature="method#makeInventoryOfArtifacts#0;class#PartyResourcePools#0" expanded="false" />
             <element signature="method#makeInventoryOfTreasures#0;class#PartyResourcePools#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/DataTree/GameElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="325" max-vertical-offset="9893">
+          <caret line="17" column="55" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="55" />
+          <folding>
+            <element signature="e#1924#1925#0" expanded="true" />
+            <element signature="e#1966#1967#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/CaveGameGUI/GameControlWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44716242" vertical-offset="687" max-vertical-offset="5473">
+          <caret line="96" column="67" selection-start-line="96" selection-start-column="67" selection-end-line="96" selection-end-column="67" />
+          <folding />
         </state>
       </provider>
     </entry>

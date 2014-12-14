@@ -168,7 +168,7 @@ public class Job extends GameElement implements Runnable {
         String jobOutput = String.format("          j : %6d : %8s : %6d : %4.1f ", ID, jobType, creatureID, time);
 
         for (Map.Entry<String, Integer> me : resources.entrySet()){
-            jobOutput += String.format(": %8s : %4.1f", me.getKey(), me.getValue());
+            jobOutput += String.format(": %8s : %4d", me.getKey(), me.getValue());
         }
         jobOutput += "\n";
         return jobOutput;
